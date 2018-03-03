@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Speak Up</string>
+
+    <string name="no_records">No records found</string>
+
+    <!--Buttons-->
+    <!--RecordActivity-->
+    <string name="record_start">Start record</string>
+    <string name="record_stop">Stop record</string>
+
 </resources>
