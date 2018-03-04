@@ -22,7 +22,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/records_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:paddingVertical="6dp"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/button_new_record"

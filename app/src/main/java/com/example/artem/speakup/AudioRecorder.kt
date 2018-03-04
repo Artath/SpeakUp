@@ -4,6 +4,7 @@ import android.media.MediaRecorder
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
+import java.io.File
 import java.io.IOException
 
 class AudioRecorder: AppCompatActivity() {
@@ -38,5 +39,10 @@ class AudioRecorder: AppCompatActivity() {
         recorder?.stop()
         recorder?.release()
         recorder = null
+    }
+
+    fun getAudioRecord(): String? {
+        val f = File(fileName)
+        return f.nameWithoutExtension
     }
 }
