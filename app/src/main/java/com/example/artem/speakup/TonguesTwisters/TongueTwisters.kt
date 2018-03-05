@@ -4,7 +4,6 @@ import android.util.Log
 
 class TongueTwisters {
 
-    private val charFilter = arrayOf('.', ',', ':', '-', ' ', ';', '?', '!')
     //пока дегенератский списочек
     val twist = arrayListOf<String>(
             "Пакет под попкорн",
@@ -25,21 +24,17 @@ class TongueTwisters {
             "На дворе - трава, на траве - дрова. Не руби дрова на траве двора!")
 
 
-    fun compareTongueTwisters(tongueTwister: String, resRecognizer: String): Boolean {
-        Log.v("12", toRightFormat(tongueTwister).toString())
-        Log.v("12", toRightFormat(resRecognizer).toString())
-        return toRightFormat(tongueTwister) == toRightFormat(resRecognizer)
+    fun compareTongueTwisters(tongueTwister: String, resRecognizer: String) =
+            toRightFormat(tongueTwister) == toRightFormat(resRecognizer)
+//tests
+    companion object {
+        val charFilter = arrayOf('.', ',', ':', '-', ' ', ';', '?', '!')
+        fun toRightFormat(string: String): String {
+            val str = string.toLowerCase().toCharArray()
+            val res = StringBuffer("")
+            (0 until str.size).filter { str[it] !in charFilter }.forEach { res.append(str[it]) }
+            return res.toString()
+        }
     }
 
-   /* fun compareTongueTwisters(tongueTwister: String, resRecognizer: String) {
-       Log.v("12", toRightFormat(tongueTwister).toString())
-       Log.v("12", toRightFormat(resRecognizer).toString())
-   }*/
-    //remove from the string excess characters and make lower case
-    private fun toRightFormat(string: String): String {
-        val str = string.toLowerCase().toCharArray()
-        val res = StringBuffer("")
-        (0 until str.size).filter { str[it] !in charFilter }.forEach { res.append(str[it]) }
-        return res.toString()
-    }
 }

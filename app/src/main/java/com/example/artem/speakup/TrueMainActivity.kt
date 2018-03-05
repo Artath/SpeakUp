@@ -3,9 +3,9 @@ package com.example.artem.speakup
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.example.artem.speakup.SpeechAnalysis.SpeechRecordsActivity
 import com.example.artem.speakup.TimeSpeechAssistentBadRealize.SessionsActivity
 import com.example.artem.speakup.TonguesTwisters.TongueTwistersActivity
-import com.homekode.android.tonguetwisters.TongueTwisters
 import kotlinx.android.synthetic.main.activity_true_main.*
 
 class TrueMainActivity : AppCompatActivity() {
@@ -23,6 +23,10 @@ class TrueMainActivity : AppCompatActivity() {
 
         tt_btn.setOnClickListener {
             startActivity(Intent(applicationContext, TongueTwistersActivity::class.java))
+        }
+
+        analisis_btn.setOnClickListener {
+            startActivity(Intent(applicationContext, SpeechRecordsActivity::class.java))
         }
     }
 }

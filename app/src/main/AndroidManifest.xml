@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".TrueMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +22,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".RecordActivity" />
-        <activity android:name=".TonguesTwisters.TongueTwistersActivity"></activity>
+        <activity android:name=".TonguesTwisters.TongueTwistersActivity" />
+        <activity android:name=".TimeSpeechAssistentBadRealize.AssistantActivity" />
+        <activity android:name=".TimeSpeechAssistentBadRealize.CreatePartActivity" />
+        <activity android:name=".TimeSpeechAssistentBadRealize.CreateSessionActivity" />
+        <activity android:name=".TimeSpeechAssistentBadRealize.SessionsActivity" />
+        <activity android:name=".TimeSpeechAssistentBadRealize.PartsActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".SpeechAnalysis.SpeechRecordsActivity" />
+        <activity android:name=".SpeechAnalysis.AnalysisResActivity"></activity>
     </application>
 
 </manifest>
