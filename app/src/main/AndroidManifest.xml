@@ -8,13 +8,14 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".Application"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TrueMainActivity">
+        <activity android:name=".TrulyTrueMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +31,8 @@
         <activity android:name=".TimeSpeechAssistentBadRealize.PartsActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SpeechAnalysis.SpeechRecordsActivity" />
-        <activity android:name=".SpeechAnalysis.AnalysisResActivity"></activity>
+        <activity android:name=".SpeechAnalysis.AnalysisResActivity" />
+        <activity android:name=".TrueMainActivity"></activity>
     </application>
 
 </manifest>
