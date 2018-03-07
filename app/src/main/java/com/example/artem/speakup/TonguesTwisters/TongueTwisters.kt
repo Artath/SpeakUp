@@ -1,8 +1,6 @@
 package com.homekode.android.tonguetwisters
 
-import android.util.Log
-import com.example.artem.speakup.SpeechAnalysis.StringWorkHelper
-import java.io.StringWriter
+import com.example.artem.speakup.SpeechAnalysis.Word
 
 class TongueTwisters {
 
@@ -27,9 +25,7 @@ class TongueTwisters {
 
 
     fun compareTongueTwisters(tongueTwister: String, resRecognizer: String): Boolean{
-        val swh = StringWorkHelper()
-
-        return  swh.toRightFormat(tongueTwister) == swh.toRightFormat(resRecognizer)
+        return  Word.toRightFormat(tongueTwister) == Word.toRightFormat(resRecognizer)
     }
 
 

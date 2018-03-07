@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.artem.speakup.R
+import com.example.artem.speakup.SpeechAnalysis.Word.Companion.fullAnalysisText
 import kotlinx.android.synthetic.main.activity_analysis_res.*
 
 class AnalysisResActivity : AppCompatActivity() {
@@ -15,13 +16,7 @@ class AnalysisResActivity : AppCompatActivity() {
 
         val res = intent.getStringExtra(SpeechRecordsActivity.RES)
 
-        val arrWprds = arrayListOf<WordParasite>()
-        //tests
-        arrWprds.add(WordParasite.registerWordParasite(res, "ну"))
-        arrWprds.add(WordParasite.registerWordParasite(res, "вот"))
-        arrWprds.add(WordParasite.registerWordParasite(res, "короче"))
-        arrWprds.add(WordParasite.registerWordParasite(res, "блин"))
-        arrWprds.add(WordParasite.registerWordParasite(res, "потому"))
+        val arrWprds = fullAnalysisText(res)
 
         res_txt.typeface = Typeface.createFromAsset(assets, "segoepr.ttf")
 
@@ -31,7 +26,7 @@ class AnalysisResActivity : AppCompatActivity() {
                     "Number of repeate: " + elem.numbRepeate + "\n" +
                     "Frequence repeate: " + elem.frequencyRepeat + "\n"
         }
-        Log.v("w12",res)
-        res_txt.text = str
+
+        res_txt.text = str + "\n" + res + "\n" + arrWprds.size
     }
 }

@@ -15,13 +15,13 @@ import kotlinx.android.synthetic.main.activity_speech_records.*
 import ru.yandex.speechkit.*
 
 class SpeechRecordsActivity : AppCompatActivity(), RecognizerListener {
+
     companion object {
         val RES = "res"
     }
 
     private val API_KEY = "34e04a4d-07bc-4e70-8527-7b5e49f62cf9"
     private var recognizer: Recognizer? = null
-    private val SEC = 3
     private var res = ""
 
     private var isRecognition = false
@@ -34,7 +34,6 @@ class SpeechRecordsActivity : AppCompatActivity(), RecognizerListener {
 
     override fun onPartialResults(p0: Recognizer?, p1: Recognition?, p2: Boolean) {
         changePartialRes(p1!!.bestResultText)
-       // res += " " + p1!!.bestResultText
     }
     override fun onRecordingBegin(p0: Recognizer?) = updateStatus("Say!!!")
 
@@ -43,7 +42,7 @@ class SpeechRecordsActivity : AppCompatActivity(), RecognizerListener {
     override fun onSpeechDetected(p0: Recognizer?) = updateStatus("Speech detected")
 
     override fun onRecognitionDone(p0: Recognizer?, p1: Recognition?) {
-        res += " " + p1!!.bestResultText
+        res += p1!!.bestResultText + " "
         if (isRecognition){
             createAndStartRecognizer()
         }
@@ -54,7 +53,7 @@ class SpeechRecordsActivity : AppCompatActivity(), RecognizerListener {
             updateStatus("Cancelled")
         } else {
             updateStatus("Error occurred " + p1!!.string)
-            cancelRecognizer()
+            onStopRec()
         }
     }
 
@@ -93,14 +92,13 @@ class SpeechRecordsActivity : AppCompatActivity(), RecognizerListener {
     private fun onStopRec() {
         rec_btn.text = "start"
         cancelRecognizer()
-        Log.v("w", res)
         startActivity(Intent(applicationContext, AnalysisResActivity::class.java).putExtra(RES, res))
 
     }
 
     override fun onPause() {
         super.onPause()
-        cancelRecognizer()
+        onStopRec()
     }
 
     @SuppressLint("MissingPermission")
