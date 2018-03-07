@@ -1,4 +1,9 @@
 package com.example.artem.speakup.TimeSpeechAssistant
 
 //class for parts of SpeechSession. It is slides. Property order may be needed for reordering
-class Part(var head: String, var time: Int, var theses: String, var order: Int)
+class Part(override var id: Long,
+           var head: String,
+           var time: Long,
+           var theses: String,
+           var session_id: Long,
+           var order: Int) : ExtraSourceObject

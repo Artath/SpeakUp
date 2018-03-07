@@ -1,6 +1,8 @@
 package com.homekode.android.tonguetwisters
 
 import android.util.Log
+import com.example.artem.speakup.SpeechAnalysis.StringWorkHelper
+import java.io.StringWriter
 
 class TongueTwisters {
 
@@ -24,17 +26,11 @@ class TongueTwisters {
             "На дворе - трава, на траве - дрова. Не руби дрова на траве двора!")
 
 
-    fun compareTongueTwisters(tongueTwister: String, resRecognizer: String) =
-            toRightFormat(tongueTwister) == toRightFormat(resRecognizer)
-//tests
-    companion object {
-        val charFilter = arrayOf('.', ',', ':', '-', ' ', ';', '?', '!')
-        fun toRightFormat(string: String): String {
-            val str = string.toLowerCase().toCharArray()
-            val res = StringBuffer("")
-            (0 until str.size).filter { str[it] !in charFilter }.forEach { res.append(str[it]) }
-            return res.toString()
-        }
+    fun compareTongueTwisters(tongueTwister: String, resRecognizer: String): Boolean{
+        val swh = StringWorkHelper()
+
+        return  swh.toRightFormat(tongueTwister) == swh.toRightFormat(resRecognizer)
     }
+
 
 }

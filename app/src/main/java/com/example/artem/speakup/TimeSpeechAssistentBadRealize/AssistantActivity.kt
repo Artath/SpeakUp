@@ -4,9 +4,7 @@ import android.graphics.Typeface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.artem.speakup.R
-import com.example.artem.speakup.TimeSpeechAssistant.DBWorkAssistantSession
-import com.example.artem.speakup.TimeSpeechAssistant.Part
-import com.example.artem.speakup.TimeSpeechAssistant.SpeechAssistant
+import com.example.artem.speakup.TimeSpeechAssistant.*
 import kotlinx.android.synthetic.main.activity_assistant.*
 
 class AssistantActivity : AppCompatActivity() {
@@ -20,9 +18,12 @@ class AssistantActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_assistant)
 
-        val parts = DBWorkAssistantSession()
-                .getSessions(applicationContext,
-                        intent.getLongExtra(SessionsActivity.ID, 0))[0].parts
+        val id = intent.getLongExtra(SessionsActivity.ID, 0)
+
+        val dbw = DBWorkParts()
+        dbw.addSelection(AssistantDBContract.Parts.SESSION_ID+ " LIKE ?")
+        dbw.addSelectionArgs(arrayOf<String>("" + id))
+        val parts = dbw.read(applicationContext) as ArrayList<Part>
 
         val tf = Typeface.createFromAsset(assets, "segoepr.ttf")
         head.typeface = tf
@@ -30,7 +31,7 @@ class AssistantActivity : AppCompatActivity() {
         scores_txt.typeface = tf
         text_time.typeface = tf
 
-        head.text= parts[partNumb].head
+        head.text = parts[partNumb].head
         theses.text = parts[partNumb].theses
         scores_txt.text = "Scores: " + scores
 

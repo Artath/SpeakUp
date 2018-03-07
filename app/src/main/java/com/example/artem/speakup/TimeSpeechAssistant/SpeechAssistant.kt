@@ -6,15 +6,15 @@ import android.os.CountDownTimer
 class SpeechAssistant (private var listener: SpeechAssistantListener) {
 
     //current time
-    private var currentTime = 0
+    private var currentTime = 0L
     private var timer: CountDownTimer? = null
     //plan time to slide's display
-    private var planTime = 0
+    private var planTime = 0L
     //time's dispersion
-    private var dispers = 0
+    private var dispers = 0L
 
     //start timer
-    fun start(time: Int) {
+    fun start(time: Long) {
 
         planTime = time
         dispers = time/5
@@ -26,7 +26,7 @@ class SpeechAssistant (private var listener: SpeechAssistantListener) {
 
             override fun onTick(millisUntilFinished: Long) {
                 //save current time
-                currentTime = (millisUntilFinished/1000).toInt()
+                currentTime = (millisUntilFinished/1000).toLong()
                 //give current time
                 listener.showTime("Time: " + millisUntilFinished/1000 + "." + millisUntilFinished % 100)
             }

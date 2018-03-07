@@ -1,29 +1,28 @@
 package com.example.artem.speakup.SpeechAnalysis
 
-import android.util.Log
-import com.homekode.android.tonguetwisters.TongueTwisters.Companion.toRightFormat
-
-/**
- * Created by ASUS on 04.03.2018.
- */
-
-class WordParasite(var word: String, var numbRepeate: Int, var frequenceRepeat: Float) {
+class WordParasite(var word: String, var numbRepeate: Int, var frequencyRepeat: Float) {
 
     companion object {
-        fun registWortParasite(text: String, wordParasite: String): WordParasite {
+
+        fun registerWordParasite(text: String, wordParasite: String): WordParasite {
 
             val splitText = text.split(" ")
-            val maxWords = splitText.size
-            var numbWordPar = 0
-
+            var maxWords = 0
+            var numbWordParasite = 0
+            var frequencyRepeat = 0.0f
+            val swh = StringWorkHelper()
             for (elem in splitText) {
-
-                if (wordParasite == toRightFormat(elem)) {
-                    numbWordPar++
-                }
+                if (swh.toRightFormat(elem) != "") { maxWords++ }
+                if (swh.toRightFormat(elem) == wordParasite) { numbWordParasite++ }
             }
 
-            return WordParasite(wordParasite, numbWordPar, numbWordPar.toFloat()/maxWords)
+            try {
+                frequencyRepeat = numbWordParasite.toFloat()/maxWords
+            }
+            catch (e: Exception) { maxWords = 1 }
+
+            return WordParasite(wordParasite, numbWordParasite, frequencyRepeat)
         }
+
     }
 }

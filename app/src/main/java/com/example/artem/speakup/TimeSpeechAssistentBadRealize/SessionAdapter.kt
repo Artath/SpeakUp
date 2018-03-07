@@ -40,9 +40,6 @@ class SessionAdapter(var data: ArrayList<SpeechSession>) : RecyclerView.Adapter<
                 callBack!!.showParts(data[position].id)
             }
         }
-
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =

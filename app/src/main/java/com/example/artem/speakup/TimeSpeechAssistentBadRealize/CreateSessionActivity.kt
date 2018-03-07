@@ -4,6 +4,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.artem.speakup.R
+import com.example.artem.speakup.TimeSpeechAssistant.DBWorkSession
 import kotlinx.android.synthetic.main.activity_create_session.*
 
 class CreateSessionActivity : AppCompatActivity() {
@@ -16,11 +17,16 @@ class CreateSessionActivity : AppCompatActivity() {
         add_part_btn.setOnClickListener {
 
             val nameSes = speech_name.text.toString()
-            var descr = descr_name.text.toString()
+            val descr = descr_name.text.toString()
             if (nameSes != "") {
+                val dbw = DBWorkSession()
+                dbw.setCurrentDate()
+                dbw.setName(nameSes)
+                dbw.setDescription(descr)
+                        //
+                dbw.setRaiting(0)
                 val intent = Intent(applicationContext, CreatePartActivity::class.java)
-                intent.putExtra(SessionsActivity.NAME, nameSes)
-                intent.putExtra(SessionsActivity.DESCRIPTION, descr)
+                intent.putExtra(SessionsActivity.ID, dbw.create(applicationContext))
                 startActivity(intent)
             }
         }

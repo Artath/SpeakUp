@@ -5,14 +5,15 @@ import android.graphics.Typeface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.widget.Toast
 import com.example.artem.speakup.R
-import com.example.artem.speakup.TimeSpeechAssistant.DBWorkAssistantSession
+import com.example.artem.speakup.TimeSpeechAssistant.AssistantDBContract
+import com.example.artem.speakup.TimeSpeechAssistant.DBWorkParts
+import com.example.artem.speakup.TimeSpeechAssistant.DBWorkSession
 import com.example.artem.speakup.TimeSpeechAssistant.Part
 import kotlinx.android.synthetic.main.activity_parts.*
 
 class PartsActivity : AppCompatActivity(), PartAdapter.CallBack {
-
-    lateinit var parts: ArrayList<Part>
 
     override fun setTypeFace() = Typeface.createFromAsset(assets, "segoepr.ttf")
 
@@ -22,9 +23,10 @@ class PartsActivity : AppCompatActivity(), PartAdapter.CallBack {
 
         val id = intent.getLongExtra(SessionsActivity.ID, 0)
 
-        parts = DBWorkAssistantSession()
-                .getSessions(applicationContext,
-                        id)[0].parts
+        val dbw = DBWorkParts()
+        dbw.addSelection(AssistantDBContract.Parts.SESSION_ID+ " LIKE ?")
+        dbw.addSelectionArgs(arrayOf<String>("" + id))
+        val parts = dbw.read(applicationContext) as ArrayList<Part>
 
         val adapter = PartAdapter(parts)
         part_list.layoutManager = LinearLayoutManager(applicationContext)

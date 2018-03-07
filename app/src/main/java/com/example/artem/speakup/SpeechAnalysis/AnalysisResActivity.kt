@@ -17,11 +17,11 @@ class AnalysisResActivity : AppCompatActivity() {
 
         val arrWprds = arrayListOf<WordParasite>()
         //tests
-        arrWprds.add(WordParasite.registWortParasite(res, "ну"))
-        arrWprds.add(WordParasite.registWortParasite(res, "вот"))
-        arrWprds.add(WordParasite.registWortParasite(res, "короче"))
-        arrWprds.add(WordParasite.registWortParasite(res, "блин"))
-        arrWprds.add(WordParasite.registWortParasite(res, "потому"))
+        arrWprds.add(WordParasite.registerWordParasite(res, "ну"))
+        arrWprds.add(WordParasite.registerWordParasite(res, "вот"))
+        arrWprds.add(WordParasite.registerWordParasite(res, "короче"))
+        arrWprds.add(WordParasite.registerWordParasite(res, "блин"))
+        arrWprds.add(WordParasite.registerWordParasite(res, "потому"))
 
         res_txt.typeface = Typeface.createFromAsset(assets, "segoepr.ttf")
 
@@ -29,7 +29,7 @@ class AnalysisResActivity : AppCompatActivity() {
         for (elem in arrWprds) {
             str += "Word parasite: " + elem.word + "\n" +
                     "Number of repeate: " + elem.numbRepeate + "\n" +
-                    "Frequence repeate: " + elem.frequenceRepeat + "\n"
+                    "Frequence repeate: " + elem.frequencyRepeat + "\n"
         }
         Log.v("w12",res)
         res_txt.text = str

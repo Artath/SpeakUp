@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import com.example.artem.speakup.R
-import com.example.artem.speakup.TimeSpeechAssistant.DBWorkAssistantSession
+import com.example.artem.speakup.TimeSpeechAssistant.DBWorkSession
 import com.example.artem.speakup.TimeSpeechAssistant.SpeechSession
 import kotlinx.android.synthetic.main.activity_sessions.*
 
@@ -35,7 +35,7 @@ class SessionsActivity : AppCompatActivity(), SessionAdapter.CallBack{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sessions)
 
-        sessions = DBWorkAssistantSession().getSessions(applicationContext, null)
+        sessions = DBWorkSession().read(applicationContext) as ArrayList<SpeechSession>
 
         speech_list.layoutManager = LinearLayoutManager(applicationContext)
         val adapter = SessionAdapter(sessions)
