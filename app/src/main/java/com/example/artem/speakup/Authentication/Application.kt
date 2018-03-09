@@ -1,4 +1,4 @@
-package com.example.artem.speakup
+package com.example.artem.speakup.Authentication
 
 import android.app.Application
 import com.vk.sdk.VKSdk
