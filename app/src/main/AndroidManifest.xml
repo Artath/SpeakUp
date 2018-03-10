@@ -33,7 +33,8 @@
         <activity android:name=".SpeechAnalysis.SpeechRecordsActivity" />
         <activity android:name=".SpeechAnalysis.AnalysisResActivity" />
         <activity android:name=".TrueMainActivity" />
-        <activity android:name=".Authentication.TrulyTrueMainActivity"></activity>
+        <activity android:name=".Authentication.TrulyTrueMainActivity" />
+        <activity android:name=".Authentication.TestActivity"></activity>
     </application>
 
 </manifest>

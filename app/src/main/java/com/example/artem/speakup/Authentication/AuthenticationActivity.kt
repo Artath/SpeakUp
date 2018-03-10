@@ -61,8 +61,10 @@ class AuthenticationActivity : AppCompatActivity() {
 
             if (resultCode == Activity.RESULT_OK) {
                 // Successfully signed in
-                val user = FirebaseAuth.getInstance().currentUser
+                val user = FirebaseAuth.getInstance().currentUser!!.uid
+                //здесь записать нового юзера в базу-----------------------------------------------------------------------db
                 Toast.makeText(applicationContext, "Signed In!", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, TestActivity::class.java))
                 // ...
             } else {
                 // Sign in failed, check response for error code
