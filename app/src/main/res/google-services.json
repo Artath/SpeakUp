@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "148998075445",
+    "firebase_url": "https://lalka-a5f99.firebaseio.com",
+    "project_id": "lalka-a5f99",
+    "storage_bucket": "lalka-a5f99.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:148998075445:android:a57f964cba4c9117",
+        "android_client_info": {
+          "package_name": "com.example.artem.speakup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "148998075445-mrsc20h5kc2jh17k1kpsnlr2fnvg3bf1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZNUrCWGsJrXSfJQ8zrIqrwfUaS2HM0TU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

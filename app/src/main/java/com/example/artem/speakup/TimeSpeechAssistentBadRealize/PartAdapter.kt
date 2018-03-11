@@ -1,51 +1,74 @@
 package com.example.artem.speakup.TimeSpeechAssistentBadRealize
 
-import android.graphics.Typeface
 import android.support.v7.widget.RecyclerView
-import android.util.Log
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.example.artem.speakup.R
 import com.example.artem.speakup.TimeSpeechAssistant.Part
 import kotlinx.android.synthetic.main.item_part.view.*
 import java.util.ArrayList
 
-/**
- * Created by ASUS on 01.03.2018.
- */
-class PartAdapter(var data: ArrayList<Part>) : RecyclerView.Adapter<PartAdapter.UserViewHolder>() {
 
-    var callBack: CallBack? = null
+class PartAdapter(var data: ArrayList<Part>, var callBack: PartAdapterCallBack) : RecyclerView.Adapter<PartAdapter.UserViewHolder>() {
 
     override fun getItemCount() = data.size
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
 
-        holder.head.text = data[position].head
-        holder.theses.text = data[position].theses
-        holder.timePlan.text = "Plan time " + data[position].time + " sec"
+        holder.themeItem.text = "Speech item " + (position + 1)
+        holder.theme.setText(data[position].head)
+        holder.detials.setText(data[position].theses)
+        holder.timing.setText(data[position].time.toString())
 
-        if (callBack != null) {
-            holder.head.typeface = callBack!!.setTypeFace()
-            holder.theses.typeface = callBack!!.setTypeFace()
-            holder.timePlan.typeface = callBack!!.setTypeFace()
+        holder.deleteBtn.setOnClickListener {
+            callBack.deletePart(position)
+            notifyDataSetChanged()
         }
+
+        holder.theme.addTextChangedListener(object : MyTextWatcher(){
+            override fun afterTextChanged(p0: Editable?) {
+                if (p0 != null) data[holder.adapterPosition].head = p0.toString()
+            }
+        })
+        holder.detials.addTextChangedListener(object : MyTextWatcher(){
+            override fun afterTextChanged(p0: Editable?) {
+                if (p0 != null) data[holder.adapterPosition].theses = p0.toString()
+            }
+        })
+        holder.timing.addTextChangedListener(object : MyTextWatcher(){
+            override fun afterTextChanged(p0: Editable?) {
+                if (p0 != null) data[holder.adapterPosition].time = p0.toString().toLong()
+            }
+        })
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            UserViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_part, parent,false))
+            UserViewHolder(LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_part, parent, false))
 
-    class UserViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        var head = view.head
-        var theses = view.thesis
-        var timePlan = view.time
+        var themeItem = view.speech_item_txt
+        var theme = view.theme_edtext
+        var detials = view.details_edtext
+        var timing = view.timning_edtext
+        var deleteBtn = view.delete_btn
+
     }
 
-    interface CallBack {
-        fun setTypeFace(): Typeface
+    interface PartAdapterCallBack {
+        fun deletePart(pos: Int)
     }
+
+    abstract class MyTextWatcher : TextWatcher {
+
+        override fun afterTextChanged(p0: Editable?) {}
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+    }
+
 }

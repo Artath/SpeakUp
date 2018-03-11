@@ -13,9 +13,8 @@ import com.example.artem.speakup.TimeSpeechAssistant.DBWorkSession
 import com.example.artem.speakup.TimeSpeechAssistant.Part
 import kotlinx.android.synthetic.main.activity_parts.*
 
-class PartsActivity : AppCompatActivity(), PartAdapter.CallBack {
+class PartsActivity : AppCompatActivity() {
 
-    override fun setTypeFace() = Typeface.createFromAsset(assets, "segoepr.ttf")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,11 +27,11 @@ class PartsActivity : AppCompatActivity(), PartAdapter.CallBack {
         dbw.addSelectionArgs(arrayOf<String>("" + id))
         val parts = dbw.read(applicationContext) as ArrayList<Part>
 
-        val adapter = PartAdapter(parts)
+       /* val adapter = PartAdapter(parts)
         part_list.layoutManager = LinearLayoutManager(applicationContext)
-        part_list.adapter = adapter
-        adapter.callBack = this
-        adapter.notifyDataSetChanged()
+        part_list.adapter = adapter*/
+        //adapter.callBack = this
+      //  adapter.notifyDataSetChanged()
 
         start_btn.setOnClickListener {
             val intent  = Intent(applicationContext, AssistantActivity::class.java)

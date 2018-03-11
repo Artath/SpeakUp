@@ -22,8 +22,8 @@ class SpeechRecordsActivity : AppCompatActivity(), RecognizerListener {
 
     private val API_KEY = "34e04a4d-07bc-4e70-8527-7b5e49f62cf9"
     private var recognizer: Recognizer? = null
+    private var partialRes = ""
     private var res = ""
-
     private var isRecognition = false
 
     override fun onRecordingDone(p0: Recognizer?) {}
@@ -34,6 +34,8 @@ class SpeechRecordsActivity : AppCompatActivity(), RecognizerListener {
 
     override fun onPartialResults(p0: Recognizer?, p1: Recognition?, p2: Boolean) {
         changePartialRes(p1!!.bestResultText)
+        if (p2)
+            res += p1!!.bestResultText
     }
     override fun onRecordingBegin(p0: Recognizer?) = updateStatus("Say!!!")
 
@@ -42,10 +44,7 @@ class SpeechRecordsActivity : AppCompatActivity(), RecognizerListener {
     override fun onSpeechDetected(p0: Recognizer?) = updateStatus("Speech detected")
 
     override fun onRecognitionDone(p0: Recognizer?, p1: Recognition?) {
-        res += p1!!.bestResultText + " "
-        if (isRecognition){
-            createAndStartRecognizer()
-        }
+       // res += p1!!.bestResultText
     }
 
     override fun onError(p0: Recognizer?, p1: Error?) {
@@ -103,7 +102,7 @@ class SpeechRecordsActivity : AppCompatActivity(), RecognizerListener {
 
     @SuppressLint("MissingPermission")
     private fun createAndStartRecognizer() {
-            recognizer = Recognizer.create(Recognizer.Language.RUSSIAN, Recognizer.Model.NOTES, this)
+            recognizer = Recognizer.create(Recognizer.Language.RUSSIAN, Recognizer.Model.NOTES, this, true)
             recognizer!!.start()
     }
 

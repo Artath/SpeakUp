@@ -15,9 +15,8 @@ import java.util.ArrayList
 /**
  * Created by ASUS on 01.03.2018.
  */
-class SessionAdapter(var data: ArrayList<SpeechSession>) : RecyclerView.Adapter<SessionAdapter.UserViewHolder>() {
-
-    var callBack: CallBack? = null
+class SessionAdapter(var data: ArrayList<SpeechSession>,
+                     var callBack: SessionAdapterCallBack) : RecyclerView.Adapter<SessionAdapter.UserViewHolder>() {
 
     override fun getItemCount() = data.size
 
@@ -25,22 +24,12 @@ class SessionAdapter(var data: ArrayList<SpeechSession>) : RecyclerView.Adapter<
 
         holder.nameSes.text = data[position].name
         holder.descr.text = data[position].description
-        holder.timeCreated.text = data[position].dateCreated.toString()
-        holder.riating.text = data[position].lastRaiting.toString()
-
-        if (callBack != null) {
-            holder.nameSes.typeface = callBack!!.setTypeFace()
-            holder.descr.typeface = callBack!!.setTypeFace()
-            holder.timeCreated.typeface = callBack!!.setTypeFace()
-            holder.riating.typeface = callBack!!.setTypeFace()
-        }
 
         holder.itemView.setOnClickListener {
-            if (callBack != null) {
-                callBack!!.showParts(data[position].id)
-            }
+            callBack.startAssistant(data[position].id)
         }
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
             UserViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_session, parent,false))
@@ -48,12 +37,13 @@ class SessionAdapter(var data: ArrayList<SpeechSession>) : RecyclerView.Adapter<
     class UserViewHolder(view: View): RecyclerView.ViewHolder(view) {
         var nameSes = view.name
         var descr = view.descr
-        var timeCreated = view.time_created
-        var riating = view.raiting
+        var menu = view.menu_btn
+
     }
 
-    interface CallBack {
-        fun setTypeFace(): Typeface
-        fun showParts(id: Long)
+    interface SessionAdapterCallBack {
+        fun startAssistant(id: Long)
+        fun deleteSession(id: Long, pos: Int)
+        fun editSession(id: Long)
     }
 }

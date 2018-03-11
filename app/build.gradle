@@ -36,5 +36,6 @@ dependencies {
 
     compile 'com.yandex.android:speechkit:2.5.0'
     compile 'com.google.code.gson:gson:2.8.2'
+    compile 'com.google.firebase:firebase-core:11.8.0'
 
 }

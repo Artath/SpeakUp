@@ -10,10 +10,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Name"
-        android:textSize="20sp"
+        android:textSize="15sp"
+        android:textColor="@android:color/black"
         app:layout_constraintBottom_toTopOf="@+id/descr"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,29 +24,21 @@
         android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:text="ska, taaaaa, shaaaaaa"
+        android:layout_marginStart="16dp"
+        android:text="ska, taaaaa, shaaaaaadfdffdfdfdfsfsfsdfdfdfdf"
+        android:maxLength="35"
+        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/time_created"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/menu_btn"
+        android:layout_width="20dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:text="04/03/2017"
-        android:textSize="8sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/raiting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
-        android:text="100 hp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

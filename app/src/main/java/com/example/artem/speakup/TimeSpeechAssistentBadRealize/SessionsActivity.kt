@@ -10,15 +10,7 @@ import com.example.artem.speakup.TimeSpeechAssistant.DBWorkSession
 import com.example.artem.speakup.TimeSpeechAssistant.SpeechSession
 import kotlinx.android.synthetic.main.activity_sessions.*
 
-class SessionsActivity : AppCompatActivity(), SessionAdapter.CallBack{
-
-    override fun showParts(id: Long) {
-        val intent = Intent(applicationContext, PartsActivity::class.java)
-        intent.putExtra(ID, id)
-        startActivity(intent)
-    }
-
-    override fun setTypeFace() = Typeface.createFromAsset(assets, "segoepr.ttf")
+class SessionsActivity : AppCompatActivity(){
 
     companion object {
         val ID = "id"
@@ -38,8 +30,21 @@ class SessionsActivity : AppCompatActivity(), SessionAdapter.CallBack{
         sessions = DBWorkSession().read(applicationContext) as ArrayList<SpeechSession>
 
         speech_list.layoutManager = LinearLayoutManager(applicationContext)
-        val adapter = SessionAdapter(sessions)
-        adapter.callBack = this
+        val adapter = SessionAdapter(sessions, object : SessionAdapter.SessionAdapterCallBack{
+
+            override fun startAssistant(id: Long) {
+
+            }
+
+            override fun deleteSession(id: Long, pos: Int) {
+
+            }
+
+            override fun editSession(id: Long) {
+
+            }
+
+        })
         speech_list.adapter = adapter
         adapter.notifyDataSetChanged()
 
