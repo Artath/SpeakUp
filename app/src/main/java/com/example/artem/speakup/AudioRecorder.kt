@@ -41,8 +41,11 @@ class AudioRecorder: AppCompatActivity() {
         recorder = null
     }
 
-    fun getAudioRecord(): String? {
+    fun getAudioRecord(): AudioRecord {
         val f = File(fileName)
-        return f.nameWithoutExtension
+        return AudioRecord(
+                    f.nameWithoutExtension,
+                    f.lastModified(),
+                    f.path)
     }
 }

@@ -1,69 +1,66 @@
 package com.example.artem.speakup
 
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.view.View
-import android.widget.Toast
+import android.support.design.widget.TabLayout
+import android.support.v4.content.ContextCompat
+import com.arellomobile.mvp.presenter.InjectPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),
+        MainPresenter.MainPresenterInterface,
+        TabRecords.Callback,
+        TabRecorder.Callback {
 
-    private var rAdapter: RecordListAdapter? = null
-    private lateinit var rList: RecyclerView
+    @InjectPresenter
+    lateinit var presenter: MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        rList = records_list
-        rList.layoutManager = LinearLayoutManager(applicationContext)
-
-        button_new_record.setOnClickListener({ _-> openNewRecordActivity() })
-
-        updateRecordsList()
+        updateTabs()
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun updateTabs() {
+        tabs.addOnTabSelectedListener(object: TabLayout.ViewPagerOnTabSelectedListener(content) {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                super.onTabSelected(tab)
+                content.currentItem = tab!!.position
 
-        updateRecordsList()
+                tabs.getTabAt(0)?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.playlist_play)
+                tabs.getTabAt(1)?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.microphone)
+                tabs.getTabAt(2)?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.message_bulleted)
+                tabs.getTabAt(3)?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.approval)
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+        })
+
+        val adapter = TabsAdapter(applicationContext, supportFragmentManager)
+        content.adapter = adapter
+        tabs.setupWithViewPager(content)
     }
 
-    fun openNewRecordActivity() {
-        val intent = Intent(applicationContext, RecordActivity::class.java)
-        startActivity(intent)
-    }
-
-    fun getAudioRecords(): ArrayList<AudioRecord> {
+    override fun getAudioRecords(): ArrayList<AudioRecord>? {
         val files = File(externalCacheDir.absolutePath).listFiles()
         var data: ArrayList<AudioRecord> = arrayListOf()
-        files.forEach {
-            f -> data.add(AudioRecord(f.nameWithoutExtension)) }
 
+        files.forEach {
+            f -> data.add(
+                AudioRecord(
+                        f.nameWithoutExtension,
+                        f.lastModified(),
+                        f.path)) }
+
+        data.reverse()
         return data
     }
 
-    fun updateRecordsList() {
-        val data = getAudioRecords()
-
-        if( data.size == 0 )
-            records_note.visibility = View.VISIBLE
-
-        if( rAdapter == null ) {
-            rAdapter = RecordListAdapter(data,
-                    object: RecordListAdapter.ItemClickListener{
-                        override fun onListItemClick(item: AudioRecord) {
-                            Toast.makeText(applicationContext, "Record clicked", Toast.LENGTH_SHORT).show()
-                        }
-                    })
-            rList.adapter = rAdapter
-        } else {
-            rAdapter?.data = data
-            rAdapter?.notifyDataSetChanged()
-        }
+    override fun getAppPath(): String {
+        return externalCacheDir.absolutePath
     }
 }

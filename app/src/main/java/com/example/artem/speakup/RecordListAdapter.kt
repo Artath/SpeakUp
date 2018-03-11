@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.list_record_item.view.*
 
-class RecordListAdapter(var data: ArrayList<AudioRecord>, val itemListener: ItemClickListener):
+class RecordListAdapter(var data: ArrayList<AudioRecord>?, val itemListener: ItemClickListener):
     RecyclerView.Adapter<RecordListAdapter.ViewHolder>() {
 
     interface ItemClickListener {
@@ -18,13 +18,15 @@ class RecordListAdapter(var data: ArrayList<AudioRecord>, val itemListener: Item
         var adapterClickListener: ItemClickListener? = null
     }
 
-    override fun getItemCount() = data.size
+    override fun getItemCount() = data!!.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         adapterClickListener = itemListener
-        val entry: AudioRecord = data[position]
+        val entry: AudioRecord = data!![position]
 
         holder.name.text = entry.getAudioName()
+        holder.dt.text = entry.getAudioDT()
+        holder.duration.text = entry.getDuration()
 
         holder.itemView.setOnClickListener(View.OnClickListener {
             if (adapterClickListener != null)
@@ -38,5 +40,7 @@ class RecordListAdapter(var data: ArrayList<AudioRecord>, val itemListener: Item
 
     class ViewHolder(var view: View): RecyclerView.ViewHolder(view) {
         var name: TextView = view.record_name
+        var dt: TextView = view.record_date
+        var duration: TextView = view.record_length
     }
 }
