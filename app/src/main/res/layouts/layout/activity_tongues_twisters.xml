@@ -13,7 +13,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="sdfsdfsfsdfs"
+        android:text=""
         android:textSize="15sp"
         android:textAlignment="center"
         android:textColor="@android:color/black"
@@ -51,17 +51,18 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
-        android:id="@+id/tg_stop_btn"
+        android:id="@+id/tg_next_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/border_rounded_outline"
-        android:layout_margin="8dp"
+        android:layout_margin="16dp"
         android:cropToPadding="false"
-        android:padding="30dp"
+        android:visibility="invisible"
+        android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/record_timer"
-        app:srcCompat="@drawable/stop_red_big" />
+        app:srcCompat="@drawable/chevron_right" />
 
 </android.support.constraint.ConstraintLayout>

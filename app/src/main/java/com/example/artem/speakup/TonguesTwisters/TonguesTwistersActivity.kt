@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.artem.speakup.R
 import com.example.artem.speakup.SpeechAnalysis.Word
@@ -13,15 +14,15 @@ import ru.yandex.speechkit.*
 // some elements - test
 class TonguesTwistersActivity : AppCompatActivity(), TGPresenter.TGPresenterInterface {
 
+    private val API_SPEECH_KIT_KEY = "34e04a4d-07bc-4e70-8527-7b5e49f62cf9"
+
     @InjectPresenter
     lateinit var presenter: TGPresenter
 
     private var recognizer: Recognizer? = null
     //test
     private var index = 0
-    private var currentTwist = ""
     private var arr = arrayListOf<String>()
-    private val API_SPEECH_KIT_KEY = "34e04a4d-07bc-4e70-8527-7b5e49f62cf9"
     private var switch = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,22 +42,21 @@ class TonguesTwistersActivity : AppCompatActivity(), TGPresenter.TGPresenterInte
             override fun onError(p0: Initializer?, p1: Error?) {}
         }).start()
 
-        tg_stop_btn.setOnClickListener {
-            if (switch) {
-                onStopSession()
-            } else {
-                onStartSession()
-            }
+
+        tg_next_btn.setOnClickListener {
+            startTrain()
         }
+
         //здесь по id уже получаем с базы скороговорки
         val arrTwistId = intent.getIntArrayExtra(TabTwisters.SELECTED_TONGUES_TWISTERS)
         //test
-         arr.addAll(arrayListOf("Их пестициды не перепистицидят наши по своей пестицидности",
-                "Их пестициды не перепистицидят наши по своей пестицидности",
+         arr.addAll(arrayListOf("В Каннах львы только ленивым венки не вили",
+                "Ну ты кек",
                 "Кокосовары варят в скорококосоварках кокосовый сок",
                 "Работники предприятие приватизировали-приватизировали, да не выприватизировали",
-                "Сиреневенькая зубовыковыривательница"))
-
+                "Сиреневенькая зубовыковыривательница",
+                 "В Кабардино-Балкарии валокордин из Болгарии"))
+        startTrain()
     }
 
     @SuppressLint("MissingPermission")
@@ -80,13 +80,17 @@ class TonguesTwistersActivity : AppCompatActivity(), TGPresenter.TGPresenterInte
             override fun onRecognitionDone(p0: Recognizer?, p1: Recognition?) {
                 val res = p1!!.bestResultText
                 changeRes(res)
-                if (compareTongueTwisters(currentTwist, res)) {
+                if (compareTongueTwisters(arr[index], res)) {
                     //updateProgress(arrTwistId[index])
                     updateCheck("Right!")
                 } else {
                     updateCheck("Bad...")
                 }
-                onStopSession()
+                if (index < (arr.size - 1)) {
+                    index++
+                }
+                changeView()
+                cancelRecognizer()
             }
 
             override fun onError(p0: Recognizer?, p1: Error?) {
@@ -121,16 +125,29 @@ class TonguesTwistersActivity : AppCompatActivity(), TGPresenter.TGPresenterInte
         check_res_txt.text = text
     }
 
-    private fun onStopSession() {
+   /* private fun onStopSession() {
         switch = !switch
         cancelRecognizer()
-    }
+    }*/
 
-    private fun onStartSession() {
-        switch = !switch
-        updateTwist(arr[index])
+    private fun startTrain() {
+        changeView()
         startTimer(8)
     }
+
+    private fun changeView() {
+        if (switch) {
+            tg_next_btn.visibility = View.VISIBLE
+            switch = !switch
+        } else {
+            updateTwist(arr[index])
+            changeRes("Read...")
+            updateCheck("")
+            tg_next_btn.visibility = View.INVISIBLE
+            switch = !switch
+        }
+    }
+
     private fun compareTongueTwisters(tongueTwister: String, resRecognizer: String) =
             Word.toRightFormat(tongueTwister) == Word.toRightFormat(resRecognizer)
 
@@ -140,15 +157,11 @@ class TonguesTwistersActivity : AppCompatActivity(), TGPresenter.TGPresenterInte
 
             override fun onTick(millisUntilFinished: Long) {
                 if (millisUntilFinished <= 3000) {
-                    changeRes((millisUntilFinished / 1000).toString() + 1)
+                    changeRes(((millisUntilFinished / 1000) + 1).toString())
                 }
             }
             override fun onFinish() {
                 createAndStartRecognizer()
-                //test
-                if (index < (arr.size - 1)) {
-                    index++
-                }
             }
         }.start()
     }
