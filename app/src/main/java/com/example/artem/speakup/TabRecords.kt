@@ -38,16 +38,16 @@ class TabRecords : Fragment() {
         rList = records_list
         rList.layoutManager = LinearLayoutManager(context)
 
-        // Switch tabs to Recorder activty
-        // button_new_record.setOnClickListener({_ -> openNewRecordActivity()})
+        // Open Recorder activty
+        button_new_record.setOnClickListener({_ -> openNewRecordActivity()})
 
         updateRecordsList()
     }
 
-//    fun openNewRecordActivity() {
-//        val intent = Intent(context, RecordActivity::class.java)
-//        startActivity(intent)
-//    }
+    fun openNewRecordActivity() {
+        val intent = Intent(context, ActivityRecorder::class.java)
+        startActivity(intent)
+    }
 
     fun updateRecordsList() {
         // Method getAudioRecords() is used from MainActivity

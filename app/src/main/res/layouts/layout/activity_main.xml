@@ -31,11 +31,6 @@
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/microphone" />
-
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:icon="@drawable/message_bulleted" />
 
         <android.support.design.widget.TabItem

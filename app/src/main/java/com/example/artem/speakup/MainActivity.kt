@@ -10,8 +10,7 @@ import java.io.File
 
 class MainActivity : AppCompatActivity(),
         MainPresenter.MainPresenterInterface,
-        TabRecords.Callback,
-        TabRecorder.Callback {
+        TabRecords.Callback {
 
     @InjectPresenter
     lateinit var presenter: MainPresenter
@@ -30,9 +29,8 @@ class MainActivity : AppCompatActivity(),
                 content.currentItem = tab!!.position
 
                 tabs.getTabAt(0)?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.playlist_play)
-                tabs.getTabAt(1)?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.microphone)
-                tabs.getTabAt(2)?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.message_bulleted)
-                tabs.getTabAt(3)?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.approval)
+                tabs.getTabAt(1)?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.message_bulleted)
+                tabs.getTabAt(2)?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.approval)
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {}
@@ -58,9 +56,5 @@ class MainActivity : AppCompatActivity(),
 
         data.reverse()
         return data
-    }
-
-    override fun getAppPath(): String {
-        return externalCacheDir.absolutePath
     }
 }

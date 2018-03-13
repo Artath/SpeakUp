@@ -2,22 +2,43 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.artem.speakup.RecordActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/record_timer"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/timer_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="00:00:000"
-        android:textAlignment="center"
-        android:textSize="38dp"
         app:layout_constraintBottom_toTopOf="@+id/record_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/record_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:textAlignment="center"
+            android:textSize="38dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/record_timer_ms"/>
+
+        <TextView
+            android:id="@+id/record_timer_ms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":000"
+            android:textAlignment="center"
+            android:textSize="28dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/record_timer"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.7" />
+    </android.support.constraint.ConstraintLayout>
 
     <ImageButton
         android:id="@+id/record_button"
@@ -29,7 +50,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/record_timer"
+        app:layout_constraintTop_toBottomOf="@+id/timer_container"
         app:srcCompat="@drawable/checkbox_blank_circle_red" />
 
     <android.support.constraint.ConstraintLayout
@@ -103,4 +124,5 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
     </android.support.constraint.ConstraintLayout>
+
 </android.support.constraint.ConstraintLayout>
