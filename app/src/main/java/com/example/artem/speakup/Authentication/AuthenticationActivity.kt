@@ -15,7 +15,7 @@ import com.firebase.ui.auth.IdpResponse
 
 class AuthenticationActivity : AppCompatActivity() {
 
-    private val RC_SIGN_IN = 123
+    private val RC_EMAIL_SIGN_IN = 123
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +28,7 @@ class AuthenticationActivity : AppCompatActivity() {
         val auth = FirebaseAuth.getInstance()
         if (auth.currentUser != null) {
             // already signed in
-            Toast.makeText(applicationContext, "Signed In!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Signed In with Email!", Toast.LENGTH_SHORT).show()
         }
 
 
@@ -47,7 +47,7 @@ class AuthenticationActivity : AppCompatActivity() {
                                 .createSignInIntentBuilder()
                                 .setAvailableProviders(providers)
                                 .build(),
-                        RC_SIGN_IN)
+                        RC_EMAIL_SIGN_IN)
 
         })
 
@@ -56,14 +56,14 @@ class AuthenticationActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == RC_SIGN_IN) {
+        if (requestCode == RC_EMAIL_SIGN_IN) {
             val response = IdpResponse.fromResultIntent(data)
 
             if (resultCode == Activity.RESULT_OK) {
                 // Successfully signed in
                 val user = FirebaseAuth.getInstance().currentUser!!.uid
                 //здесь записать нового юзера в базу-----------------------------------------------------------------------db
-                Toast.makeText(applicationContext, "Signed In!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Signed In with Email!", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, TestActivity::class.java))
                 // ...
             } else {
