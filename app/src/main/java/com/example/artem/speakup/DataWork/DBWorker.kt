@@ -3,11 +3,11 @@ package com.example.artem.speakup.DataWork
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
-import com.example.artem.speakup.TimeSpeechAssistant.AsissrantSQLiteOpenHelper
+import com.example.artem.speakup.TimeSpeechAssistant.Data.AsissrantSQLiteOpenHelper
 import kotlin.collections.ArrayList
 
 // base class for data base work
-abstract class DBWorker : ExtraSourceWorker {
+abstract class DBWorker (var context: Context) : ExtraSourceWorker {
 
     protected open val values = ContentValues()
 
@@ -16,7 +16,7 @@ abstract class DBWorker : ExtraSourceWorker {
     protected open var selection: String? = null
     protected open var selectionArgs: Array<String>? = null
 
-    override fun read(context: Context): ArrayList<out ExtraSourceObject> {
+    override fun read(): ArrayList<out ExtraSourceObject> {
 
         val DB = AsissrantSQLiteOpenHelper(context).readableDatabase
         return cursorToArrayList(DB.query(
@@ -29,12 +29,12 @@ abstract class DBWorker : ExtraSourceWorker {
                 null))
     }
 
-    override fun create(context: Context): Long {
+    override fun create(): Long {
         val DB = AsissrantSQLiteOpenHelper(context).writableDatabase
         return DB.insert(tableName, null, values)
     }
 
-    override fun update(context: Context): Int {
+    override fun update(): Int {
         val DB = AsissrantSQLiteOpenHelper(context).readableDatabase
         return DB.update(
                 tableName,
@@ -43,7 +43,7 @@ abstract class DBWorker : ExtraSourceWorker {
                 selectionArgs)
     }
 
-    override fun delete(context: Context): Int {
+    override fun delete(): Int {
         val DB = AsissrantSQLiteOpenHelper(context).readableDatabase
         return DB.delete(
                 tableName,

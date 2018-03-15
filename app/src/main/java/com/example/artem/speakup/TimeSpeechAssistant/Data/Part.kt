@@ -1,4 +1,4 @@
-package com.example.artem.speakup.TimeSpeechAssistant
+package com.example.artem.speakup.TimeSpeechAssistant.Data
 
 import com.example.artem.speakup.DataWork.ExtraSourceObject
 

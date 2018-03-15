@@ -1,12 +1,8 @@
-package com.example.artem.speakup.TimeSpeechAssistant
+package com.example.artem.speakup.TimeSpeechAssistant.Data
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-
-/**
- * Created by ASUS on 01.03.2018.
- */
 
 class AsissrantSQLiteOpenHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     override fun onCreate(sqLiteDatabase: SQLiteDatabase) {
@@ -22,6 +18,6 @@ class AsissrantSQLiteOpenHelper(context: Context) : SQLiteOpenHelper(context, DA
 
     companion object {
         private val DATABASE_VERSION = 1
-        val DATABASE_NAME = "SessionDatabase"
+        val DATABASE_NAME = "SessionDatabaseSU"
     }
 }

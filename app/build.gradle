@@ -53,16 +53,10 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.google.firebase:firebase-core:11.8.0'
 
+    implementation 'com.arello-mobile:moxy:1.5.3'
+    implementation 'com.arello-mobile:moxy-app-compat:1.5.3'
     kapt 'com.arello-mobile:moxy-compiler:1.5.3'
-    compile 'com.arello-mobile:moxy:1.5.3'
-    annotationProcessor 'com.arello-mobile:moxy-compiler:1.5.3'
-    compile 'com.arello-mobile:moxy-app-compat:1.5.3'
 }
-
-
-
-
-
 
 
 kapt {

@@ -1,9 +1,10 @@
-package com.example.artem.speakup.TimeSpeechAssistant
+package com.example.artem.speakup.TimeSpeechAssistant.Data
 
+import android.content.Context
 import android.database.Cursor
 import com.example.artem.speakup.DataWork.DBWorker
 
-class DBWorkParts : DBWorker() {
+class DBWorkParts(context: Context) : DBWorker(context) {
 
     override val projection = arrayOf<String>(AssistantDBContract.Parts._ID,
             AssistantDBContract.Parts.COLUMN_HEAD,
@@ -23,6 +24,13 @@ class DBWorkParts : DBWorker() {
     fun setSessionId(id: Long) =  values.put(AssistantDBContract.Parts.SESSION_ID, id)
 
     fun setOrder(order: Int) = values.put(AssistantDBContract.Parts.COLUMNE_ORDER, order)
+
+    //except sessionId
+    fun setAllValues(part: Part) {
+        setHead(part.head)
+        setTheses(part.theses)
+        setTime(part.time)
+    }
 
     //concrate realization
     override fun cursorToArrayList(cursor: Cursor): ArrayList<Part>  {

@@ -17,9 +17,9 @@ class MainActivity : AppCompatActivity(),
         TabRecords.Callback,
         TabRecorder.Callback {
 
-    @InjectPresenter
+    /*@InjectPresenter
     lateinit var presenter: MainPresenter
-
+*/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
