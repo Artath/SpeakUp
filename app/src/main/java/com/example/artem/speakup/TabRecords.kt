@@ -41,6 +41,9 @@ class TabRecords : Fragment() {
         // Open Recorder activty
         button_new_record.setOnClickListener({_ -> openNewRecordActivity()})
 
+        // Refresh Records list
+        records_refresh.setOnClickListener({ _ -> updateRecordsList() })
+
         updateRecordsList()
     }
 
@@ -53,8 +56,14 @@ class TabRecords : Fragment() {
         // Method getAudioRecords() is used from MainActivity
         val data = callback?.getAudioRecords()
 
-        if( data!!.size == 0 )
+        if( data!!.size == 0 ) {
             records_note.visibility = View.VISIBLE
+            records_refresh.visibility = View.VISIBLE
+            Toast.makeText(context, resources.getString(R.string.no_records), Toast.LENGTH_LONG).show()
+        } else {
+            records_note.visibility = View.GONE
+            records_refresh.visibility = View.GONE
+        }
 
         if( rAdapter == null ) {
             rAdapter = RecordListAdapter(data,
@@ -67,14 +76,6 @@ class TabRecords : Fragment() {
         } else {
             rAdapter?.data = data
             rAdapter?.notifyDataSetChanged()
-        }
-    }
-
-
-
-    fun onButtonPressed(uri: Uri) {
-        if (mListener != null) {
-            mListener!!.onFragmentInteraction(uri)
         }
     }
 
