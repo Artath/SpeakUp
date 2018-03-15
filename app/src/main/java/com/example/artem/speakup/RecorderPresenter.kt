@@ -1,14 +1,14 @@
 package com.example.artem.speakup
 
-import android.content.Context
 import android.os.CountDownTimer
 import android.util.Log
-import android.widget.Toast
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.arellomobile.mvp.MvpView
+import com.github.mikephil.charting.data.*
 import java.io.File
 import java.util.*
+import kotlin.collections.ArrayList
 
 @InjectViewState
 class RecorderPresenter: MvpPresenter<RecorderPresenter.Interface>() {
@@ -22,6 +22,17 @@ class RecorderPresenter: MvpPresenter<RecorderPresenter.Interface>() {
     var aRecorder: AudioRecorder? = null
     var startts: Long = 0
     var appPath: String = ""
+    var aLevels: ArrayList<BarEntry> = ArrayList<BarEntry>() // Max 32767
+
+    fun iniChart() {
+        // Complete aLevels with empty values
+        for ( i in 0 .. 99 ) {
+            aLevels.add(BarEntry(i.toFloat(), ((i*100) * 100 / 32767 ).toFloat()))
+        }
+
+        val data = BarDataSet(aLevels, "Level")
+        viewState.vInitChart(data)
+    }
 
     fun recorderStart() {
         record_status = "rec"
@@ -36,7 +47,7 @@ class RecorderPresenter: MvpPresenter<RecorderPresenter.Interface>() {
 
         var fileName = appPath
         val files = File(fileName).listFiles()
-        fileName += "/NewRecord-%s.3gp".format(files.size)
+        fileName += "/NewRecord-%s.mp3".format(files.size)
 
         aRecorder = AudioRecorder()
         aRecorder?.startRecording(fileName)
@@ -74,6 +85,8 @@ class RecorderPresenter: MvpPresenter<RecorderPresenter.Interface>() {
         aTimer = object: CountDownTimer(60*60*1000, 100) {
             override fun onTick(p0: Long) {
                 viewState.vUpdateTimer(startTS)
+//                Log.d("** speakup **", "vUpdateChart y: %s; entry: %s".format(aRecorder!!.getLevel(), aRecorder!!.getLevel() * 100 / 32767))
+                viewState.vUpdateChart(BarEntry(99.0F, aRecorder!!.getLevel() * 100 / 32767))
             }
 
             override fun onFinish() { }
@@ -95,5 +108,7 @@ class RecorderPresenter: MvpPresenter<RecorderPresenter.Interface>() {
         fun vUpdateButton(state: String)
         fun vHideNewRecord(hide: Boolean, record: AudioRecord?)
         fun vMessage(msg: String)
+        fun vInitChart(data: BarDataSet)
+        fun vUpdateChart(entry: BarEntry)
     }
 }

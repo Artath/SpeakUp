@@ -2,10 +2,12 @@ package com.example.artem.speakup
 
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.github.mikephil.charting.data.*
 
 import kotlinx.android.synthetic.main.activity_recorder.*
 import java.lang.Math.abs
@@ -24,6 +26,8 @@ class ActivityRecorder : MvpAppCompatActivity(),
 
         // Return to main app view
         new_record_audio.setOnClickListener({ _ -> finish() })
+
+        presenter.iniChart()
     }
 
     fun recordHandler() {
@@ -71,5 +75,51 @@ class ActivityRecorder : MvpAppCompatActivity(),
 
     override fun vMessage(msg: String) {
         Toast.makeText( applicationContext, msg, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun vInitChart(data: BarDataSet) {
+        data.color = ContextCompat.getColor(applicationContext, R.color.colorPrimary)
+
+        record_level_chart.data = BarData(data)
+
+        record_level_chart.description = null
+        record_level_chart.legend.isEnabled = false
+        record_level_chart.axisLeft.setDrawLabels(false)
+        record_level_chart.axisRight.setDrawLabels(false)
+        record_level_chart.axisLeft.setDrawAxisLine(false)
+        record_level_chart.axisRight.setDrawAxisLine(false)
+        record_level_chart.axisLeft.setDrawGridLines(false)
+        record_level_chart.axisRight.setDrawGridLines(false)
+
+        record_level_chart.xAxis.setDrawLabels(false)
+        record_level_chart.xAxis.setDrawAxisLine(false)
+        record_level_chart.xAxis.setDrawGridLines(false)
+
+        record_level_chart.xAxis.axisMaximum = 100F
+
+        record_level_chart.invalidate()
+    }
+
+    override fun vUpdateChart(entry: BarEntry) {
+        record_level_chart.data.removeEntry(0F, 0)
+
+        var lvl: ArrayList<BarEntry> = ArrayList<BarEntry>()
+        val data = record_level_chart.data
+
+        for( i in 0 .. 98 ) {
+            lvl.add(BarEntry(
+                    i.toFloat(),
+                    data.getDataSetByIndex(0).getEntryForIndex(i).y))
+        }
+        lvl.add(entry)
+
+        val chartData = BarDataSet(lvl, "Level")
+        chartData.color = ContextCompat.getColor(applicationContext, R.color.colorPrimary)
+        record_level_chart.data = BarData(chartData)
+
+        record_level_chart.xAxis.axisMaximum = 100F
+
+        record_level_chart.notifyDataSetChanged()
+        record_level_chart.invalidate()
     }
 }

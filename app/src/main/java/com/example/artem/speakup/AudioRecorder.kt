@@ -16,9 +16,9 @@ class AudioRecorder: AppCompatActivity() {
 
         recorder = MediaRecorder()
         recorder?.setAudioSource(MediaRecorder.AudioSource.MIC)
-        recorder?.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+        recorder?.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
         recorder?.setOutputFile(fileName)
-        recorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+        recorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
 
         try {
             recorder?.prepare()
@@ -47,5 +47,19 @@ class AudioRecorder: AppCompatActivity() {
                     f.nameWithoutExtension,
                     f.lastModified(),
                     f.path)
+    }
+
+    fun getLevel(): Float {
+        if( recorder != null ) {
+            try {
+                return recorder?.maxAmplitude!!.toFloat()
+            } catch (e: Exception) {
+                Log.d("** speakup **", "AudioRecorder getLevel() failed; Return 0")
+                return 0F
+            }
+        } else {
+            Log.d("** speakup **", "AudioRecorder getLevel() - recorder is NULL; Return 0")
+            return 0F
+        }
     }
 }
