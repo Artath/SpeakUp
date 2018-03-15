@@ -2,4 +2,8 @@
     <string name="app_name">Speak Up</string>
 
     <string name="no_records">No records found</string>
+
+    <!-- Remove record alert dialog -->
+    <string name="remove_record_title">Remove record</string>
+    <string name="remove_record_msg">Confirm record %s remove</string>
 </resources>

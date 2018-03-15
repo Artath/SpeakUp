@@ -11,7 +11,7 @@
 
 
     <ImageButton
-        android:id="@+id/record_icon"
+        android:id="@+id/record_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
@@ -23,18 +23,31 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/play" />
 
+    <ImageButton
+        android:id="@+id/record_delete"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:background="@drawable/border_rounded_outline"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/delete_red" />
+
     <TextView
         android:id="@+id/record_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="72dp"
         android:text="record_name"
         android:textSize="16dp"
         android:textColor="@color/colorTextDark"
         app:layout_constraintBottom_toTopOf="@+id/record_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/record_icon"
+        app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -45,10 +58,10 @@
         android:text="record_date"
         android:textSize="12dp"
         android:textColor="@color/colorTextLight"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="72dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/record_icon"
+        app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/record_name"
         app:layout_constraintHorizontal_bias="0.0" />
 
