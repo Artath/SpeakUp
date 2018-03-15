@@ -54,11 +54,6 @@ class AuthActivity : AppCompatActivity() {
         }
 
 
-        /*if(VKSdk.wakeUpSession(applicationContext)){
-            Toast.makeText(applicationContext, "Signed In with VK!", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this@VKplusFBActivity, TrueMainActivity::class.java))
-        }*/
-
         emailLoginBtn.setOnClickListener({
             startActivityForResult(
                     AuthUI.getInstance()
@@ -77,91 +72,85 @@ class AuthActivity : AppCompatActivity() {
     private fun signIn(){
         loginProgressBar.visibility = View.VISIBLE
         background.visibility = View.VISIBLE
-        // Вызываем VKSdk.login для дальшейшего onActivityResult(), который нам понадобится
         VKSdk.login(this, *scopeArray)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        vkontakteLoginButton.isEnabled = false
-        emailLoginBtn.isEnabled = false
 
-        if (requestCode == RC_EMAIL_SIGN_IN) {
-            val response = IdpResponse.fromResultIntent(data)
+        if(resultCode != RESULT_CANCELED) {
+            vkontakteLoginButton.isEnabled = false
+            emailLoginBtn.isEnabled = false
+            if (requestCode == RC_EMAIL_SIGN_IN) {
+                val response = IdpResponse.fromResultIntent(data)
 
-            if (resultCode == Activity.RESULT_OK) {
-                // Successfully signed in
-                val user = FirebaseAuth.getInstance().currentUser!!.uid
-                //здесь записать нового юзера в базу-----------------------------------------------------------------------db
-                Toast.makeText(applicationContext, "Signed In with Email!", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, MainActivity::class.java))
-                // ...
+                if (resultCode == Activity.RESULT_OK) {
+                    // Successfully signed in
+                    val user = FirebaseAuth.getInstance().currentUser!!.uid
+                    //здесь записать нового юзера в базу-----------------------------------------------------------------------db
+                    Toast.makeText(applicationContext, "Signed In with Email!", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, MainActivity::class.java))
+                    // ...
+                } else {
+                    // Sign in failed, check response for error code
+                    // ...
+                }
             } else {
-                // Sign in failed, check response for error code
-                // ...
-            }
-        }else {
 
 
-            val callback = object : VKCallback<VKAccessToken> {
-                override fun onResult(res: VKAccessToken) {
-                    //Собственно, вся "магия" имеет место далее.
+                val callback = object : VKCallback<VKAccessToken> {
+                    override fun onResult(res: VKAccessToken) {
 
-                    //Здесь может быть любая логика по подготовке нужных
-                    //креденшлов для последующей отправки на Firebase.
-                    //val authPass = preparePassForAuth(res.userId)
-                    val authPass: String = res.userId
+                        val authPass: String = res.userId
+                        var firebaseAuthManager = FirebaseAuth.getInstance()
 
-                    //Когда данные готовы, получаем instance FirebaseAuth, ведь дальше без него никак,
-                    //и, собственно, создаем корневой коллбек на регистрацию/аутентификацию
-                    //пользовательских данных, которые понадобятся нам для учета.
+                        FirebaseAuth.getInstance()
+                                .fetchProvidersForEmail("vk_${res.email}")
+                                .addOnCompleteListener { task ->
+                                    //Если находим хотя бы одного провайдера с существующими креденшлами,
+                                    //логиним пользователя. Иначе, регистрируем его в Firebase Auth.
+                                    if (task.isSuccessful && task.result.providers != null) {
+                                        if (task.result.providers!!.isNotEmpty()) {
+                                            firebaseAuthManager
+                                                    //Не забываем предварительно трансформировать данные в "email-password"
+                                                    .signInWithEmailAndPassword("vk_${res.email}", authPass)
+                                                    .addOnCompleteListener(this@AuthActivity) { innerTask ->
+                                                        processAuthResult(innerTask, authPass)
+                                                    }
 
-                    var firebaseAuthManager = FirebaseAuth.getInstance()
+                                        } else {
+                                            firebaseAuthManager
+                                                    //Не забываем предварительно трансформировать данные в "email-password"
+                                                    .createUserWithEmailAndPassword("vk_${res.email}", authPass)
+                                                    .addOnCompleteListener(this@AuthActivity) { innerTask ->
+                                                        processAuthResult(innerTask, authPass)
+                                                    }
 
-                    FirebaseAuth.getInstance()
-                            .fetchProvidersForEmail("vk_${res.email}")
-                            .addOnCompleteListener { task ->
-                                //Если находим хотя бы одного провайдера с существующими креденшлами,
-                                //логиним пользователя. Иначе, регистрируем его в Firebase Auth.
-                                if (task.isSuccessful && task.result.providers != null) {
-                                    if (task.result.providers!!.isNotEmpty()) {
-                                        firebaseAuthManager
-                                                //Не забываем предварительно трансформировать данные в "email-password"
-                                                .signInWithEmailAndPassword("vk_${res.email}", authPass)
-                                                .addOnCompleteListener(this@AuthActivity) { innerTask ->
-                                                    processAuthResult(innerTask, authPass)
-                                                }
 
+                                        }
                                     } else {
-                                        firebaseAuthManager
-                                                //Не забываем предварительно трансформировать данные в "email-password"
-                                                .createUserWithEmailAndPassword("vk_${res.email}", authPass)
-                                                .addOnCompleteListener(this@AuthActivity) { innerTask ->
-                                                    processAuthResult(innerTask, authPass)
-                                                }
-
-
+                                        //На случай unsuccessful response от самого Firebase'овского сервиса
+                                        Log.w(TAG, "FirebaseAuth:failure", task.exception)
+                                        Toast.makeText(applicationContext,
+                                                "Authentication failed.", Toast.LENGTH_SHORT).show()
                                     }
-                                } else {
-                                    //На случай unsuccessful response от самого Firebase'овского сервиса
-                                    Log.w(TAG, "FirebaseAuth:failure", task.exception)
-                                    Toast.makeText(applicationContext,
-                                            "Authentication failed.", Toast.LENGTH_SHORT).show()
                                 }
-                            }
+                    }
+
+                    override fun onError(error: VKError) {
+                        loginProgressBar.visibility = View.INVISIBLE
+                        Log.d(TAG, error.errorMessage)
+                        Toast.makeText(this@AuthActivity, "Authentication failed. vk",
+                                Toast.LENGTH_SHORT).show()
+                    }
+                }
+                if (!VKSdk.onActivityResult(requestCode, resultCode, data, callback)) {
+                    super.onActivityResult(requestCode, resultCode, data)
                 }
 
-                override fun onError(error: VKError) {
-                    loginProgressBar.visibility = View.INVISIBLE
-                    Log.d(TAG, error.errorMessage)
-                    Toast.makeText(this@AuthActivity, "Authentication failed. vk",
-                            Toast.LENGTH_SHORT).show()
-                }
             }
-            if (!VKSdk.onActivityResult(requestCode, resultCode, data, callback)) {
-                super.onActivityResult(requestCode, resultCode, data)
-            }
-
-
+        }else{
+            loginProgressBar.visibility = View.INVISIBLE
+            background.visibility = View.INVISIBLE
         }
 
     }
@@ -176,16 +165,8 @@ class AuthActivity : AppCompatActivity() {
             startActivity(Intent(this@AuthActivity, MainActivity::class.java))
         } else {
             //На случай auth failure Firebase'овского сервиса
-            //Log.w(TAG, "createUpdateUserWithEmail:failure", task.exception)
             Toast.makeText(this@AuthActivity, "Authentication failed. fb",
                     Toast.LENGTH_SHORT).show()
         }
     }
-
-    /*fun preparePassForAuth(userId: String): String {
-        //Код для хеширования UID, например
-    }
-    fun getVKUIdFromPass(hashedPass: String): String {
-        //Код для расшифровки UID, например
-    }*/
 }
