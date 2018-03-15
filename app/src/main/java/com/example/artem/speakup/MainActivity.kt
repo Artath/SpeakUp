@@ -27,6 +27,18 @@ class MainActivity : AppCompatActivity(),
         updateTabs()
     }
 
+
+
+    override fun onResume() {
+        super.onResume()
+        updateTabs()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        updateTabs()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.main_menu, menu)
