@@ -1,5 +1,8 @@
 package com.example.artem.speakup.TimeSpeechAssistant
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.app.DialogFragment
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -11,8 +14,11 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.artem.speakup.R
 import com.example.artem.speakup.TimeSpeechAssistant.Data.DBWorkSession
 import kotlinx.android.synthetic.main.activity_create_new.*
+import android.widget.NumberPicker
 
-class CreateNewActivity : MvpAppCompatActivity(), CreateNewPresenter.CreateNewView {
+class CreateNewActivity : MvpAppCompatActivity(),
+        CreateNewPresenter.CreateNewView,
+        TimeEnterDialog.TimeEnterDialogCallBack {
 
     @InjectPresenter
     lateinit var presenter: CreateNewPresenter
@@ -43,8 +49,11 @@ class CreateNewActivity : MvpAppCompatActivity(), CreateNewPresenter.CreateNewVi
     }
 
     override fun onTimeEnter() {
-
+        TimeEnterDialog().show(fragmentManager, "DurationDialog")
     }
 
+    override fun takeTime(minute: Int, second: Int) {
+        presenter.setTime(minute, second)
+    }
 
 }

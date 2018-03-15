@@ -15,6 +15,7 @@ class EditSessionPresenter : MvpPresenter<CreateNewPresenter.CreateNewView>(){
     private lateinit var adapter: PartAdapter
     private var isResizable = true
     private var idSession = 0L
+    private var currentPos = 0
 
     fun launchPresenter(dbw: ExtraSourceWorker, id: Long) {
         if (isResizable) {
@@ -24,9 +25,9 @@ class EditSessionPresenter : MvpPresenter<CreateNewPresenter.CreateNewView>(){
             }
             adapter = PartAdapter(parts, object : PartAdapter.PartAdapterCallBack {
 
-                override fun enterTime(): Long {
+                override fun enterTime(pos: Int) {
+                    currentPos = pos
                     viewState.onTimeEnter()
-                    return 0
                 }
 
                 override fun deletePart(pos: Int) {
@@ -48,6 +49,11 @@ class EditSessionPresenter : MvpPresenter<CreateNewPresenter.CreateNewView>(){
 
     fun addPart() {
         parts.add(Part(-1, "",0,"",0,0))
+        adapter.notifyDataSetChanged()
+    }
+
+    fun setTime(minute: Int, second: Int) {
+        parts[currentPos].time = ((minute*60 + second)*1000).toLong()
         adapter.notifyDataSetChanged()
     }
 

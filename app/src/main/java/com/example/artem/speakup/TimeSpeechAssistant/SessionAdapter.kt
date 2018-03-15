@@ -18,7 +18,10 @@ class SessionAdapter(var data: ArrayList<SpeechSession>,
 
         holder.nameSes.text = data[position].name
         holder.descr.text = data[position].description
-        holder.planTime.text = "Planing time: " + data[position].duration.toString()
+        holder.planTime.text = "Planing time: " + String.format("%02d:%02d",
+                (data[position].duration / 1000) / 60,
+                (data[position].duration / 1000) % 60)
+
         holder.parts.text = "Chapters: " + data[position].numbParts.toString()
 
         holder.bottomPanel.visibility = if (data[position].selected) View.VISIBLE else

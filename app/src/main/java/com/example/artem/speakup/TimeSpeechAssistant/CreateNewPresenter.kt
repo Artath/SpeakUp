@@ -1,5 +1,6 @@
 package com.example.artem.speakup.TimeSpeechAssistant
 
+import android.content.Context
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.arellomobile.mvp.MvpView
@@ -13,13 +14,14 @@ class CreateNewPresenter : MvpPresenter<CreateNewPresenter.CreateNewView>() {
 
     private val parts = arrayListOf<Part>(Part(-1, "",0,"",0,0))
     private lateinit var adapter: PartAdapter
+    private var currentPos = 0
 
     init {
         adapter = PartAdapter(parts, object : PartAdapter.PartAdapterCallBack {
 
-            override fun enterTime(): Long {
+            override fun enterTime(pos: Int){
+                currentPos = pos
                 viewState.onTimeEnter()
-                return 0
             }
 
             override fun deletePart(pos: Int) {
@@ -34,6 +36,11 @@ class CreateNewPresenter : MvpPresenter<CreateNewPresenter.CreateNewView>() {
 
     fun addPart() {
         parts.add(Part(-1, "",0,"",0,0))
+        adapter.notifyDataSetChanged()
+    }
+
+    fun setTime(minute: Int, second: Int) {
+        parts[currentPos].time = ((minute*60 + second)*1000).toLong()
         adapter.notifyDataSetChanged()
     }
 

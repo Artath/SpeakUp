@@ -22,7 +22,11 @@ class PartAdapter(var data: ArrayList<Part>,
         holder.themeItem.text = "Speech item " + (position + 1)
         holder.theme.setText(data[position].head)
         holder.details.setText(data[position].theses)
-        holder.timing.setText(data[position].time.toString())
+
+        holder.timing
+                .setText(String.format("%02d:%02d",
+                        (data[position].time / 1000) / 60,
+                        (data[position].time / 1000) % 60))
 
         holder.deleteBtn.setOnClickListener {
             callBack.deletePart(position)
@@ -40,13 +44,8 @@ class PartAdapter(var data: ArrayList<Part>,
             }
         })
 
-        holder.timing.addTextChangedListener(object : MyTextWatcher(){
-            override fun afterTextChanged(p0: Editable?) {
-                if (p0 != null) data[holder.adapterPosition].time = p0.toString().toLong()
-            }
-        })
         holder.timing.setOnClickListener {
-            callBack.enterTime()
+            callBack.enterTime(position)
         }
 
     }
@@ -67,7 +66,7 @@ class PartAdapter(var data: ArrayList<Part>,
 
     interface PartAdapterCallBack {
         fun deletePart(pos: Int)
-        fun enterTime(): Long
+        fun enterTime(pos: Int)
     }
 
     abstract class MyTextWatcher : TextWatcher {

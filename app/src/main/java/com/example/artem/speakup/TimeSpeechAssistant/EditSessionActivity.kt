@@ -9,7 +9,9 @@ import com.example.artem.speakup.R
 import com.example.artem.speakup.TimeSpeechAssistant.Data.DBWorkParts
 import kotlinx.android.synthetic.main.activity_create_new.*
 
-class EditSessionActivity : MvpAppCompatActivity(), CreateNewPresenter.CreateNewView {
+class EditSessionActivity : MvpAppCompatActivity(),
+        CreateNewPresenter.CreateNewView,
+        TimeEnterDialog.TimeEnterDialogCallBack {
 
     @InjectPresenter
     lateinit var presenter: EditSessionPresenter
@@ -42,5 +44,11 @@ class EditSessionActivity : MvpAppCompatActivity(), CreateNewPresenter.CreateNew
         adapter.notifyDataSetChanged()
     }
 
-    override fun onTimeEnter() {}
+    override fun onTimeEnter() {
+        TimeEnterDialog().show(fragmentManager, "DurationDialog")
+    }
+
+    override fun takeTime(minute: Int, second: Int) {
+        presenter.setTime(minute, second)
+    }
 }
