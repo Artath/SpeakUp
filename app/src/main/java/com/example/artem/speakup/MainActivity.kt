@@ -22,6 +22,16 @@ class MainActivity : AppCompatActivity(),
         updateTabs()
     }
 
+    override fun onResume() {
+        super.onResume()
+        updateTabs()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        updateTabs()
+    }
+
     override fun updateTabs() {
         tabs.addOnTabSelectedListener(object: TabLayout.ViewPagerOnTabSelectedListener(content) {
             override fun onTabSelected(tab: TabLayout.Tab?) {
