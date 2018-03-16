@@ -16,4 +16,18 @@
     <!-- Menu messages -->
     <string name="menu_profile">Profile</string>
     <string name="menu_logout">Logout</string>
+
+    <!-- Strings for welcome screens -->
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+    <string name="slide_1_title">Bla bla!!</string>
+    <string name="slide_1_desc">Bla blabla bla blalablalba balb albalalbal</string>
+    <string name="slide_2_title">BLA!!!!!!!!!</string>
+    <string name="slide_2_desc">Bla blablaba lbab balba labl albablbal</string>
+    <string name="slide_3_title">Final Bla!</string>
+    <string name="slide_3_desc">Blabal blab labbl  aba lbalb lablabl balblbalbl la bll</string>
+
+
 </resources>
