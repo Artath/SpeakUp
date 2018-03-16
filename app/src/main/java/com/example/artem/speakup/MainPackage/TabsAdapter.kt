@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import com.example.artem.speakup.TimeSpeechAssistant.TabAssistant
-import com.example.artem.speakup.AudioRecords.TabRecorder
+import com.example.artem.speakup.SpeechAnalysis.TabRecorder
 import com.example.artem.speakup.AudioRecords.TabRecords
 import com.example.artem.speakup.TonguesTwisters.TabTwisters
 

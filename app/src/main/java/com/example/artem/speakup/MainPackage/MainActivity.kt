@@ -4,18 +4,16 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.content.ContextCompat
-import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.artem.speakup.AudioRecords.AudioRecord
 import com.example.artem.speakup.R
-import com.example.artem.speakup.AudioRecords.TabRecorder
+import com.example.artem.speakup.SpeechAnalysis.TabRecorder
 import com.example.artem.speakup.AudioRecords.TabRecords
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 
 class MainActivity : AppCompatActivity(),
         MainPresenter.MainPresenterInterface,
-        TabRecords.Callback,
-        TabRecorder.Callback {
+        TabRecords.Callback{
 
     /*@InjectPresenter
     lateinit var presenter: MainPresenter
@@ -63,5 +61,4 @@ class MainActivity : AppCompatActivity(),
         return data
     }
 
-    override fun getAppPath(): String = externalCacheDir.absolutePath
 }

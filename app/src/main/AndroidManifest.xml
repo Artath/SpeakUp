@@ -28,7 +28,8 @@
         <activity
             android:name=".TimeSpeechAssistant.EditSessionActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".TimeSpeechAssistant.SpeechActivity"></activity>
+        <activity android:name=".TimeSpeechAssistant.SpeechActivity" />
+        <activity android:name=".SpeechAnalysis.ChooseWordsActivity"></activity>
     </application>
 
 </manifest>
