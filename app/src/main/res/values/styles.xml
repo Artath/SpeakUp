@@ -7,5 +7,18 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="Vk.Button" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">#4c75a3</item>
+    </style>
+    <style name="Email.Button" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">#858c94</item>
+    </style>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="ProgressBar" parent="Widget.AppCompat.ProgressBar">
+        <item name="colorAccent">#d70808</item>
+    </style>
 
 </resources>

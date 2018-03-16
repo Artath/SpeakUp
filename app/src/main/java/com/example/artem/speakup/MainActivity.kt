@@ -1,9 +1,12 @@
 package com.example.artem.speakup
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.content.ContextCompat
+import android.view.Menu
+import android.view.MenuItem
 import com.arellomobile.mvp.presenter.InjectPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
@@ -19,8 +22,12 @@ class MainActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
         updateTabs()
     }
+
+
 
     override fun onResume() {
         super.onResume()
@@ -30,6 +37,19 @@ class MainActivity : AppCompatActivity(),
     override fun onRestart() {
         super.onRestart()
         updateTabs()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.profileMenuBtn -> startActivity(Intent(this, ProfileActivity::class.java))
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun updateTabs() {
