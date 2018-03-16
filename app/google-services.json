@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "723781357547",
+    "firebase_url": "https://speak-up-ca829.firebaseio.com",
+    "project_id": "speak-up-ca829",
+    "storage_bucket": "speak-up-ca829.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723781357547:android:a57f964cba4c9117",
+        "android_client_info": {
+          "package_name": "com.example.artem.speakup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "723781357547-dg7go2lt1shi8ptmtppqkgdkc105hudf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.artem.speakup",
+            "certificate_hash": "4b6a72dfffe7e51dc6583cf912e7a646511579b7"
+          }
+        },
+        {
+          "client_id": "723781357547-h8r12qnq6m8mup4mfbp3kc19sj3iqiuq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.artem.speakup",
+            "certificate_hash": "4b99010edcc41ff8348269c8282b4357944aedaa"
+          }
+        },
+        {
+          "client_id": "723781357547-ub5b7ucorqk0vfi1pfc3d63ah7ohkl65.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGLKraMQb6lNXzt1ZUoNxBiPiA_m3BvCI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "723781357547-ub5b7ucorqk0vfi1pfc3d63ah7ohkl65.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

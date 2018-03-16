@@ -58,7 +58,7 @@ dependencies {
     annotationProcessor 'com.arello-mobile:moxy-compiler:1.5.3'
     compile 'com.arello-mobile:moxy-app-compat:1.5.3'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
-    compile project(':vksdk_library')
+    implementation 'com.vk:androidsdk:1.6.9'
     compile 'com.firebaseui:firebase-ui-auth:3.2.2'
 
 }

@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.FragmentActivity
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
@@ -42,7 +41,6 @@ class AuthActivity : AppCompatActivity() {
         setContentView(R.layout.activity_auth)
         loginProgressBar = findViewById(R.id.login_progress_bar)
 
-
         val providers = Arrays.asList(
                 AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build())
 
@@ -54,7 +52,7 @@ class AuthActivity : AppCompatActivity() {
         }
 
 
-        emailLoginBtn.setOnClickListener({
+        button_auth_email.setOnClickListener({
             startActivityForResult(
                     AuthUI.getInstance()
                             .createSignInIntentBuilder()
@@ -64,7 +62,7 @@ class AuthActivity : AppCompatActivity() {
 
         })
 
-        vkontakteLoginButton.setOnClickListener { signIn() }
+        button_auth_vk.setOnClickListener { signIn() }
 
 
     }
@@ -78,8 +76,8 @@ class AuthActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         if(resultCode != RESULT_CANCELED) {
-            vkontakteLoginButton.isEnabled = false
-            emailLoginBtn.isEnabled = false
+            button_auth_vk.isEnabled = false
+            button_auth_email.isEnabled = false
             if (requestCode == RC_EMAIL_SIGN_IN) {
                 val response = IdpResponse.fromResultIntent(data)
 

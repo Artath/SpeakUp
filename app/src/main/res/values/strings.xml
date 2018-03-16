@@ -1,10 +1,19 @@
 <resources>
     <string name="app_name">Speak Up</string>
+    <string name="app_subname">Feel free to speak</string>
 
     <string name="no_records">No records found</string>
+
+    <!-- Auth activity buttons -->
+    <string name="auth_vk">Sign in with VK</string>
+    <string name="auth_email">Sign in with Email</string>
 
     <!-- Remove record alert dialog -->
     <string name="remove_record_title">Remove record</string>
     <string name="remove_record_msg">Confirm record %s remove</string>
     <integer name="com_vk_sdk_AppId">6396971</integer>
+
+    <!-- Menu messages -->
+    <string name="menu_profile">Profile</string>
+    <string name="menu_logout">Logout</string>
 </resources>

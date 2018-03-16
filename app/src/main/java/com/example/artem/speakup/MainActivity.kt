@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity(),
 
     override fun getAudioRecords(): ArrayList<AudioRecord>? {
         val files = File(externalCacheDir.absolutePath).listFiles()
-        var data: ArrayList<AudioRecord> = arrayListOf()
+        val data: ArrayList<AudioRecord> = arrayListOf()
 
         files.forEach {
             f -> data.add(
