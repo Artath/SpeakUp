@@ -7,6 +7,7 @@ import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.artem.speakup.R
 import com.example.artem.speakup.TimeSpeechAssistant.Data.DBWorkParts
+import com.example.artem.speakup.TimeSpeechAssistant.Data.DBWorkSession
 import kotlinx.android.synthetic.main.activity_create_new.*
 
 class EditSessionActivity : MvpAppCompatActivity(),
@@ -30,7 +31,8 @@ class EditSessionActivity : MvpAppCompatActivity(),
         save_btn.setOnClickListener {
             val speechName = speech_name_edit_text.text.toString()
             if (speechName != "") {
-                presenter.update(DBWorkParts(applicationContext), speechName)
+                presenter.updateSession(DBWorkSession(applicationContext), speechName)
+                presenter.updateParts(DBWorkParts(applicationContext))
                 finish()
             }
             else

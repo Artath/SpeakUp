@@ -3,11 +3,10 @@ package com.example.artem.speakup.TimeSpeechAssistant
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.arellomobile.mvp.MvpView
+import com.arellomobile.mvp.viewstate.strategy.SkipStrategy
+import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import com.example.artem.speakup.DataWork.ExtraSourceWorker
-import com.example.artem.speakup.TimeSpeechAssistant.Data.AssistantDBContract
-import com.example.artem.speakup.TimeSpeechAssistant.Data.DBWorkSession
-import com.example.artem.speakup.TimeSpeechAssistant.Data.Part
-import com.example.artem.speakup.TimeSpeechAssistant.Data.SpeechSession
+import com.example.artem.speakup.TimeSpeechAssistant.Data.*
 
 @InjectViewState
 class TabAssistantPresenter : MvpPresenter<TabAssistantPresenter.TabAssistantView>() {
@@ -18,19 +17,6 @@ class TabAssistantPresenter : MvpPresenter<TabAssistantPresenter.TabAssistantVie
         private val data = arrayListOf<SpeechSession>()
         private var adapter: SessionAdapter? = null
         private var isResizable = true
-
-        fun prepareSpeech(speechName: String, parts: ArrayList<Part>): SpeechSession {
-            var descr = ""
-            val duration = parts.map { it.time }.sum()
-            for (elem in parts) {
-                descr += elem.head + " "
-                if (descr.length > 30) {
-                    descr = descr.substring(0, 30) + "..."
-                    break
-                }
-            }
-            return SpeechSession(0, speechName, descr, duration, parts.size, false)
-        }
 
         fun addSessionToList(session: SpeechSession) {
             data.add(session)
@@ -47,18 +33,16 @@ class TabAssistantPresenter : MvpPresenter<TabAssistantPresenter.TabAssistantVie
         }
     }
 
-    fun launchPresenter(dbw: ExtraSourceWorker) {
+    fun launchPresenter(extrW: ExtraSourceWorker) {
         if (isResizable) {
-            if (dbw is DBWorkSession) {
-                data.addAll(dbw.read() as ArrayList<SpeechSession>)
-            }
+
+            data += DataHelper.readSession(extrW, null)
 
             adapter = SessionAdapter(data, object : SessionAdapter.SessionAdapterCallBack {
 
                 override fun deleteSpeechSession(pos: Int) {
-                    if (dbw is DBWorkSession) {
-                        deleteFromLocalDB(dbw, data[pos].id)
-                    }
+
+                    DataHelper.deleteSessionWithParts(extrW, data[pos].id)
                     data.removeAt(pos)
                     adapter!!.notifyDataSetChanged()
                 }
@@ -67,8 +51,8 @@ class TabAssistantPresenter : MvpPresenter<TabAssistantPresenter.TabAssistantVie
                     viewState.onEditSpeechSession(data[pos].id, data[pos].name)
                 }
 
-                override fun startSpeechSession(id: Long) {
-                    viewState.onStartSpeechSession(id)
+                override fun startSpeechSession(pos: Int) {
+                    viewState.onStartSpeechSession(data[pos].id, data[pos].duration, data[pos].name)
                 }
             })
             viewState.showSpeechList(adapter!!)
@@ -76,15 +60,10 @@ class TabAssistantPresenter : MvpPresenter<TabAssistantPresenter.TabAssistantVie
         }
     }
 
-    private fun deleteFromLocalDB(dbw: DBWorkSession, id: Long) {
-        dbw.addSelection(AssistantDBContract.Sessions._ID + " LIKE ?")
-        dbw.addSelectionArgs(arrayOf<String>(id.toString()))
-        dbw.delete()
-    }
-
     interface TabAssistantView : MvpView {
         fun showSpeechList(adapter: SessionAdapter)
-        fun onStartSpeechSession(id: Long)
+        fun onStartSpeechSession(id: Long, planingTime: Long, speechName: String)
+        @StateStrategyType(SkipStrategy::class)
         fun onEditSpeechSession(id: Long, speechName: String)
     }
 

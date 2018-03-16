@@ -24,9 +24,11 @@
         <activity android:name=".TonguesTwisters.TonguesTwistersActivity" />
         <activity
             android:name=".TimeSpeechAssistant.CreateNewActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
-        <activity android:name=".TimeSpeechAssistant.EditSessionActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".TimeSpeechAssistant.EditSessionActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".TimeSpeechAssistant.SpeechActivity"></activity>
     </application>
 
 </manifest>

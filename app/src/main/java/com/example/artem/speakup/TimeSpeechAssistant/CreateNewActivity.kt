@@ -1,20 +1,14 @@
 package com.example.artem.speakup.TimeSpeechAssistant
 
-import android.annotation.SuppressLint
-import android.app.AlertDialog
-import android.app.DialogFragment
-import android.app.TimePickerDialog
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
-import android.widget.TimePicker
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.artem.speakup.R
 import com.example.artem.speakup.TimeSpeechAssistant.Data.DBWorkSession
 import kotlinx.android.synthetic.main.activity_create_new.*
-import android.widget.NumberPicker
+import com.example.artem.speakup.TimeSpeechAssistant.Data.DBWorkParts
 
 class CreateNewActivity : MvpAppCompatActivity(),
         CreateNewPresenter.CreateNewView,
@@ -34,7 +28,8 @@ class CreateNewActivity : MvpAppCompatActivity(),
         save_btn.setOnClickListener {
             val speechName = speech_name_edit_text.text.toString()
             if (speechName != "") {
-                presenter.save(DBWorkSession(applicationContext), speechName)
+                presenter.saveSession(DBWorkSession(applicationContext), speechName)
+                presenter.saveParts(DBWorkParts(applicationContext))
                 finish()
             }
             else

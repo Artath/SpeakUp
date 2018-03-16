@@ -1,12 +1,10 @@
 package com.example.artem.speakup.TimeSpeechAssistant
 
-import android.content.Context
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.arellomobile.mvp.MvpView
 import com.example.artem.speakup.DataWork.ExtraSourceWorker
-import com.example.artem.speakup.TimeSpeechAssistant.Data.DBWorkParts
-import com.example.artem.speakup.TimeSpeechAssistant.Data.DBWorkSession
+import com.example.artem.speakup.TimeSpeechAssistant.Data.DataHelper
 import com.example.artem.speakup.TimeSpeechAssistant.Data.Part
 
 @InjectViewState
@@ -15,6 +13,7 @@ class CreateNewPresenter : MvpPresenter<CreateNewPresenter.CreateNewView>() {
     private val parts = arrayListOf<Part>(Part(-1, "",0,"",0,0))
     private lateinit var adapter: PartAdapter
     private var currentPos = 0
+    private var sessionId = -1L
 
     init {
         adapter = PartAdapter(parts, object : PartAdapter.PartAdapterCallBack {
@@ -35,7 +34,7 @@ class CreateNewPresenter : MvpPresenter<CreateNewPresenter.CreateNewView>() {
     }
 
     fun addPart() {
-        parts.add(Part(-1, "",0,"",0,0))
+        parts += Part(-1, "",0,"",-1,0)
         adapter.notifyDataSetChanged()
     }
 
@@ -44,33 +43,17 @@ class CreateNewPresenter : MvpPresenter<CreateNewPresenter.CreateNewView>() {
         adapter.notifyDataSetChanged()
     }
 
-    private fun saveSessionToLocalDB(dbw: DBWorkSession, speechName: String): Long {
-        val session =  TabAssistantPresenter.prepareSpeech(speechName, parts)
-        dbw.setAllValues(session)
-        val id = dbw.create()
-        session.id = id
+    fun saveSession(extrW: ExtraSourceWorker, speechName: String) {
+
+        val session = DataHelper.prepareSpeech(speechName, parts)
+        sessionId = DataHelper.createSession(extrW, session)
+        session.id = sessionId
         TabAssistantPresenter.addSessionToList(session)
-        return id
+
     }
 
-    private fun savePartsToLocalBD(dbw: DBWorkParts, id: Long) {
-        dbw.setSessionId(id)
-        parts.forEach { elem ->
-            dbw.setAllValues(elem)
-            dbw.create()
-        }
-    }
-    fun save(dbw: ExtraSourceWorker, speechName: String) {
-        when (dbw) {
-            is DBWorkSession -> {
-                savePartsToLocalBD(DBWorkParts(dbw.context), saveSessionToLocalDB(dbw, speechName))
-            }
+    fun saveParts(extrW: ExtraSourceWorker) = DataHelper.createSeveralPart(extrW, sessionId, parts)
 
-            is DBWorkParts -> {
-                savePartsToLocalBD(dbw, saveSessionToLocalDB(DBWorkSession(dbw.context), speechName))
-            }
-        }
-    }
 
     interface CreateNewView : MvpView {
         fun showPartList(adapter: PartAdapter)

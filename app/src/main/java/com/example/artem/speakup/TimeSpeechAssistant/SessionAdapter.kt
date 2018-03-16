@@ -33,7 +33,7 @@ class SessionAdapter(var data: ArrayList<SpeechSession>,
         }
 
         holder.itemView.setOnClickListener {
-            callBack.startSpeechSession(data[position].id)
+            callBack.startSpeechSession(position)
         }
 
         holder.deleteBtn.setOnClickListener {
@@ -65,6 +65,6 @@ class SessionAdapter(var data: ArrayList<SpeechSession>,
 
         fun deleteSpeechSession(pos: Int)
         fun editSpeechSession(pos: Int)
-        fun startSpeechSession(id: Long)
+        fun startSpeechSession(pos: Int)
     }
 }

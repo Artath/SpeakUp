@@ -16,40 +16,29 @@ abstract class DBWorker (var context: Context) : ExtraSourceWorker {
     protected open var selection: String? = null
     protected open var selectionArgs: Array<String>? = null
 
-    override fun read(): ArrayList<out ExtraSourceObject> {
+    override fun read(): ArrayList<out ExtraSourceObject> =
+            cursorToArrayList(AsissrantSQLiteOpenHelper(context).readableDatabase.query(
+                    tableName,
+                    projection,
+                    selection,
+                    selectionArgs,
+                    null,
+                    null,
+                    null))
 
-        val DB = AsissrantSQLiteOpenHelper(context).readableDatabase
-        return cursorToArrayList(DB.query(
-                tableName,
-                projection,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                null))
-    }
+    override fun create(): Long =
+            AsissrantSQLiteOpenHelper(context).writableDatabase.insert(tableName, null, values)
 
-    override fun create(): Long {
-        val DB = AsissrantSQLiteOpenHelper(context).writableDatabase
-        return DB.insert(tableName, null, values)
-    }
+    override fun update(): Int = AsissrantSQLiteOpenHelper(context).readableDatabase.update(
+            tableName,
+            values,
+            selection,
+            selectionArgs)
 
-    override fun update(): Int {
-        val DB = AsissrantSQLiteOpenHelper(context).readableDatabase
-        return DB.update(
-                tableName,
-                values,
-                selection,
-                selectionArgs)
-    }
-
-    override fun delete(): Int {
-        val DB = AsissrantSQLiteOpenHelper(context).readableDatabase
-        return DB.delete(
-                tableName,
-                selection,
-                selectionArgs)
-    }
+    override fun delete(): Int = AsissrantSQLiteOpenHelper(context).readableDatabase.delete(
+            tableName,
+            selection,
+            selectionArgs)
 
     open fun addSelection(selection: String) {
         this.selection = selection

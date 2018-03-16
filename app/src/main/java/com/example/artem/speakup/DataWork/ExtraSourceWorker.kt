@@ -1,7 +1,5 @@
 package com.example.artem.speakup.DataWork
 
-import android.content.Context
-
 //interface for CRUD request from extra source
 interface ExtraSourceWorker {
 
