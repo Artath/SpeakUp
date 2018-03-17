@@ -10,10 +10,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="Speech item 1"
-        android:textSize="15sp"
-        android:textColor="@android:color/black"
+        style="@style/InputLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,9 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
-        android:textSize="15sp"
-        android:text="Theme:"
-        android:textColor="@android:color/black"
+        android:text="@string/session_item_theme"
+        style="@style/InputLabelLight"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/speech_item_txt" />
 
@@ -35,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="30dp"
-        android:textColor="@android:color/darker_gray"
+        style="@style/InputEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/theme_txt"
         app:layout_constraintTop_toBottomOf="@+id/speech_item_txt" />
@@ -46,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="30dp"
-        android:textColor="@android:color/darker_gray"
+        style="@style/InputEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/details_txt"
         app:layout_constraintTop_toBottomOf="@+id/theme_edtext" />
@@ -60,7 +58,7 @@
         android:hint="00:00"
         android:inputType="none"
         android:focusable="false"
-        android:textColor="@android:color/darker_gray"
+        style="@style/InputEditText"
         app:layout_constraintStart_toEndOf="@+id/timing_txt"
         app:layout_constraintTop_toBottomOf="@+id/details_edtext" />
 
@@ -70,9 +68,8 @@
         android:layout_height="23dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
-        android:textSize="15sp"
-        android:text="Details:"
-        android:textColor="@android:color/black"
+        android:text="@string/session_item_details"
+        style="@style/InputLabelLight"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/theme_txt" />
 
@@ -82,9 +79,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
-        android:text="Timing:"
-        android:textColor="@android:color/black"
-        android:textSize="15sp"
+        android:text="@string/session_item_time"
+        style="@style/InputLabelLight"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/details_txt" />
 
@@ -94,7 +90,7 @@
         android:layout_height="27dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/delete"
+        android:background="@drawable/delete_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

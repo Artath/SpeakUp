@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,16 +10,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <Button
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/tg_start_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
-        android:layout_marginEnd="15dp"
-        android:background="@drawable/speak_up_btn"
-        android:text="start"
-        android:textColor="@color/colorAccent"
+        android:layout_marginRight="15dp"
+        android:background="@color/colorPrimary"
+        android:clickable="true"
+        app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:rippleColor="@color/colorPrimaryDark"
+        app:srcCompat="@drawable/play" />
 
 </android.support.constraint.ConstraintLayout>

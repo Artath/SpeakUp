@@ -8,7 +8,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.artem.speakup.R
 import com.example.artem.speakup.TimeSpeechAssistant.Data.DBWorkParts
 import com.example.artem.speakup.TimeSpeechAssistant.Data.DBWorkSession
-import kotlinx.android.synthetic.main.activity_create_new.*
+import kotlinx.android.synthetic.main.activity_new_session.*
 
 class EditSessionActivity : MvpAppCompatActivity(),
         CreateNewPresenter.CreateNewView,
@@ -19,24 +19,23 @@ class EditSessionActivity : MvpAppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_create_new)
+        setContentView(R.layout.activity_new_session)
         presenter.launchPresenter(DBWorkParts(applicationContext), intent.getLongExtra(TabAssistant.ID, 0))
-        speech_name_edit_text.setText(intent.getStringExtra(TabAssistant.SPEECH_NAME))
+        new_speech_name_edit_text.setText(intent.getStringExtra(TabAssistant.SPEECH_NAME))
 
-        add_part_btn.setOnClickListener {
+        new_session_add_part_btn.setOnClickListener {
             presenter.addPart()
         }
 
-        save_btn.text = "Change"
-        save_btn.setOnClickListener {
-            val speechName = speech_name_edit_text.text.toString()
+        new_session_save_btn.setOnClickListener {
+            val speechName = new_speech_name_edit_text.text.toString()
             if (speechName != "") {
                 presenter.updateSession(DBWorkSession(applicationContext), speechName)
                 presenter.updateParts(DBWorkParts(applicationContext))
                 finish()
             }
             else
-                Toast.makeText(applicationContext, "Enter speech name!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, R.string.new_session_name_error, Toast.LENGTH_SHORT).show()
         }
     }
 

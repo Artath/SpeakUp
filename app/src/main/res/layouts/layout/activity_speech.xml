@@ -4,19 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.artem.speakup.TimeSpeechAssistant.SpeechActivity">
+    tools:context="com.example.artem.speakup.TimeSpeechAssistant.SpeechActivity"
+    android:background="@color/colorTextWhite">
 
     <TextView
-        android:id="@+id/speech_name_txt"
+        android:id="@+id/new_speech_name_txt"
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/mr_1"
+        android:layout_marginStart="@dimen/mr_1"
+        android:layout_marginTop="@dimen/mr_3"
         android:text="Meetup speech"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:textColor="@color/colorTextDark"
+        android:textSize="@dimen/tp_caption"
+        android:fontFamily="@font/roboto_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,27 +25,28 @@
     <TextView
         android:id="@+id/current_time_txt"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/mr_1"
+        android:layout_marginStart="@dimen/mr_1"
+        android:layout_marginTop="@dimen/mr_2"
         android:text="02:43:234"
-        android:textColor="@android:color/black"
-        android:textSize="40sp"
+        android:textColor="@color/colorTextDark"
+        android:textSize="@dimen/tp_caption_super"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/speech_name_txt" />
+        app:layout_constraintTop_toBottomOf="@+id/new_speech_name_txt" />
 
     <TextView
         android:id="@+id/planing_time_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/mr_1"
+        android:layout_marginStart="@dimen/mr_1"
+        android:layout_marginTop="@dimen/mr_1"
         android:text="15:00"
-        android:textSize="20sp"
+        android:textSize="@dimen/tp_caption"
+        android:textColor="@color/colorTextLight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/current_time_txt" />
@@ -62,43 +64,43 @@
         android:id="@+id/stop_speech_img_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="16dp"
-        android:background="@android:color/background_light"
+        android:layout_marginBottom="@dimen/mr_3"
+        android:layout_marginStart="@dimen/mr_4"
+        android:background="@drawable/border_rounded"
         android:cropToPadding="false"
-        android:padding="15dp"
+        android:padding="@dimen/mr_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/stop_red" />
+        app:srcCompat="@drawable/stop" />
 
     <ImageButton
         android:id="@+id/back_img_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@android:color/background_light"
+        android:layout_marginBottom="@dimen/mr_3"
+        android:layout_marginEnd="@dimen/mr_2"
+        android:layout_marginStart="@dimen/mr_2"
+        android:background="@drawable/border_rounded_outline"
         android:cropToPadding="false"
-        android:padding="15dp"
+        android:padding="@dimen/mr_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/next_btn"
         app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toEndOf="@+id/stop_speech_img_btn"
-        app:srcCompat="@drawable/step_backward" />
+        app:srcCompat="@drawable/arrow_left_red" />
 
     <ImageButton
         android:id="@+id/next_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
-        android:background="@android:color/background_light"
+        android:layout_marginBottom="@dimen/mr_3"
+        android:layout_marginEnd="@dimen/mr_4"
+        android:background="@drawable/border_rounded_outline"
         android:cropToPadding="false"
-        android:padding="15dp"
+        android:padding="@dimen/mr_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/arrow_right_bold_hexagon_outline" />
+        app:srcCompat="@drawable/arrow_right_red" />
 
 
 </android.support.constraint.ConstraintLayout>

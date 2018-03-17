@@ -19,9 +19,14 @@ class PartAdapter(var data: ArrayList<Part>,
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
 
+        // [!] Use text from strings.xml values - @string/session_item_name
         holder.themeItem.text = "Speech item " + (position + 1)
         holder.theme.setText(data[position].head)
         holder.details.setText(data[position].theses)
+
+        // Hide delete button for first item, to keep at least one chapter available
+        if( position == 0 )
+            holder.deleteBtn.visibility = View.GONE
 
         holder.timing
                 .setText(String.format("%02d:%02d",

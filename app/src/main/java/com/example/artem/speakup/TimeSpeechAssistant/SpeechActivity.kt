@@ -42,7 +42,7 @@ class SpeechActivity : MvpAppCompatActivity(), SpeechPresenter.SpeechView {
     }
 
     override fun showSpeechName(speechName: String) {
-        speech_name_txt.text = speechName
+        new_speech_name_txt.text = speechName
     }
 
     override fun showPlaningTime(planingTime: Long) {

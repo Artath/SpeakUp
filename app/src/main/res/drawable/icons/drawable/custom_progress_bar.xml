@@ -2,27 +2,27 @@
 <layer-list
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
-<item>
-    <clip>
-        <shape>
-            <corners android:radius="5dip" />
+        <item>
+            <clip>
+                <shape>
+                    <corners android:radius="5dip" />
 
-            <solid android:color="@color/colorPrimaryDark" />
-        </shape>
-    </clip>
+                    <solid android:color="@color/colorPrimary" />
+                </shape>
+            </clip>
 
-    <color android:color="@color/colorPrimaryDark" />
-</item>
-<item >
-<clip>
-    <shape>
-        <corners android:radius="5dip" />
+            <color android:color="@color/colorPrimary" />
+        </item>
+        <item >
+            <clip>
+                <shape>
+                    <corners android:radius="5dip" />
 
-        <solid android:color="@color/colorPrimaryDark" />
-    </shape>
-</clip>
+                    <solid android:color="@color/colorPrimary" />
+                </shape>
+            </clip>
 
-<color android:color="@color/colorPrimaryDark" />
-</item>
+            <color android:color="@color/colorPrimary" />
+        </item>
 
     </layer-list>

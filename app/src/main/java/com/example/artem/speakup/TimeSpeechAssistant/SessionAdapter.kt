@@ -18,10 +18,13 @@ class SessionAdapter(var data: ArrayList<SpeechSession>,
 
         holder.nameSes.text = data[position].name
         holder.descr.text = data[position].description
+
+        // [!] Use text from strings.xml values - @string/session_chapters
         holder.planTime.text = "Planing time: " + String.format("%02d:%02d",
                 (data[position].duration / 1000) / 60,
                 (data[position].duration / 1000) % 60)
 
+        // [!] Use text from strings.xml values - @string/session_time
         holder.parts.text = "Chapters: " + data[position].numbParts.toString()
 
         holder.bottomPanel.visibility = if (data[position].selected) View.VISIBLE else
@@ -57,7 +60,7 @@ class SessionAdapter(var data: ArrayList<SpeechSession>,
         var parts = view.parts_txt
         var deleteBtn = view.delete_img_btn
         var editBtn = view.edit_img_btn
-        var bottomPanel = view.bottom_elem_constraintLayout
+        var bottomPanel = view.speech_item_expand
 
     }
 

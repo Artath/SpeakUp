@@ -10,4 +10,26 @@
     <dimen name="slide_desc">16dp</dimen>
     <dimen name="desc_padding">40dp</dimen>
 
+    <!-- List items dimensions -->
+    <dimen name="list_caption">16dp</dimen>
+    <dimen name="list_sub">12dp</dimen>
+
+    <!-- Input text -->
+    <dimen name="input_label">14dp</dimen>
+
+    <!-- Typography -->
+    <dimen name="tp_caption">24dp</dimen>
+    <dimen name="tp_caption_super">40dp</dimen>
+    <dimen name="tp_paragrph">18dp</dimen>
+    <dimen name="tp_paragraph_sub">16dp</dimen>
+    <dimen name="tp_paragraph_small">14dp</dimen>
+
+    <!-- Margin units -->
+    <dimen name="mr_1">8dp</dimen>
+    <dimen name="mr_2">16dp</dimen>
+    <dimen name="mr_3">24dp</dimen>
+    <dimen name="mr_4">32dp</dimen>
+    <dimen name="mr_5">40dp</dimen>
+    <dimen name="mr_6">48dp</dimen>
+
 </resources>

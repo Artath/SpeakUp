@@ -28,4 +28,27 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="NumberPickerDefault">
+        <item name="android:colorControlNormal">@color/colorPrimary</item>
+        <item name="android:solidColor">@color/colorTextWhite</item>
+        <item name="android:background">@color/colorTextWhite</item>
+    </style>
+
+    <style name="InputLabel">
+        <item name="android:textColor">@color/colorTextDark</item>
+        <item name="android:textSize">@dimen/input_label</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+    </style>
+    <style name="InputLabelLight">
+        <item name="android:textColor">@color/colorTextLight</item>
+        <item name="android:textSize">@dimen/input_label</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="InputEditText">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">@color/colorTextDark</item>
+        <item name="android:colorActivatedHighlight">@color/colorPrimary</item>
+    </style>
+
 </resources>

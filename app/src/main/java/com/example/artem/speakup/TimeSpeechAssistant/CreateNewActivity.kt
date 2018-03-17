@@ -7,7 +7,7 @@ import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.artem.speakup.R
 import com.example.artem.speakup.TimeSpeechAssistant.Data.DBWorkSession
-import kotlinx.android.synthetic.main.activity_create_new.*
+import kotlinx.android.synthetic.main.activity_new_session.*
 import com.example.artem.speakup.TimeSpeechAssistant.Data.DBWorkParts
 
 class CreateNewActivity : MvpAppCompatActivity(),
@@ -19,14 +19,14 @@ class CreateNewActivity : MvpAppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_create_new)
+        setContentView(R.layout.activity_new_session)
 
-        add_part_btn.setOnClickListener {
+        new_session_add_part_btn.setOnClickListener {
             presenter.addPart()
         }
 
-        save_btn.setOnClickListener {
-            val speechName = speech_name_edit_text.text.toString()
+        new_session_save_btn.setOnClickListener {
+            val speechName = new_speech_name_edit_text.text.toString()
             if (speechName != "") {
                 presenter.saveSession(DBWorkSession(applicationContext), speechName)
                 presenter.saveParts(DBWorkParts(applicationContext))

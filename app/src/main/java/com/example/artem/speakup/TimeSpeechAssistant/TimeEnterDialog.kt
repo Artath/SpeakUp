@@ -16,14 +16,14 @@ class TimeEnterDialog : DialogFragment() {
 
         val v = inflater.inflate(R.layout.duration_dialog, null)
 
-        val minute = v.minute_picker
-        val second = v.sec_picker
+        val minute = v.timepicker_minute
+        val second = v.timepicker_seconds
         minute.minValue = 0
         minute.maxValue = 59
         second.minValue = 0
         second.maxValue = 59
 
-        v.ok_btn.setOnClickListener {
+        v.timepicker_button_ok.setOnClickListener {
             if (activity !is TimeEnterDialogCallBack)  {
                 throw RuntimeException("This activity doesn't impliment TimeEnterDialogCallBack interface!")
             } else {
@@ -31,7 +31,7 @@ class TimeEnterDialog : DialogFragment() {
             }
             dismiss()
         }
-        v.cancel_btn.setOnClickListener {
+        v.timepicker_button_cancel.setOnClickListener {
             dismiss()
         }
         return v
