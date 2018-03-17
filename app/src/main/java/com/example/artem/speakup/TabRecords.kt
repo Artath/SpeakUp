@@ -75,7 +75,9 @@ class TabRecords : Fragment() {
             rAdapter = RecordListAdapter(data,
                     object: RecordListAdapter.ItemClickListener{
                         override fun onListItemClick(item: AudioRecord) {
-                            Toast.makeText(context, "Record clicked", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(context, ActivityRecordDetails::class.java)
+                            intent.putExtra("record_name", item.name)
+                            startActivity(intent)
                         }
                     },
                     object: RecordListAdapter.ItemPlayListener{

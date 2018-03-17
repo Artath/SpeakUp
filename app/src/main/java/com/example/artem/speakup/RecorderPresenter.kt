@@ -74,15 +74,15 @@ class RecorderPresenter: MvpPresenter<RecorderPresenter.Interface>() {
             val record = aRecorder?.getAudioRecord()
             val signal = aRecorder?.getAudioSignal()
             viewState.vHideNewRecord(false, record)
+
             val name = record!!.name
-            var uid = FirebaseAuth.getInstance().uid
-            var ref = FirebaseDatabase.getInstance().reference
+            val uid = FirebaseAuth.getInstance().uid
+            val ref = FirebaseDatabase.getInstance().reference
                     .child("users")
                     .child(uid)
                     .child("records")
                     .child(name)
             ref.child("signalList").setValue(signal)
-
 
             aRecorder = null
         }

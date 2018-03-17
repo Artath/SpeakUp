@@ -46,4 +46,7 @@
     <!-- TimePicker dialog -->
     <string name="dialog_button_positive">Ok</string>
     <string name="dialog_button_negarive">Cancel</string>
+    
+    <!-- Audio Record details activity -->
+    <string name="audio_record_name">Audio record name</string>
 </resources>

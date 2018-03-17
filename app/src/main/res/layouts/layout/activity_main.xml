@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.artem.speakup.MainActivity">
+    tools:context="com.example.artem.speakup.MainActivity"
+    android:background="@color/colorTextWhite">
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabs"
@@ -50,5 +51,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabs"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        android:background="@color/colorTextWhite" />
 </android.support.constraint.ConstraintLayout>
