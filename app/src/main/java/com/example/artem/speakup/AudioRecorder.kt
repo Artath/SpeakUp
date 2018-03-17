@@ -10,6 +10,7 @@ import java.io.IOException
 class AudioRecorder: AppCompatActivity() {
     var fileName: String? = null
     var recorder: MediaRecorder? = null
+    var signal: ArrayList<Float> = arrayListOf()
 
     fun startRecording(fl: String) {
         fileName = fl
@@ -47,6 +48,10 @@ class AudioRecorder: AppCompatActivity() {
                     f.nameWithoutExtension,
                     f.lastModified(),
                     f.path)
+    }
+
+    fun getAudioSignal(): ArrayList<Float> {
+        return signal
     }
 
     fun getLevel(): Float {

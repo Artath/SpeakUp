@@ -70,6 +70,7 @@ class RecorderPresenter: MvpPresenter<RecorderPresenter.Interface>() {
 
             // Get new recorded audio file
             val record = aRecorder?.getAudioRecord()
+            val signal = aRecorder?.getAudioSignal()
             viewState.vHideNewRecord(false, record)
 
             aRecorder = null
@@ -86,7 +87,9 @@ class RecorderPresenter: MvpPresenter<RecorderPresenter.Interface>() {
             override fun onTick(p0: Long) {
                 viewState.vUpdateTimer(startTS)
 //                Log.d("** speakup **", "vUpdateChart y: %s; entry: %s".format(aRecorder!!.getLevel(), aRecorder!!.getLevel() * 100 / 32767))
-                viewState.vUpdateChart(BarEntry(99.0F, aRecorder!!.getLevel() * 100 / 32767))
+                val level = aRecorder!!.getLevel() * 100 / 32767
+                aRecorder!!.signal.add(level)
+                viewState.vUpdateChart(BarEntry(99.0F, level))
             }
 
             override fun onFinish() { }
