@@ -24,7 +24,7 @@ class SpeechItemAdapter (var data: ArrayList<ChildPart>) : RecyclerView.Adapter<
                 R.drawable.check_all
             }
             else -> {
-                R.drawable.check
+                R.drawable.check_gray
             }
         })
         holder.planTime.text = String.format("%02d:%02d",

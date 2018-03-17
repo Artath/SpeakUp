@@ -5,15 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="horizontal"
-    android:layout_height="match_parent"
-    android:background="@color/colorTextWhite">
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/parts_list"
         android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        ma/>
+        android:layout_height="match_parent" />
 
 
     <android.support.constraint.ConstraintLayout

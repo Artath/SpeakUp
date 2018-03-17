@@ -12,9 +12,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/mr_2"
         android:layout_marginTop="@dimen/mr_1"
-        android:src="@drawable/check_gray"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/check_gray" />
 
     <TextView
         android:id="@+id/head_txt"
