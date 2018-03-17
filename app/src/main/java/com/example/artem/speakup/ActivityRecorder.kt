@@ -81,6 +81,7 @@ class ActivityRecorder : MvpAppCompatActivity(),
     override fun vInitChart(data: BarDataSet) {
         data.color = ContextCompat.getColor(applicationContext, R.color.colorPrimary)
         data.isHighlightEnabled = false
+        data.setDrawValues(false)
 
         record_level_chart.data = BarData(data)
 
@@ -109,7 +110,7 @@ class ActivityRecorder : MvpAppCompatActivity(),
         var lvl: ArrayList<BarEntry> = ArrayList<BarEntry>()
         val data = record_level_chart.data
 
-        for( i in 0 .. data.entryCount ) {
+        for( i in 0 .. data.entryCount-1 ) {
             lvl.add(BarEntry(
                     i.toFloat(),
                     data.getDataSetByIndex(0).getEntryForIndex(i).y))
@@ -119,6 +120,7 @@ class ActivityRecorder : MvpAppCompatActivity(),
         val chartData = BarDataSet(lvl, "Level")
         chartData.color = ContextCompat.getColor(applicationContext, R.color.colorPrimary)
         chartData.isHighlightEnabled = false
+        chartData.setDrawValues(false)
         record_level_chart.data = BarData(chartData)
 
         record_level_chart.notifyDataSetChanged()
