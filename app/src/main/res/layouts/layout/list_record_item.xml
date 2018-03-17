@@ -70,7 +70,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="6dp"
         android:layout_marginTop="3dp"
-        android:text="00:00"
         android:textColor="@color/colorTextLight"
         android:textSize="@dimen/list_caption"
         app:layout_constraintBottom_toBottomOf="parent"

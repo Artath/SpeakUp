@@ -63,11 +63,13 @@ class ActivityRecordDetails : AppCompatActivity() {
         audio_record_finish_edit.setOnClickListener({ _ -> finish() })
     }
 
+
+
     fun getRecordFromFb(name: String){
         var mDatabase = FirebaseDatabase.getInstance().reference
         var uid = FirebaseAuth.getInstance().uid
         mDatabase.child("users").child(uid).child("records").child(name)
-                .addValueEventListener(object : ValueEventListener {
+                .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 var i = 0

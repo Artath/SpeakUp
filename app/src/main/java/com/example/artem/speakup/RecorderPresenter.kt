@@ -73,17 +73,23 @@ class RecorderPresenter: MvpPresenter<RecorderPresenter.Interface>() {
             // Get new recorded audio file
             val record = aRecorder?.getAudioRecord()
             val signal = aRecorder?.getAudioSignal()
+            signal!![0] = 0.00001.toFloat()
+            val name = record!!.name
+            val dt = record.dt
+            val path = record.path
             viewState.vHideNewRecord(false, record)
 
-            val name = record!!.name
+
             val uid = FirebaseAuth.getInstance().uid
             val ref = FirebaseDatabase.getInstance().reference
                     .child("users")
                     .child(uid)
                     .child("records")
                     .child(name)
-                    .child("signalList")
-                    .setValue(signal)
+
+            ref.child("signalList").setValue(signal)
+            ref.child("date").setValue(dt)
+            ref.child("path").setValue(path)
 
             aRecorder = null
         }

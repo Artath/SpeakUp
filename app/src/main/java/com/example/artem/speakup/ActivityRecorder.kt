@@ -1,5 +1,6 @@
 package com.example.artem.speakup
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.util.Log
@@ -25,7 +26,8 @@ class ActivityRecorder : MvpAppCompatActivity(),
         record_button.setOnClickListener({ _ -> recordHandler() })
 
         // Return to main app view
-        new_record_audio.setOnClickListener({ _ -> finish() })
+        new_record_audio.setOnClickListener({ _ ->
+            startActivity(Intent(this, MainActivity::class.java)) })
 
         if( presenter.record_status == "ready" )
             presenter.iniChart()

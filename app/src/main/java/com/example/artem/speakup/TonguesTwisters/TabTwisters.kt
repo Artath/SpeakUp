@@ -26,13 +26,11 @@ class TabTwisters : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val arrayTwist = arrayListOf<TonguesTwister>()
+
+
         val selectedIdTG = arrayListOf<Long>()
-        //test
-
-
         var mDatabase = FirebaseDatabase.getInstance().reference
-        mDatabase.child("tongueTwisters").addValueEventListener(object : ValueEventListener {
+        var listener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 var id: Long = 1
                 var arrayList = ArrayList<TonguesTwister>()
@@ -63,53 +61,14 @@ class TabTwisters : Fragment() {
                     }
                     startActivity(Intent(context, TonguesTwistersActivity::class.java).putExtra(SELECTED_TONGUES_TWISTERS, selectedIdTG))
                 })
-
-
             }
-
             override fun onCancelled(databaseError: DatabaseError) {
                 Toast.makeText(activity, "Loading error", Toast.LENGTH_SHORT).show()
             }
-        })
+        }
+        mDatabase.child("tongueTwisters").addListenerForSingleValueEvent(listener)
 
 
-        /*arrayTwist.add(TonguesTwister(1, "Пакет под попкорн", 12,0, false))
-        arrayTwist.add(TonguesTwister(2, "Банкиров ребрендили-ребрендили-ребрендили, да не выребрендировали", 22,0, false))
-        arrayTwist.add(TonguesTwister(3, "В Каннах львы только ленивым венки не вили", 45,0, false))
-        arrayTwist.add(TonguesTwister(4, "В Кабардино-Балкарии валокордин из Болгарии", 8,0, false))
-        arrayTwist.add(TonguesTwister(5, "Деидеологизировали-деидеологизировали, и додеидеологизировались", 11,0, false))
-        arrayTwist.add(TonguesTwister(6, "Их пестициды не перепистицидят наши по своей пестицидности", 10,0, false))
-        arrayTwist.add(TonguesTwister(7, "Их пестициды не перепистицидят наши по своей пестицидности", 23,0, false))
-        arrayTwist.add(TonguesTwister(8, "Кокосовары варят в скорококосоварках кокосовый сок", 20,0, false))
-        arrayTwist.add(TonguesTwister(9, "Работники предприятие приватизировали-приватизировали, да не выприватизировали", 12,0, false))
-        arrayTwist.add(TonguesTwister(10, "Сиреневенькая зубовыковыривательница", 16,0, false))
-        arrayTwist.add(TonguesTwister(11, "Флюорографист флюорографировал флюорографистку", 17,0, false))
-        arrayTwist.add(TonguesTwister(12, "Я - вертикультяп. Могу вертикультяпнуться, могу вывертикультяпнутьс", 28,0, false))
-        arrayTwist.add(TonguesTwister(13, "Стаффордширский терьер ретив, а черношерстный ризеншнауцер резв", 16,0, false))
-        arrayTwist.add(TonguesTwister(14, "Это колониализм? - Нет, это не колониализм, а неоколониализм!", 0,0, false))
-        arrayTwist.add(TonguesTwister(15, "Волховал волхв в хлеву с волхвами", 9,0, false))
-        arrayTwist.add(TonguesTwister(16, "Волховал волхв в хлеву с волхвами", 17,0, false))
-        arrayTwist.add(TonguesTwister(17, "Мы ели-ели ершей у ели. Их еле-еле у ели доели", 10,0, false))
-        arrayTwist.add(TonguesTwister(18, "На дворе - трава, на траве - дрова. Не руби дрова на траве двора!", 5,0, false))
-
-        val adapter = TGAdapter(arrayTwist, object : TGAdapter.TGAdapterCallBack{
-            override fun multiSelect(id: Long) {
-            }
-        })
-        tg_recycler.layoutManager = LinearLayoutManager(context)
-        tg_recycler.adapter = adapter
-        adapter.notifyDataSetChanged()
-
-        tg_start_btn.setOnClickListener({_ ->
-            val randomTG = HashSet<Int>()
-            val rand = Random()
-            while(randomTG.size < 5) {
-                if (randomTG.add(rand.nextInt(arrayTwist.size))) {
-                    selectedIdTG.add(arrayTwist[randomTG.size - 1].id)
-                }
-            }
-            startActivity(Intent(context, TonguesTwistersActivity::class.java).putExtra(SELECTED_TONGUES_TWISTERS, selectedIdTG))
-        })*/
     }
 
     companion object {

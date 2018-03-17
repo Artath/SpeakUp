@@ -6,13 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import kotlinx.android.synthetic.main.list_record_item.view.*
+import java.io.File
 
 class RecordListAdapter(var data: ArrayList<AudioRecord>?,
                         val itemListener: ItemClickListener,
                         val playListener: ItemPlayListener,
                         val deleteListener: ItemDeleteListener,
-                        val lognListener: ItemLongClickListener ):
+                        val lognListener: ItemLongClickListener):
     RecyclerView.Adapter<RecordListAdapter.ViewHolder>() {
 
     var edit: Boolean = false
@@ -55,17 +57,27 @@ class RecordListAdapter(var data: ArrayList<AudioRecord>?,
 
         holder.name.text = entry.getAudioName()
         holder.dt.text = entry.getAudioDT()
-        holder.duration.text = entry.getDuration()
+
+
+        if(File(data!![position].path).exists()){
+            holder.duration.text = entry.getDuration()
+            holder.play.setOnClickListener({
+                if (adapterPlayListener != null)
+                    adapterPlayListener?.onItemPlayClick(entry)
+            })
+        }else{
+            holder.play.setBackgroundResource(R.color.notification_material_background_media_default_color)
+        }
+
+
+
 
         holder.itemView.setOnClickListener({
             if (adapterClickListener != null)
                 adapterClickListener?.onListItemClick(entry)
         })
 
-        holder.play.setOnClickListener({
-            if (adapterPlayListener != null)
-                adapterPlayListener?.onItemPlayClick(entry)
-        })
+
 
         holder.delete.setOnClickListener({
             if (adapterDeleteListener != null)
