@@ -12,10 +12,7 @@ import com.example.artem.speakup.TonguesTwisters.TabTwisters
 import com.example.artem.speakup.TonguesTwisters.TonguesTwister
 import com.example.artem.speakup.TonguesTwisters.TonguesTwistersActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_record_details.*
 import kotlinx.android.synthetic.main.tab_twisters.*
 import java.util.*
@@ -44,30 +41,30 @@ class ActivityRecordDetails : AppCompatActivity() {
 
     }
 
+
+
     fun getRecordFromFb(){
         var mDatabase = FirebaseDatabase.getInstance().reference
         var uid = FirebaseAuth.getInstance().uid
-        mDatabase.child("users").child(uid).child("records").child(name).child("signalList")
+        mDatabase.child("users").child(uid).child("records").child(name)
                 .addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                for (snapshot in dataSnapshot.children) {
-                    val value = snapshot.value
-                    arrayList.add(value)
-                }
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
 
 
-
-
-
-                //здесь доступен заполненный данными ArrayList<Double> нашей записи
+                        for (snapshot in dataSnapshot.child("signalList").children) {
+                            val value = snapshot.value
+                            arrayList.add(value)
+                        }
 
 
 
-                Toast.makeText(applicationContext, arrayList[0].toString(), Toast.LENGTH_SHORT).show()
+
+
+                        //здесь доступен заполненный данными ArrayList<Double> нашей записи
 
 
 
+                        Toast.makeText(applicationContext, arrayList[0].toString(), Toast.LENGTH_SHORT).show()
 
 
 
@@ -77,11 +74,14 @@ class ActivityRecordDetails : AppCompatActivity() {
 
 
 
-            }
 
-            override fun onCancelled(databaseError: DatabaseError) {
-                Toast.makeText(applicationContext, "Loading error", Toast.LENGTH_SHORT).show()
-            }
-        })
+
+
+                    }
+
+                    override fun onCancelled(databaseError: DatabaseError) {
+                        Toast.makeText(applicationContext, "Loading error", Toast.LENGTH_SHORT).show()
+                    }
+                })
     }
 }
