@@ -48,7 +48,7 @@ class AuthActivity : AppCompatActivity() {
         if (auth.currentUser != null) {
             // already signed in
             Toast.makeText(applicationContext, "Signed In!", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, MainActivity::class.java))
+            startMainActivity()
         }
 
 
@@ -73,6 +73,13 @@ class AuthActivity : AppCompatActivity() {
         VKSdk.login(this, *scopeArray)
     }
 
+    private fun startMainActivity(){
+        var intent = Intent(this, MainActivity::class.java)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
+        finish()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         if(resultCode != RESULT_CANCELED) {
@@ -86,7 +93,7 @@ class AuthActivity : AppCompatActivity() {
                     val user = FirebaseAuth.getInstance().currentUser!!.uid
                     //здесь записать нового юзера в базу-----------------------------------------------------------------------db
                     Toast.makeText(applicationContext, "Signed In with Email!", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startMainActivity()
                     // ...
                 } else {
                     // Sign in failed, check response for error code
@@ -160,7 +167,7 @@ class AuthActivity : AppCompatActivity() {
             loginProgressBar.visibility = View.INVISIBLE
             Toast.makeText(this@AuthActivity, "Signed In with VK!",
                     Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this@AuthActivity, MainActivity::class.java))
+            startMainActivity()
         } else {
             //На случай auth failure Firebase'овского сервиса
             Toast.makeText(this@AuthActivity, "Authentication failed. fb",

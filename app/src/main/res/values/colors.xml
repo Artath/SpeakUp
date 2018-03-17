@@ -17,13 +17,13 @@
     <color name="bg_slider_screen2">#16bc7d</color>
     <color name="bg_slider_screen3">#203d8c</color>
     <!-- dots inactive colors -->
-    <color name="dot_inactive_screen1">#ffa000</color>
-    <color name="dot_inactive_screen2">#008c57</color>
-    <color name="dot_inactive_screen3">#0e1e49</color>
+    <color name="dot_inactive_screen1">#76353535</color>
+    <color name="dot_inactive_screen2">#76353535</color>
+    <color name="dot_inactive_screen3">#76353535</color>
     <!-- dots active colors -->
-    <color name="dot_active_screen1">#f9c772</color>
-    <color name="dot_active_screen2">#74f7c5</color>
-    <color name="dot_active_screen3">#3a67e0</color>
+    <color name="dot_active_screen1">#a4ffffff</color>
+    <color name="dot_active_screen2">#a4ffffff</color>
+    <color name="dot_active_screen3">#a4ffffff</color>
     <array name="array_dot_active">
         <item>@color/dot_active_screen1</item>
         <item>@color/dot_active_screen2</item>

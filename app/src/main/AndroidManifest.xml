@@ -37,7 +37,8 @@
                 android:value=".MainActivity" />
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".ProfileActivity" />
+        <activity android:name=".ProfileActivity"
+            android:noHistory="true"/>
         <activity android:name=".Auth.AuthActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"

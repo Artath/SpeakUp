@@ -143,7 +143,8 @@ class WelcomeActivity : AppCompatActivity() {
 
     private fun launchHomeScreen() {
         prefManager!!.isFirstTimeLaunch = false
-        startActivity(Intent(this@WelcomeActivity, AuthActivity::class.java))
+        var intent = Intent(this, AuthActivity::class.java)
+        startActivity(intent)
         finish()
     }
 
