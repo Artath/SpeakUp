@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -9,35 +10,29 @@
         android:id="@+id/tg_content_txt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/mr_1"
         android:layout_marginStart="@dimen/mr_2"
-        android:layout_marginEnd="@dimen/mr_2"
-        android:layout_marginTop="@dimen/mr_2"
+        android:layout_marginTop="@dimen/mr_1"
         android:maxLength="50"
+        android:text=""
         android:textAlignment="textStart"
-        android:text="Работники предприятие приватизировали-приватиз..."
         android:textColor="@color/colorTextDark"
         android:textSize="@dimen/tp_paragraph_sub"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/progress_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/attempt_txt"
+        android:id="@+id/check_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/mr_2"
+        android:layout_marginBottom="@dimen/mr_1"
+        android:layout_marginEnd="@dimen/mr_2"
         android:layout_marginTop="@dimen/mr_1"
-        android:text="Attempts: 0"
-        android:textSize="@dimen/tp_paragraph_small"
-        android:textColor="@color/colorTextLight"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tg_content_txt" />
-
+        android:visibility="invisible"
+        android:src="@drawable/check_red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

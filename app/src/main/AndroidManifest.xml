@@ -44,7 +44,11 @@
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".TonguesTwisters.TonguesTwistersActivity" />
+        <activity android:name=".TonguesTwisters.TonguesTwistersActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
         <activity
             android:name=".TimeSpeechAssistant.CreateNewActivity"
             android:windowSoftInputMode="adjustPan" />

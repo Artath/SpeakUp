@@ -25,10 +25,8 @@ class PartAdapter(var data: ArrayList<Part>,
         holder.details.setText(data[position].theses)
 
         // Hide delete button for first item, to keep at least one chapter available
-        if( position == 0 )
-            holder.deleteBtn.visibility = View.GONE
-        else
-            holder.deleteBtn.visibility = View.VISIBLE
+        holder.deleteBtn.visibility = if(data.size == 1 )View.GONE else View.VISIBLE
+
 
         holder.timing
                 .setText(String.format("%02d:%02d",

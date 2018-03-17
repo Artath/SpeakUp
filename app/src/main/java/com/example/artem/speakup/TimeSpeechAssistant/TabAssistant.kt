@@ -39,7 +39,7 @@ class TabAssistant : MvpAppCompatFragment(), TabAssistantPresenter.TabAssistantV
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        presenter.launchPresenter(DBWorkSession(context as Context))
+        presenter.launchPresenter(DBWorkSession(context!!))
 
         new_session_btn.setOnClickListener {
             startActivity(Intent(context, CreateNewActivity::class.java))

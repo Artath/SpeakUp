@@ -9,22 +9,24 @@ import kotlinx.android.synthetic.main.tongues_twist_item.view.*
 import java.util.ArrayList
 
 class TGAdapter(var data: ArrayList<TonguesTwister>,
-                     var callBack: TGAdapterCallBack) : RecyclerView.Adapter<TGAdapter.UserViewHolder>() {
+                private var callBack: TGAdapterCallBack) : RecyclerView.Adapter<TGAdapter.UserViewHolder>() {
+
+    private val MAX_LENGTH = 20
 
     override fun getItemCount() = data.size
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         var text = data[position].text
-        if (text.length > 30) {
-            text = text.substring(0, 30).toString() + "..."
+        if (text.length > MAX_LENGTH) {
+            text = text.substring(0, MAX_LENGTH) + "..."
         }
 
         holder.tongTwistText.text = text
-        holder.attempts.text ="Attempts " + data[position].attempts.toString()
+        holder.check.visibility = if (data[position].isSelected) View.VISIBLE else View.INVISIBLE
 
-        holder.itemView.setOnLongClickListener {
-            callBack.multiSelect(data[position].id)
-            true
+        holder.itemView.setOnClickListener {
+            callBack.multiSelect(position, data[position].isSelected)
+            notifyDataSetChanged()
         }
     }
 
@@ -34,10 +36,10 @@ class TGAdapter(var data: ArrayList<TonguesTwister>,
     class UserViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
         var tongTwistText = view.tg_content_txt
-        var attempts = view.attempt_txt
+        var check = view.check_img
     }
 
     interface TGAdapterCallBack {
-        fun multiSelect(id: Long)
+        fun multiSelect(pos: Int, isSelected: Boolean)
     }
 }
