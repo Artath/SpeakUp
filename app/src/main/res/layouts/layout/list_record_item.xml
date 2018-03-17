@@ -9,7 +9,6 @@
     android:paddingRight="8dp"
     android:paddingVertical="12dp">
 
-
     <ImageButton
         android:id="@+id/record_play"
         android:layout_width="wrap_content"

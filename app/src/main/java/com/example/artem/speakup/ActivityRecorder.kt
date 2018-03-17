@@ -27,7 +27,8 @@ class ActivityRecorder : MvpAppCompatActivity(),
         // Return to main app view
         new_record_audio.setOnClickListener({ _ -> finish() })
 
-        presenter.iniChart()
+        if( presenter.record_status == "ready" )
+            presenter.iniChart()
     }
 
     fun recordHandler() {
@@ -108,7 +109,7 @@ class ActivityRecorder : MvpAppCompatActivity(),
         var lvl: ArrayList<BarEntry> = ArrayList<BarEntry>()
         val data = record_level_chart.data
 
-        for( i in 0 .. 98 ) {
+        for( i in 0 .. data.entryCount ) {
             lvl.add(BarEntry(
                     i.toFloat(),
                     data.getDataSetByIndex(0).getEntryForIndex(i).y))

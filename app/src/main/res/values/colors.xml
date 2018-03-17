@@ -2,12 +2,15 @@
 <resources>
     <!--<color name="colorPrimary">#3F51B5</color>-->
     <!--<color name="colorPrimaryDark">#303F9F</color>-->
+
     <color name="colorAccent">#f73434</color>
     <color name="colorTextWhite">#FFFFFF</color>
     <color name="colorTextDark">#333333</color>
     <color name="colorTextLight">#999999</color>
     <color name="colorPrimary">#D50000</color>
     <color name="colorPrimaryDark">#9B0000</color>
+    <color name="colorPrimaryLight">#FF5131</color>
+
     <color name="colorButtonVK">#4c75a3</color>
     <!--Colors for welcome screens-->
     <color name="bg_slider_screen1">#f4b241</color>
@@ -31,6 +34,5 @@
         <item>@color/dot_inactive_screen2</item>
         <item>@color/dot_inactive_screen3</item>
     </array>
-
 
 </resources>
