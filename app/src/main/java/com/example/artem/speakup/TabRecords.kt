@@ -6,7 +6,6 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
@@ -32,7 +31,7 @@ class TabRecords : Fragment() {
     var callback: Callback? = null
 
     interface Callback {
-        fun getAudioRecords(): ArrayList<AudioRecord>?
+        fun getARecordsForTabRecords(): ArrayList<AudioRecord>?
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -78,8 +77,8 @@ class TabRecords : Fragment() {
     }
 
     fun updateRecordsList() {
-        // Method getAudioRecords() is used from MainActivity
-        val data = callback?.getAudioRecords()
+        // Method getARecordsForTabRecords() is used from MainActivity
+        val data = callback?.getARecordsForTabRecords()
 
         if( data!!.size == 0 ) {
             records_note.visibility = View.VISIBLE
@@ -91,7 +90,6 @@ class TabRecords : Fragment() {
         }
 
         var mediaPlayer = MediaPlayer()
-
 
         if( rAdapter == null ) {
             rAdapter = RecordListAdapter(data,

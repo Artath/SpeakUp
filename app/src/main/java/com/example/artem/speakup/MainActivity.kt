@@ -66,7 +66,7 @@ class MainActivity : MvpAppCompatActivity(),
         tabs.setupWithViewPager(content)
     }
 
-    override fun getAudioRecords(): ArrayList<AudioRecord>? {
+    fun getARecords(): ArrayList<AudioRecord>? {
         val files = File(externalCacheDir.absolutePath).listFiles()
         val data: ArrayList<AudioRecord> = arrayListOf()
 
@@ -79,5 +79,9 @@ class MainActivity : MvpAppCompatActivity(),
 
         data.reverse()
         return data
+    }
+
+    override fun getARecordsForTabRecords(): ArrayList<AudioRecord>? {
+        return getARecords()
     }
 }

@@ -49,4 +49,7 @@
     
     <!-- Audio Record details activity -->
     <string name="audio_record_name">Audio record name</string>
+    <string name="audio_record_time">Duration</string>
+    <string name="audio_record_date">Date</string>
+    <string name="audio_record_no_db_data">Audrio record data is not found</string>
 </resources>
