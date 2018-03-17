@@ -16,6 +16,7 @@ import com.firebase.ui.auth.IdpResponse
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.vk.sdk.VKAccessToken
 import com.vk.sdk.VKCallback
 import com.vk.sdk.VKScope
@@ -90,8 +91,8 @@ class AuthActivity : AppCompatActivity() {
 
                 if (resultCode == Activity.RESULT_OK) {
                     // Successfully signed in
-                    val user = FirebaseAuth.getInstance().currentUser!!.uid
-                    //здесь записать нового юзера в базу-----------------------------------------------------------------------db
+                    //writing new user to fb realtime database
+                    writeUserInFirebase()
                     Toast.makeText(applicationContext, "Signed In with Email!", Toast.LENGTH_SHORT).show()
                     startMainActivity()
                     // ...
@@ -160,6 +161,12 @@ class AuthActivity : AppCompatActivity() {
 
     }
 
+    private fun writeUserInFirebase(){
+        val user = FirebaseAuth.getInstance().currentUser!!.uid
+        var mDatabase = FirebaseDatabase.getInstance().reference
+        mDatabase.child("users").child(user).child("userId").setValue(user)
+    }
+
     fun processAuthResult(innerTask: Task<AuthResult>, authPass: String) {
         //Обрабатываем внутренний AuthResult'овский коллбек
         //в зависимости от нужд. Если все ок, делаем свои дела.
@@ -167,6 +174,7 @@ class AuthActivity : AppCompatActivity() {
             loginProgressBar.visibility = View.INVISIBLE
             Toast.makeText(this@AuthActivity, "Signed In with VK!",
                     Toast.LENGTH_SHORT).show()
+            writeUserInFirebase()
             startMainActivity()
         } else {
             //На случай auth failure Firebase'овского сервиса

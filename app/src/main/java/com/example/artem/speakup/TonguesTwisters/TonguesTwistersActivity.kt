@@ -4,12 +4,24 @@ import android.annotation.SuppressLint
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.support.v4.app.FragmentActivity
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.artem.speakup.R
 import com.example.artem.speakup.SpeechAnalysis.Word
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_tongues_twisters.*
 import ru.yandex.speechkit.*
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.ChildEventListener
+import org.w3c.dom.Comment
+import com.google.firebase.database.GenericTypeIndicator
+
+
+
 
 // some elements - test
 class TonguesTwistersActivity : AppCompatActivity(), TGPresenter.TGPresenterInterface {
@@ -50,12 +62,12 @@ class TonguesTwistersActivity : AppCompatActivity(), TGPresenter.TGPresenterInte
         //здесь по id уже получаем с базы скороговорки
         val arrTwistId = intent.getIntArrayExtra(TabTwisters.SELECTED_TONGUES_TWISTERS)
         //test
-         arr.addAll(arrayListOf("В Каннах львы только ленивым венки не вили",
+        arr.addAll(arrayListOf("В Каннах львы только ленивым венки не вили",
                 "Ну ты кек",
                 "Кокосовары варят в скорококосоварках кокосовый сок",
                 "Работники предприятие приватизировали-приватизировали, да не выприватизировали",
                 "Сиреневенькая зубовыковыривательница",
-                 "В Кабардино-Балкарии валокордин из Болгарии"))
+                "В Кабардино-Балкарии валокордин из Болгарии"))
         startTrain()
     }
 
