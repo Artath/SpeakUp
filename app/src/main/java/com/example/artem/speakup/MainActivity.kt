@@ -5,14 +5,16 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.content.ContextCompat
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 
-class MainActivity : AppCompatActivity(),
-        MainPresenter.MainPresenterInterface,
+class MainActivity : MvpAppCompatActivity(),
+        MainPresenter.Interface,
         TabRecords.Callback {
 
     @InjectPresenter
@@ -22,17 +24,8 @@ class MainActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        updateTabs()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        updateTabs()
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        updateTabs()
+        // presenter.updateTabs()
+        vUpdateTabs()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -48,11 +41,14 @@ class MainActivity : AppCompatActivity(),
         return super.onOptionsItemSelected(item)
     }
 
-    override fun updateTabs() {
+    override fun vUpdateTabs() {
         tabs.addOnTabSelectedListener(object: TabLayout.ViewPagerOnTabSelectedListener(content) {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 super.onTabSelected(tab)
-                content.currentItem = tab!!.position
+
+                presenter.vActiveTab = tab!!.position
+
+                content.currentItem = tab.position
 
                 tabs.getTabAt(0)?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.playlist_play)
                 tabs.getTabAt(1)?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.message_bulleted)
@@ -64,8 +60,9 @@ class MainActivity : AppCompatActivity(),
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
         })
 
-        val adapter = TabsAdapter(applicationContext, supportFragmentManager)
+        val adapter = TabsAdapter(supportFragmentManager)
         content.adapter = adapter
+
         tabs.setupWithViewPager(content)
     }
 

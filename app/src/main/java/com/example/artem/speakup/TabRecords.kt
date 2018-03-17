@@ -32,7 +32,7 @@ class TabRecords : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        return inflater!!.inflate(R.layout.tab_records, container, false)
+        return inflater.inflate(R.layout.tab_records, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -115,7 +115,7 @@ class TabRecords : Fragment() {
         dialog.setMessage(resources.getString(R.string.remove_record_msg).format(item.getAudioName()))
 
         dialog.setButton(AlertDialog.BUTTON_POSITIVE, "Ok", {
-            _, i ->
+            _, _ ->
             try {
                 val file = File(item.path)
                 file.delete()
@@ -126,7 +126,7 @@ class TabRecords : Fragment() {
         })
 
         dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No, keep it", {
-            _, i ->
+            _, _ ->
         })
 
         dialog.show()
