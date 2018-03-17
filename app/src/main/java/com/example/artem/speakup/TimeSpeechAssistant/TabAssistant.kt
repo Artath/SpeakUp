@@ -1,6 +1,5 @@
 package com.example.artem.speakup.TimeSpeechAssistant
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -39,7 +38,7 @@ class TabAssistant : MvpAppCompatFragment(), TabAssistantPresenter.TabAssistantV
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        presenter.launchPresenter(DBWorkSession(context as Context))
+        presenter.launchPresenter(DBWorkSession(context!!))
 
         new_session_btn.setOnClickListener {
             startActivity(Intent(context, CreateNewActivity::class.java))

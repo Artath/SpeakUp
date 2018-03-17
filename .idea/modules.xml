@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SpeakUp.iml" filepath="$PROJECT_DIR$/SpeakUp.iml" />
+      <module fileurl="file://C:\Users\ASUS\AndroidStudioProjects\SpeakUp!!\SpeakUp.iml" filepath="C:\Users\ASUS\AndroidStudioProjects\SpeakUp!!\SpeakUp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SpeakUp!!.iml" filepath="$PROJECT_DIR$/.idea/SpeakUp!!.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/vksdk_library/vksdk_library.iml" filepath="$PROJECT_DIR$/vksdk_library/vksdk_library.iml" />
     </modules>

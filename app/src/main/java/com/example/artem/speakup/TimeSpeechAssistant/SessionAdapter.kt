@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.session_item.view.*
 import java.util.ArrayList
 
 class SessionAdapter(var data: ArrayList<SpeechSession>,
-                     var callBack: SessionAdapterCallBack) : RecyclerView.Adapter<SessionAdapter.UserViewHolder>() {
+                     private var callBack: SessionAdapterCallBack) : RecyclerView.Adapter<SessionAdapter.UserViewHolder>() {
 
     override fun getItemCount() = data.size
 

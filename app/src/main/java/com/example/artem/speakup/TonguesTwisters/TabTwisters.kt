@@ -1,116 +1,21 @@
 package com.example.artem.speakup.TonguesTwisters
 
-
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.arellomobile.mvp.MvpAppCompatFragment
+import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.artem.speakup.R
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.tab_twisters.*
-import java.util.*
-import kotlin.collections.HashSet
 
-class TabTwisters : Fragment() {
+class TabTwisters : MvpAppCompatFragment(), TGPresenter.TGPView {
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater.inflate(R.layout.tab_twisters, container, false)
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val arrayTwist = arrayListOf<TonguesTwister>()
-        val selectedIdTG = arrayListOf<Long>()
-        //test
-
-
-        var mDatabase = FirebaseDatabase.getInstance().reference
-        mDatabase.child("tongueTwisters").addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                var id: Long = 1
-                var arrayList = ArrayList<TonguesTwister>()
-                for (snapshot in dataSnapshot.children) {
-
-                    val value = snapshot.value!!.toString()
-
-                    var tongue = TonguesTwister(id, value, 0,0, false)
-                    id++
-                    arrayList.add(tongue)
-                }
-
-                val adapter = TGAdapter(arrayList, object : TGAdapter.TGAdapterCallBack{
-                    override fun multiSelect(id: Long) {
-                    }
-                })
-                tg_recycler.layoutManager = LinearLayoutManager(context)
-                tg_recycler.adapter = adapter
-                adapter.notifyDataSetChanged()
-
-                tg_start_btn.setOnClickListener({_ ->
-                    val randomTG = HashSet<Int>()
-                    val rand = Random()
-                    while(randomTG.size < 5) {
-                        if (randomTG.add(rand.nextInt(arrayList.size))) {
-                            selectedIdTG.add(arrayList[randomTG.size - 1].id)
-                        }
-                    }
-                    startActivity(Intent(context, TonguesTwistersActivity::class.java).putExtra(SELECTED_TONGUES_TWISTERS, selectedIdTG))
-                })
-
-
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                Toast.makeText(activity, "Loading error", Toast.LENGTH_SHORT).show()
-            }
-        })
-
-
-        /*arrayTwist.add(TonguesTwister(1, "Пакет под попкорн", 12,0, false))
-        arrayTwist.add(TonguesTwister(2, "Банкиров ребрендили-ребрендили-ребрендили, да не выребрендировали", 22,0, false))
-        arrayTwist.add(TonguesTwister(3, "В Каннах львы только ленивым венки не вили", 45,0, false))
-        arrayTwist.add(TonguesTwister(4, "В Кабардино-Балкарии валокордин из Болгарии", 8,0, false))
-        arrayTwist.add(TonguesTwister(5, "Деидеологизировали-деидеологизировали, и додеидеологизировались", 11,0, false))
-        arrayTwist.add(TonguesTwister(6, "Их пестициды не перепистицидят наши по своей пестицидности", 10,0, false))
-        arrayTwist.add(TonguesTwister(7, "Их пестициды не перепистицидят наши по своей пестицидности", 23,0, false))
-        arrayTwist.add(TonguesTwister(8, "Кокосовары варят в скорококосоварках кокосовый сок", 20,0, false))
-        arrayTwist.add(TonguesTwister(9, "Работники предприятие приватизировали-приватизировали, да не выприватизировали", 12,0, false))
-        arrayTwist.add(TonguesTwister(10, "Сиреневенькая зубовыковыривательница", 16,0, false))
-        arrayTwist.add(TonguesTwister(11, "Флюорографист флюорографировал флюорографистку", 17,0, false))
-        arrayTwist.add(TonguesTwister(12, "Я - вертикультяп. Могу вертикультяпнуться, могу вывертикультяпнутьс", 28,0, false))
-        arrayTwist.add(TonguesTwister(13, "Стаффордширский терьер ретив, а черношерстный ризеншнауцер резв", 16,0, false))
-        arrayTwist.add(TonguesTwister(14, "Это колониализм? - Нет, это не колониализм, а неоколониализм!", 0,0, false))
-        arrayTwist.add(TonguesTwister(15, "Волховал волхв в хлеву с волхвами", 9,0, false))
-        arrayTwist.add(TonguesTwister(16, "Волховал волхв в хлеву с волхвами", 17,0, false))
-        arrayTwist.add(TonguesTwister(17, "Мы ели-ели ершей у ели. Их еле-еле у ели доели", 10,0, false))
-        arrayTwist.add(TonguesTwister(18, "На дворе - трава, на траве - дрова. Не руби дрова на траве двора!", 5,0, false))
-
-        val adapter = TGAdapter(arrayTwist, object : TGAdapter.TGAdapterCallBack{
-            override fun multiSelect(id: Long) {
-            }
-        })
-        tg_recycler.layoutManager = LinearLayoutManager(context)
-        tg_recycler.adapter = adapter
-        adapter.notifyDataSetChanged()
-
-        tg_start_btn.setOnClickListener({_ ->
-            val randomTG = HashSet<Int>()
-            val rand = Random()
-            while(randomTG.size < 5) {
-                if (randomTG.add(rand.nextInt(arrayTwist.size))) {
-                    selectedIdTG.add(arrayTwist[randomTG.size - 1].id)
-                }
-            }
-            startActivity(Intent(context, TonguesTwistersActivity::class.java).putExtra(SELECTED_TONGUES_TWISTERS, selectedIdTG))
-        })*/
-    }
+    @InjectPresenter
+    lateinit var presenter: TGPresenter
 
     companion object {
         val SELECTED_TONGUES_TWISTERS = "selectedTG"
@@ -122,4 +27,34 @@ class TabTwisters : Fragment() {
             return fragment
         }
     }
+
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+            inflater.inflate(R.layout.tab_twisters, container, false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        tg_start_btn.setOnClickListener {
+            presenter.analyzeChoice()
+        }
+
+    }
+
+    override fun showTonguesTwisters(adapter: TGAdapter) {
+        tg_recycler.layoutManager = LinearLayoutManager(context)
+        tg_recycler.adapter = adapter
+        adapter.notifyDataSetChanged()
+    }
+
+    override fun showMessage(mess: String) {
+        Toast.makeText(context, mess, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun takeTG(arrTG: ArrayList<String>) {
+        startActivity(Intent(context, TonguesTwistersActivity::class.java)
+                .putExtra(SELECTED_TONGUES_TWISTERS, arrTG))
+    }
+
 }
+

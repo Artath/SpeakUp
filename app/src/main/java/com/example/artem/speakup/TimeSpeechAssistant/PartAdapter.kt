@@ -13,7 +13,7 @@ import java.util.ArrayList
 
 
 class PartAdapter(var data: ArrayList<Part>,
-                  var callBack: PartAdapterCallBack) : RecyclerView.Adapter<PartAdapter.UserViewHolder>() {
+                  private var callBack: PartAdapterCallBack) : RecyclerView.Adapter<PartAdapter.UserViewHolder>() {
 
     override fun getItemCount() = data.size
 
@@ -25,7 +25,7 @@ class PartAdapter(var data: ArrayList<Part>,
         holder.details.setText(data[position].theses)
 
         // Hide delete button for first item, to keep at least one chapter available
-        if( position == 0 )
+        if( data.size == 1 )
             holder.deleteBtn.visibility = View.GONE
         else
             holder.deleteBtn.visibility = View.VISIBLE

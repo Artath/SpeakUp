@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.duration_dialog.*
 
 class ChooseWordsActivity : AppCompatActivity() {
 
-    var words = arrayListOf<String>()
+    val words = arrayListOf<String>()
     val WORDS = "words"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +29,7 @@ class ChooseWordsActivity : AppCompatActivity() {
         words_list.adapter.notifyDataSetChanged()
 
         add_word_btn.setOnClickListener {
-            words.add("")
+            words += ""
             words_list.adapter.notifyDataSetChanged()
         }
 
