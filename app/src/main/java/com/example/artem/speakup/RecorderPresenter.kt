@@ -6,6 +6,8 @@ import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.arellomobile.mvp.MvpView
 import com.github.mikephil.charting.data.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
@@ -72,6 +74,15 @@ class RecorderPresenter: MvpPresenter<RecorderPresenter.Interface>() {
             val record = aRecorder?.getAudioRecord()
             val signal = aRecorder?.getAudioSignal()
             viewState.vHideNewRecord(false, record)
+            val name = record!!.name
+            var uid = FirebaseAuth.getInstance().uid
+            var ref = FirebaseDatabase.getInstance().reference
+                    .child("users")
+                    .child(uid)
+                    .child("records")
+                    .child(name)
+            ref.child("signalList").setValue(signal)
+
 
             aRecorder = null
         }
