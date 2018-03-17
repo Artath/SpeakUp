@@ -47,11 +47,12 @@ class ActivityRecordDetails : AppCompatActivity() {
     fun getRecordFromFb(){
         var mDatabase = FirebaseDatabase.getInstance().reference
         var uid = FirebaseAuth.getInstance().uid
-        mDatabase.child("users").child(uid).child("records").child(name)
+        mDatabase.child("users").child(uid).child("records").child(name).child("signalList")
                 .addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+
                 for (snapshot in dataSnapshot.children) {
-                    val value = snapshot.child(name).value
+                    val value = snapshot.value
                     arrayList.add(value)
                 }
 
