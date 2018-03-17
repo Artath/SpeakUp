@@ -82,7 +82,8 @@ class RecorderPresenter: MvpPresenter<RecorderPresenter.Interface>() {
                     .child(uid)
                     .child("records")
                     .child(name)
-            ref.child("signalList").setValue(signal)
+                    .child("signalList")
+                    .setValue(signal)
 
             aRecorder = null
         }

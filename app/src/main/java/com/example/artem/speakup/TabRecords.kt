@@ -3,9 +3,12 @@ package com.example.artem.speakup
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.support.v4.app.Fragment
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -15,6 +18,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.tab_records.*
 import java.io.File
+import com.github.mikephil.charting.charts.Chart.LOG_TAG
+
+
 
 class TabRecords : Fragment() {
 
@@ -50,7 +56,20 @@ class TabRecords : Fragment() {
         // Refresh Records list
         records_refresh.setOnClickListener({ _ -> updateRecordsList() })
 
+        swipeRefresh.setOnRefreshListener(
+                object : SwipeRefreshLayout.OnRefreshListener {
+                    override fun onRefresh() {
+                        Log.i(LOG_TAG, "onRefresh called from SwipeRefreshLayout")
+
+                        // This method performs the actual data-refresh operation.
+                        // The method calls setRefreshing(false) when it's finished.
+                        updateRecordsList()
+                    }
+                }
+        )
+
         updateRecordsList()
+
     }
 
     fun openNewRecordActivity() {
@@ -71,6 +90,9 @@ class TabRecords : Fragment() {
             records_refresh.visibility = View.GONE
         }
 
+        var mediaPlayer = MediaPlayer()
+
+
         if( rAdapter == null ) {
             rAdapter = RecordListAdapter(data,
                     object: RecordListAdapter.ItemClickListener{
@@ -82,7 +104,19 @@ class TabRecords : Fragment() {
                     },
                     object: RecordListAdapter.ItemPlayListener{
                         override fun onItemPlayClick(item: AudioRecord) {
-                            Toast.makeText(context, "Record play", Toast.LENGTH_SHORT).show()
+                            if(mediaPlayer != null) {
+                                var path = item.path
+                                if (mediaPlayer.isPlaying) {
+                                    mediaPlayer.stop()
+                                    mediaPlayer = MediaPlayer()
+                                    Toast.makeText(context, "Record stop", Toast.LENGTH_SHORT).show()
+                                } else {
+                                    mediaPlayer.setDataSource(path)
+                                    mediaPlayer.prepare()
+                                    mediaPlayer.start()
+                                    Toast.makeText(context, "Record play", Toast.LENGTH_SHORT).show()
+                                }
+                            }
                         }
                     },
                     object: RecordListAdapter.ItemDeleteListener{
@@ -100,6 +134,7 @@ class TabRecords : Fragment() {
             rAdapter?.data = data
             rAdapter?.notifyDataSetChanged()
         }
+        swipeRefresh.isRefreshing = false
     }
 
     fun switchMode(edit: Boolean) {
