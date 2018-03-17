@@ -17,10 +17,7 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_record_details.*
 import kotlinx.android.synthetic.main.tab_twisters.*
 import java.io.File
@@ -69,9 +66,9 @@ class ActivityRecordDetails : AppCompatActivity() {
     fun getRecordFromFb(name: String){
         var mDatabase = FirebaseDatabase.getInstance().reference
         var uid = FirebaseAuth.getInstance().uid
-        mDatabase.child("users").child(uid).child("records").child(name).child("signalList")
+        mDatabase.child("users").child(uid).child("records").child(name)
                 .addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 var i = 0
                 for (snapshot in dataSnapshot.children) {
@@ -126,6 +123,7 @@ class ActivityRecordDetails : AppCompatActivity() {
     fun getAudioRecords(): ArrayList<AudioRecord>? {
         val files = File(externalCacheDir.absolutePath).listFiles()
         val data: ArrayList<AudioRecord> = arrayListOf()
+
 
         files.forEach {
             f -> data.add(
