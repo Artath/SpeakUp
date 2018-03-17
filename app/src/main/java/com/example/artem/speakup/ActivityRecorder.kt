@@ -11,10 +11,16 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.github.mikephil.charting.data.*
 
 import kotlinx.android.synthetic.main.activity_recorder.*
+import ru.yandex.speechkit.Error
+import ru.yandex.speechkit.Initializer
+import ru.yandex.speechkit.InitializerListener
+import ru.yandex.speechkit.SpeechKit
 import java.lang.Math.abs
 
 class ActivityRecorder : MvpAppCompatActivity(),
     RecorderPresenter.Interface {
+
+    private val API_KEY = "34e04a4d-07bc-4e70-8527-7b5e49f62cf9"
 
     @InjectPresenter
     lateinit var presenter: RecorderPresenter
@@ -22,6 +28,14 @@ class ActivityRecorder : MvpAppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recorder)
+
+        SpeechKit.getInstance().configure(applicationContext, API_KEY)
+
+        Initializer.create(object : InitializerListener {
+            override fun onInitializerBegin(p0: Initializer?) {}
+            override fun onInitializerDone(p0: Initializer?) {}
+            override fun onError(p0: Initializer?, p1: Error?) {}
+        }).start()
 
         record_button.setOnClickListener({ _ -> recordHandler() })
 
