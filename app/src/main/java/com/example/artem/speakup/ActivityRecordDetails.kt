@@ -1,33 +1,21 @@
 package com.example.artem.speakup
 
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.WorkSource
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Half.toFloat
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.example.artem.speakup.SpeechAnalysis.Word
-import com.example.artem.speakup.TonguesTwisters.TGAdapter
-import com.example.artem.speakup.TonguesTwisters.TabTwisters
-import com.example.artem.speakup.TonguesTwisters.TonguesTwister
-import com.example.artem.speakup.TonguesTwisters.TonguesTwistersActivity
-import com.example.artem.speakup.WelcomeScreens.WordsGridAdapter
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_record_details.*
-import kotlinx.android.synthetic.main.tab_twisters.*
 import java.io.File
-import java.util.*
 import kotlin.collections.ArrayList
-import com.vk.sdk.util.VKUtil
-
 
 
 class ActivityRecordDetails : AppCompatActivity() {

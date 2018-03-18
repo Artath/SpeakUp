@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.example.artem.speakup.SpeechAnalysis.Word
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 
@@ -24,8 +25,8 @@ class MainActivity : MvpAppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // presenter.updateTabs()
         vUpdateTabs()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

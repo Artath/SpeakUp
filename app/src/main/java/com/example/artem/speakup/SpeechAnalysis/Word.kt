@@ -1,19 +1,22 @@
 package com.example.artem.speakup.SpeechAnalysis
 
-class Word(var word: String, var numbRepeate: Int, var frequencyRepeat: Float) {
+class Word(var word: String, var numbRepeate: Int, var frequencyRepeat: Double) {
 
     companion object {
 
-        private val charFilter = arrayOf('.', ',', ':', '-', ' ', ';', '?', '!', '[', ']')
+        private val charFilter = arrayOf('.', ',', ':', '-', ' ', ';', '?', '!', '[', ']', '(', ')', '{', '}', "'", "«", "»")
 
         fun registerWord(text: String, word: String): Word {
 
+            var txt= text.split(" ").sorted()
             var maxWords = countWordsInText(text)
-            val numbWordParasite = (text.toLowerCase().length - text.toLowerCase().replace(word, "").length) / word.length
+            //val numbWordParasite = (text.toLowerCase().length - text.toLowerCase().replace(word, "").length) / word.length
+            val numbWordParasite = txt.count { word == toRightFormat(it) }
+
             if (maxWords == 0){
                 maxWords = 1
             }
-            return Word(word, numbWordParasite, numbWordParasite.toFloat()/maxWords)
+            return Word(word, numbWordParasite, numbWordParasite.toDouble()/maxWords)
         }
 
         //to lowercase, delete chars if they in charFilter
