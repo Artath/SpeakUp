@@ -145,6 +145,21 @@
                     app:layout_constraintVertical_bias="0.7" />
             </android.support.constraint.ConstraintLayout>
 
+
+            <TextView
+                android:id="@+id/recording_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/mr_2"
+                android:text="Recordind status"
+                android:textAlignment="center"
+                android:textSize="@dimen/tp_paragraph_sub"
+                android:textColor="@color/colorTextDark"
+                app:layout_constraintBottom_toTopOf="@+id/record_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/timer_container"/>
+
             <ImageButton
                 android:id="@+id/record_button"
                 android:layout_width="wrap_content"

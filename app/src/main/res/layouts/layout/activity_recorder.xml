@@ -55,6 +55,21 @@
         app:layout_constraintTop_toBottomOf="@+id/timer_container"
         app:srcCompat="@drawable/checkbox_blank_circle_red" />
 
+    <TextView
+        android:id="@+id/recording_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mr_2"
+        android:text="Recordind status"
+        android:textAlignment="center"
+        android:textSize="@dimen/tp_paragraph_sub"
+        android:textColor="@color/colorTextDark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/record_button"
+        app:layout_constraintVertical_bias="0.0"/>
+
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/record_level_chart"
         android:layout_width="match_parent"

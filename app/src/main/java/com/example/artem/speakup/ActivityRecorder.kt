@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.example.artem.speakup.SpeechAnalysis.AnalysisPresenter
 import com.github.mikephil.charting.data.*
 
 import kotlinx.android.synthetic.main.activity_recorder.*
@@ -17,12 +18,16 @@ import ru.yandex.speechkit.SpeechKit
 import java.lang.Math.abs
 
 class ActivityRecorder : MvpAppCompatActivity(),
-    RecorderPresenter.Interface {
+    RecorderPresenter.Interface,
+    AnalysisPresenter.AnalysisView {
 
     private val API_KEY = "34e04a4d-07bc-4e70-8527-7b5e49f62cf9"
 
     @InjectPresenter
     lateinit var presenter: RecorderPresenter
+
+    @InjectPresenter
+    lateinit var analysisPresenter: AnalysisPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +54,19 @@ class ActivityRecorder : MvpAppCompatActivity(),
 
     fun recordHandler() {
         when( presenter.record_status ) {
-            "ready" -> presenter.recorderStart()
-            "rec" -> presenter.recorderStop()
+            "ready" -> startRecording()
+            "rec" -> stopRecording()
         }
+    }
+
+    fun startRecording() {
+        presenter.recorderStart()
+        analysisPresenter.startRecognizer()
+    }
+
+    fun stopRecording() {
+        presenter.recorderStop()
+        analysisPresenter.cancelRecognizer()
     }
 
     override fun vGetAppPath() {
@@ -141,5 +156,14 @@ class ActivityRecorder : MvpAppCompatActivity(),
 
         record_level_chart.notifyDataSetChanged()
         record_level_chart.invalidate()
+    }
+
+    // AnalysisPresenter implementation
+    override fun showPartialRes(text: String) {
+        recording_status.text = text
+    }
+
+    override fun showResults(cleanText: String) {
+        Log.d("** speakup **", "showResults %s".format(cleanText))
     }
 }
