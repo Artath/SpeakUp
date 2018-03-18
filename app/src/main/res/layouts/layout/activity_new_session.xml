@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.artem.speakup.TimeSpeechAssistant.CreateNewActivity">
+    tools:context="com.example.artem.speakup.TimeSpeechAssistant.CreateNewActivity"
+    android:background="@color/colorTextWhite">
 
     <TextView
         android:id="@+id/new_speech_name_txt"
@@ -51,9 +52,9 @@
         android:id="@+id/new_session_add_part_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginStart="16dp"
-        android:padding="10dp"
+        android:layout_marginBottom="@dimen/mr_2"
+        android:layout_marginStart="@dimen/mr_2"
+        android:padding="14dp"
         android:background="@drawable/border_rounded_outline"
         android:src="@drawable/playlist_plus_red"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,9 +64,9 @@
         android:id="@+id/new_session_save_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        android:padding="10dp"
+        android:layout_marginBottom="@dimen/mr_2"
+        android:layout_marginEnd="@dimen/mr_2"
+        android:padding="14dp"
         android:background="@drawable/border_rounded"
         android:src="@drawable/check"
         app:layout_constraintBottom_toBottomOf="parent"

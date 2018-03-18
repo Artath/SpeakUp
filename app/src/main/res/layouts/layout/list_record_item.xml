@@ -7,7 +7,8 @@
     android:layout_height="wrap_content"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
-    android:paddingVertical="12dp">
+    android:paddingVertical="12dp"
+    android:background="@color/colorTextWhite">
 
     <ImageButton
         android:id="@+id/record_play"
