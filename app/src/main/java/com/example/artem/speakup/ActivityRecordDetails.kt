@@ -82,7 +82,6 @@ class ActivityRecordDetails : AppCompatActivity() {
                 if( arrayList.size > 0 ) {
                     audio_record_level_chart.visibility = View.VISIBLE
                     drawChart(arrayList)
-                    Toast.makeText(applicationContext, arrayList.size.toString(), Toast.LENGTH_SHORT).show()
                 } else {
                     audio_record_level_chart.visibility = View.GONE
                     Toast.makeText(applicationContext, R.string.audio_record_no_db_data, Toast.LENGTH_SHORT).show()
