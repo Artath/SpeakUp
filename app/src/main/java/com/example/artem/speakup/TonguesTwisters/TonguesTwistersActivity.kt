@@ -12,7 +12,6 @@ import ru.yandex.speechkit.SpeechKit
 
 class TonguesTwistersActivity : MvpAppCompatActivity(), TGTrainingPresenter.TGTrainingView {
 
-    private val API_KEY = "34e04a4d-07bc-4e70-8527-7b5e49f62cf9"
 
     @InjectPresenter
     lateinit var presenter: TGTrainingPresenter
@@ -21,13 +20,6 @@ class TonguesTwistersActivity : MvpAppCompatActivity(), TGTrainingPresenter.TGTr
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tongues_twisters)
 
-        SpeechKit.getInstance().configure(applicationContext, API_KEY)
-
-        Initializer.create(object : InitializerListener {
-            override fun onInitializerBegin(p0: Initializer?) {}
-            override fun onInitializerDone(p0: Initializer?) {}
-            override fun onError(p0: Initializer?, p1: Error?) {}
-        }).start()
 
         presenter.launchPresenter(intent.getStringArrayListExtra(TabTwisters.SELECTED_TONGUES_TWISTERS))
 

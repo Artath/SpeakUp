@@ -22,12 +22,12 @@
     <string name="next">NEXT</string>
     <string name="skip">SKIP</string>
     <string name="start">GOT IT</string>
-    <string name="slide_1_title">Bla bla!!</string>
-    <string name="slide_1_desc">Bla blabla bla blalablalba balb albalalbal</string>
-    <string name="slide_2_title">BLA!!!!!!!!!</string>
-    <string name="slide_2_desc">Bla blablaba lbab balba labl albablbal</string>
-    <string name="slide_3_title">Final Bla!</string>
-    <string name="slide_3_desc">Blabal blab labbl  aba lbalb lablabl balblbalbl la bll</string>
+    <string name="slide_1_title">Rise your voice!</string>
+    <string name="slide_1_desc">Speak Up will help you to start watching your voice</string>
+    <string name="slide_2_title">Make people listen to you</string>
+    <string name="slide_2_desc">Train your speech with Tongue Twisters</string>
+    <string name="slide_3_title">Real time assistant!</string>
+    <string name="slide_3_desc">Will help you during the performance</string>
 
     <!-- Session list -->
     <string name="session_chapters">Chapters:</string>
