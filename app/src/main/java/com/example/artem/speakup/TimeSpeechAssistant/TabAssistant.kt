@@ -40,6 +40,7 @@ class TabAssistant : MvpAppCompatFragment(), TabAssistantPresenter.TabAssistantV
         super.onViewCreated(view, savedInstanceState)
 
         presenter.launchPresenter(DBWorkSession(activity!!.applicationContext))
+        presenter.showList()
 
         new_session_btn.setOnClickListener {
             startActivity(Intent(context, CreateNewActivity::class.java))

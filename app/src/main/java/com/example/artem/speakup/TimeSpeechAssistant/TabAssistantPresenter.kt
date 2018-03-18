@@ -60,8 +60,15 @@ class TabAssistantPresenter : MvpPresenter<TabAssistantPresenter.TabAssistantVie
         }
     }
 
+    fun showList() {
+        if (adapter != null) {
+        viewState.showSpeechList(adapter!!)
+        }
+    }
+
     interface TabAssistantView : MvpView {
         fun showSpeechList(adapter: SessionAdapter)
+        @StateStrategyType(SkipStrategy::class)
         fun onStartSpeechSession(id: Long, planingTime: Long, speechName: String)
         @StateStrategyType(SkipStrategy::class)
         fun onEditSpeechSession(id: Long, speechName: String)
