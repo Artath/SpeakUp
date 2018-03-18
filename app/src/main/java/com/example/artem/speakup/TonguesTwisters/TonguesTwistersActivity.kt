@@ -16,12 +16,22 @@ class TonguesTwistersActivity : MvpAppCompatActivity(), TGTrainingPresenter.TGTr
     @InjectPresenter
     lateinit var presenter: TGTrainingPresenter
 
+    private val API_KEY = "34e04a4d-07bc-4e70-8527-7b5e49f62cf9"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tongues_twisters)
 
-
         presenter.launchPresenter(intent.getStringArrayListExtra(TabTwisters.SELECTED_TONGUES_TWISTERS))
+
+        SpeechKit.getInstance().configure(applicationContext, API_KEY)
+
+        Initializer.create(object : InitializerListener {
+            override fun onError(p0: Initializer?, p1: ru.yandex.speechkit.Error?) {}
+            override fun onInitializerBegin(p0: Initializer?) {}
+            override fun onInitializerDone(p0: Initializer?) {}
+
+        }).start()
 
         speech_img_btn.setOnClickListener {
             presenter.start()

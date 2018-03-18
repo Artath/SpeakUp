@@ -9,7 +9,7 @@ class Word(var word: String, var numbRepeate: Int, var frequencyRepeat: Float) {
         fun registerWord(text: String, word: String): Word {
 
             var maxWords = countWordsInText(text)
-            val numbWordParasite = (text.length - text.replace(word, "").length) / word.length
+            val numbWordParasite = (text.toLowerCase().length - text.toLowerCase().replace(word, "").length) / word.length
             if (maxWords == 0){
                 maxWords = 1
             }

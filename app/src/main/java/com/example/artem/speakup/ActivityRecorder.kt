@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.example.artem.speakup.R.id.show_content_txt
 import com.example.artem.speakup.SpeechAnalysis.AnalysisPresenter
 import com.github.mikephil.charting.data.*
 
@@ -16,6 +17,9 @@ import ru.yandex.speechkit.Initializer
 import ru.yandex.speechkit.InitializerListener
 import ru.yandex.speechkit.SpeechKit
 import java.lang.Math.abs
+import com.vk.sdk.util.VKUtil
+import kotlinx.android.synthetic.main.activity_tongues_twisters.*
+
 
 class ActivityRecorder : MvpAppCompatActivity(),
     RecorderPresenter.Interface,
@@ -32,6 +36,8 @@ class ActivityRecorder : MvpAppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recorder)
+
+
 
         SpeechKit.getInstance().configure(applicationContext, API_KEY)
 

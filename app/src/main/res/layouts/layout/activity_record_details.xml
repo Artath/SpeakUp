@@ -19,6 +19,7 @@
 
             <TextView
                 android:id="@+id/audio_record_name_txt"
+                android:textIsSelectable="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/mr_2"

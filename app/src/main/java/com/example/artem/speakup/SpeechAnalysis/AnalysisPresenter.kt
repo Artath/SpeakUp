@@ -57,7 +57,7 @@ class AnalysisPresenter : MvpPresenter<AnalysisPresenter.AnalysisView>()   {
             override fun onError(p0: Recognizer?, p1: Error?) {
                 if (p1 != null) when (p1.code) {
                     Error.ERROR_CANCELED -> {
-                        viewState.showPartialRes("Cancelled")
+                        viewState.showPartialRes("") // Final call
                     }
                     Error.ERROR_NETWORK -> {
                         viewState.showPartialRes("Network error")

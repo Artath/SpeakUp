@@ -35,26 +35,23 @@ class TGTrainingPresenter : MvpPresenter<TGTrainingPresenter.TGTrainingView>() {
 
     fun launchPresenter(arrTg: ArrayList<String>) {
         if (isResizable) {
-            if (arrayTG.size != 0) {
                 arrayTG += arrTg
                 viewState.showTG(arrayTG[index])
                 startTimer()
                 isResizable = false
-            }
+
         }
     }
 
     fun start() {
         stopTimer()
-        if (arrayTG.size != 0) {
-            viewState.showPartialRes("Read...")
-            viewState.showNote("")
-            if (index < arrayTG.size - 1) {
-                index++
-                viewState.showTG(arrayTG[index])
-            }
-            startTimer()
+        viewState.showPartialRes("Read...")
+        viewState.showNote("")
+        if (index < arrayTG.size - 1) {
+            index++
+            viewState.showTG(arrayTG[index])
         }
+        startTimer()
 
     }
 

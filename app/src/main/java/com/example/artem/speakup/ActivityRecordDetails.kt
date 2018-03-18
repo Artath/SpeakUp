@@ -26,6 +26,9 @@ import kotlinx.android.synthetic.main.tab_twisters.*
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
+import com.vk.sdk.util.VKUtil
+
+
 
 class ActivityRecordDetails : AppCompatActivity() {
 
@@ -35,6 +38,8 @@ class ActivityRecordDetails : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_record_details)
+
+
 
         val name = intent.getStringExtra("record_name")
 
