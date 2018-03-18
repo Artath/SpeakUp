@@ -24,7 +24,6 @@ class AnalysisPresenter : MvpPresenter<AnalysisPresenter.AnalysisView>()   {
         if (recognizer != null) {
             recognizer!!.cancel()
             recognizer = null
-            Log.v("dfgdfg", "dfgdfg")
             viewState.showResults(cleanText.toString())
         }
     }
