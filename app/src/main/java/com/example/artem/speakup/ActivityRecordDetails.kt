@@ -68,29 +68,32 @@ class ActivityRecordDetails : AppCompatActivity() {
     fun getRecordFromFb(name: String){
         var mDatabase = FirebaseDatabase.getInstance().reference
         var uid = FirebaseAuth.getInstance().uid
-        mDatabase.child("users").child(uid).child("records").child(name).child("signalList")
-                .addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+        mDatabase.child("users").child(uid).child("records").child(name)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                var i = 0
-                for (snapshot in dataSnapshot.children) {
-                    val value = snapshot.value
-                    arrayList.add(BarEntry(i.toFloat(), value.toString().toFloat()))
-                    i++
+                    var i = 0
+                    for (snapshot in dataSnapshot.child("signalList").children) {
+                        val value = snapshot.value
+                        arrayList.add(BarEntry(i.toFloat(), value.toString().toFloat()))
+                        i++
+                    }
+
+                    if( arrayList.size > 0 ) {
+                        audio_record_level_chart.visibility = View.VISIBLE
+                        drawChart(arrayList)
+                    } else {
+                        audio_record_level_chart.visibility = View.GONE
+                        Toast.makeText(applicationContext, R.string.audio_record_no_db_data, Toast.LENGTH_SHORT).show()
+                    }
+
+                    var text = dataSnapshot.child("text").value
+                    audio_record_text.text = text.toString()
                 }
 
-                if( arrayList.size > 0 ) {
-                    audio_record_level_chart.visibility = View.VISIBLE
-                    drawChart(arrayList)
-                } else {
-                    audio_record_level_chart.visibility = View.GONE
-                    Toast.makeText(applicationContext, R.string.audio_record_no_db_data, Toast.LENGTH_SHORT).show()
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Toast.makeText(applicationContext, "Loading error", Toast.LENGTH_SHORT).show()
                 }
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                Toast.makeText(applicationContext, "Loading error", Toast.LENGTH_SHORT).show()
-            }
         })
     }
 

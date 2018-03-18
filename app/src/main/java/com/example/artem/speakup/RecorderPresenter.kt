@@ -55,7 +55,7 @@ class RecorderPresenter: MvpPresenter<RecorderPresenter.Interface>() {
         aRecorder?.startRecording(fileName)
     }
 
-    fun recorderStop() {
+    fun recorderStop(text: String) {
         if( ( Date().time - startts ) < 5 * 1000 ) {
             // Set more userfriendly block
             viewState.vMessage("Too short speech, wtf?!")
@@ -90,6 +90,7 @@ class RecorderPresenter: MvpPresenter<RecorderPresenter.Interface>() {
             ref.child("signalList").setValue(signal)
             ref.child("date").setValue(dt)
             ref.child("path").setValue(path)
+            ref.child("text").setValue(text)
 
             aRecorder = null
         }

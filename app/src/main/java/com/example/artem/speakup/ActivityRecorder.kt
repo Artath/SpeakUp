@@ -65,7 +65,6 @@ class ActivityRecorder : MvpAppCompatActivity(),
     }
 
     fun stopRecording() {
-        presenter.recorderStop()
         analysisPresenter.cancelRecognizer()
     }
 
@@ -164,6 +163,7 @@ class ActivityRecorder : MvpAppCompatActivity(),
     }
 
     override fun showResults(cleanText: String) {
+        presenter.recorderStop(cleanText)
         Log.d("** speakup **", "showResults %s".format(cleanText))
     }
 }
