@@ -3,16 +3,19 @@ package com.example.artem.speakup
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.WorkSource
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Half.toFloat
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.example.artem.speakup.SpeechAnalysis.Word
 import com.example.artem.speakup.TonguesTwisters.TGAdapter
 import com.example.artem.speakup.TonguesTwisters.TabTwisters
 import com.example.artem.speakup.TonguesTwisters.TonguesTwister
 import com.example.artem.speakup.TonguesTwisters.TonguesTwistersActivity
+import com.example.artem.speakup.WelcomeScreens.WordsGridAdapter
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
@@ -89,6 +92,12 @@ class ActivityRecordDetails : AppCompatActivity() {
 
                     var text = dataSnapshot.child("text").value
                     audio_record_text.text = text.toString()
+
+                    val analisys = Word.fullAnalysisText(text.toString())
+                    val adapter = WordsGridAdapter(analisys)
+                    audio_record_words_stats.layoutManager = LinearLayoutManager(applicationContext)
+                    audio_record_words_stats.adapter = adapter
+                    audio_record_words_stats.adapter.notifyDataSetChanged()
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {

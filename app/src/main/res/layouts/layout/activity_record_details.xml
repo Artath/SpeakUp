@@ -129,17 +129,75 @@
                 app:layout_constraintTop_toBottomOf="@id/audio_record_datetime" />
 
             <TextView
-            android:id="@+id/audio_record_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/mr_2"
-            android:layout_marginEnd="@dimen/mr_2"
-            android:layout_marginTop="@dimen/mr_2"
-            android:textSize="@dimen/tp_paragraph_sub"
-            android:textColor="@color/colorTextLight"
-            android:text="@string/audio_record_name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/audio_record_level_chart" />
+                android:id="@+id/audio_record_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/mr_2"
+                android:layout_marginEnd="@dimen/mr_2"
+                android:layout_marginTop="@dimen/mr_2"
+                android:textSize="@dimen/tp_paragraph_sub"
+                android:textColor="@color/colorTextLight"
+                android:text="@string/audio_record_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/audio_record_level_chart" />
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/audio_record_text"
+                android:layout_marginHorizontal="@dimen/mr_2"
+                android:layout_marginTop="@dimen/mr_2">
+
+                <LinearLayout
+                    android:id="@+id/words_grid_head"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/mr_1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/audio_record_words_stats">
+
+                    <TextView
+                        android:id="@+id/list_record_head_word"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/InputLabel"
+                        android:text="Word" />
+
+                    <TextView
+                        android:id="@+id/list_record_word_head_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        style="@style/InputLabel"
+                        android:text="Frequency"
+                        android:textAlignment="viewEnd" />
+
+                    <TextView
+                        android:id="@+id/list_record_word_head_percent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        style="@style/InputLabel"
+                        android:text="Percent"
+                        android:textAlignment="viewEnd" />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/audio_record_words_stats"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/words_grid_head"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </android.support.constraint.ConstraintLayout>
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
