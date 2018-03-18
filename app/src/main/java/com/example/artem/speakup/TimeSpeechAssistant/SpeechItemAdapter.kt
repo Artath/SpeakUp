@@ -1,7 +1,6 @@
 package com.example.artem.speakup.TimeSpeechAssistant
 
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +36,6 @@ class SpeechItemAdapter (var data: ArrayList<ChildPart>) : RecyclerView.Adapter<
 
         holder.progress.visibility = if (data[position].currentTime > 0L) View.VISIBLE else View.GONE
 
-        Log.v("cuur", data[position].currentTime.toString())
         if (data[position].time != 0L) {
             holder.progress.progress = (1000*(data[position].currentTime.toDouble()/data[position].time)).toInt()
         }

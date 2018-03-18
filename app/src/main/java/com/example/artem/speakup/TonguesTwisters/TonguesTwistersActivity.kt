@@ -40,9 +40,4 @@ class TonguesTwistersActivity : MvpAppCompatActivity(), TGTrainingPresenter.TGTr
        check_res_txt.text = note
     }
 
-    override fun onDestroy() {
-        presenter.stop()
-        super.onDestroy()
-    }
-
 }
