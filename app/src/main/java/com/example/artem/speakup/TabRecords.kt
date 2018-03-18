@@ -92,8 +92,17 @@ class TabRecords : Fragment() {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         for (snapshot in dataSnapshot.children) {
                             val name = snapshot.key
-                            val dt = snapshot.child("date").value
-                            val path = snapshot.child("path").value
+                            var dt: Long = if( snapshot.child("date").exists() )
+                                snapshot.child("date").value as Long else 0
+                            var path: String = if( snapshot.child("path").exists() )
+                                snapshot.child("path").value as String else ""
+
+                            if( dt == null )
+                                dt = 0
+
+                            if( path == null )
+                                path = ""
+
                             val item = AudioRecord(name as String, dt as Long, path as String)
                             data.add(item)
                         }

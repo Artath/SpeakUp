@@ -25,7 +25,7 @@ class AnalysisPresenter : MvpPresenter<AnalysisPresenter.AnalysisView>()   {
             recognizer!!.cancel()
             recognizer = null
             Log.v("dfgdfg", "dfgdfg")
-            viewState.showResults(cleanText.toString())
+            viewState.showResults(cleanText.toString(), "GENERAL_TEXT")
         }
     }
 
@@ -76,6 +76,6 @@ class AnalysisPresenter : MvpPresenter<AnalysisPresenter.AnalysisView>()   {
 
     interface AnalysisView : MvpView {
         fun showPartialRes(text: String)
-        fun showResults(cleanText: String)
+        fun showResults(cleanText: String, generalText: String)
     }
 }
