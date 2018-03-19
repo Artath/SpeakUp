@@ -1,4 +1,4 @@
-package com.example.artem.speakup
+package com.example.artem.speakup.WriteRecorder
 
 import android.media.MediaRecorder
 import android.support.v7.app.AppCompatActivity
@@ -45,9 +45,9 @@ class AudioRecorder: AppCompatActivity() {
     fun getAudioRecord(): AudioRecord {
         val f = File(fileName)
         return AudioRecord(
-                    f.nameWithoutExtension,
-                    f.lastModified(),
-                    f.path)
+                f.nameWithoutExtension,
+                f.lastModified(),
+                f.path)
     }
 
     fun getAudioSignal(): ArrayList<Float> {

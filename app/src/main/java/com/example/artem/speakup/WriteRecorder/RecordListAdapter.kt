@@ -1,4 +1,4 @@
-package com.example.artem.speakup
+package com.example.artem.speakup.WriteRecorder
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import com.example.artem.speakup.R
 import kotlinx.android.synthetic.main.list_record_item.view.*
 import java.io.File
 

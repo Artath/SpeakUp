@@ -1,4 +1,4 @@
-package com.example.artem.speakup
+package com.example.artem.speakup.WriteRecorder
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.example.artem.speakup.R
 import com.example.artem.speakup.SpeechAnalysis.Word
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet

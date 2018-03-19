@@ -8,7 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
-import com.example.artem.speakup.MainActivity
+import com.example.artem.speakup.MainPack.MainActivity
 import com.example.artem.speakup.R
 //import com.example.artem.speakup.TrueMainActivity
 import com.firebase.ui.auth.AuthUI

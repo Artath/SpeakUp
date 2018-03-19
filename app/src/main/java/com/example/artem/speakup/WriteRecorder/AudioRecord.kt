@@ -1,8 +1,7 @@
-package com.example.artem.speakup
+package com.example.artem.speakup.WriteRecorder
 
 import android.media.MediaMetadataRetriever
 import android.util.Log
-import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 

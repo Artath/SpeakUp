@@ -1,4 +1,4 @@
-package com.example.artem.speakup
+package com.example.artem.speakup.MainPack
 
 import android.media.MediaPlayer
 import android.util.Log
@@ -7,6 +7,8 @@ import com.arellomobile.mvp.MvpPresenter
 import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
+import com.example.artem.speakup.WriteRecorder.AudioRecord
+import com.example.artem.speakup.WriteRecorder.RecordListAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -14,6 +16,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import java.io.File
 
+//GARBAGE
 @InjectViewState
 class RecordsPresenter : MvpPresenter<RecordsPresenter.RecordsView>(){
 
@@ -71,18 +74,18 @@ class RecordsPresenter : MvpPresenter<RecordsPresenter.RecordsView>(){
                             object : RecordListAdapter.ItemPlayListener {
                                 override fun onItemPlayClick(item: AudioRecord) {
 
-                                    if (File(item.path).exists()){
+                                    if (File(item.path).exists()) {
 
-                                            if (mediaPlayer.isPlaying) {
-                                                mediaPlayer.stop()
-                                               // mediaPlayer = MediaPlayer()
-                                               viewState.showMessage("Record stop")
-                                            } else {
-                                                mediaPlayer.setDataSource(item.path)
-                                                mediaPlayer.prepare()
-                                                mediaPlayer.start()
-                                                viewState.showMessage("Record play")
-                                            }
+                                        if (mediaPlayer.isPlaying) {
+                                            mediaPlayer.stop()
+                                            // mediaPlayer = MediaPlayer()
+                                            viewState.showMessage("Record stop")
+                                        } else {
+                                            mediaPlayer.setDataSource(item.path)
+                                            mediaPlayer.prepare()
+                                            mediaPlayer.start()
+                                            viewState.showMessage("Record play")
+                                        }
 
                                     }
                                 }

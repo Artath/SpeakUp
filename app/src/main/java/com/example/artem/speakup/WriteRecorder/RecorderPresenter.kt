@@ -1,7 +1,6 @@
-package com.example.artem.speakup
+package com.example.artem.speakup.WriteRecorder
 
 import android.os.CountDownTimer
-import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.arellomobile.mvp.MvpView

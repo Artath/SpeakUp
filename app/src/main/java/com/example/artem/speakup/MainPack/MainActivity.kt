@@ -1,16 +1,16 @@
-package com.example.artem.speakup
+package com.example.artem.speakup.MainPack
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.content.ContextCompat
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
-import com.example.artem.speakup.SpeechAnalysis.Word
+import com.example.artem.speakup.R
+import com.example.artem.speakup.WriteRecorder.AudioRecord
+import com.example.artem.speakup.WriteRecorder.TabRecords
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 

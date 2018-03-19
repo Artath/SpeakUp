@@ -1,4 +1,4 @@
-package com.example.artem.speakup
+package com.example.artem.speakup.WriteRecorder
 
 import android.app.AlertDialog
 import android.content.Context
@@ -7,7 +7,6 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -15,11 +14,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.artem.speakup.R.id.button_finish_edit
-import com.example.artem.speakup.R.id.button_new_record
+import com.example.artem.speakup.R
 import kotlinx.android.synthetic.main.tab_records.*
 import java.io.File
-import com.github.mikephil.charting.charts.Chart.LOG_TAG
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -136,17 +133,17 @@ class TabRecords : Fragment() {
                 var mediaPlayer = MediaPlayer()
                 if( rAdapter == null ) {
                     rAdapter = RecordListAdapter(data,
-                            object: RecordListAdapter.ItemClickListener{
+                            object : RecordListAdapter.ItemClickListener {
                                 override fun onListItemClick(item: AudioRecord) {
                                     val intent = Intent(context, ActivityRecordDetails::class.java)
                                     intent.putExtra("record_name", item.name)
                                     startActivity(intent)
                                 }
                             },
-                            object: RecordListAdapter.ItemPlayListener{
+                            object : RecordListAdapter.ItemPlayListener {
                                 override fun onItemPlayClick(item: AudioRecord) {
 
-                                    if (File(item.path).exists()){
+                                    if (File(item.path).exists()) {
                                         if (mediaPlayer != null) {
                                             var path = item.path
                                             if (mediaPlayer.isPlaying) {
@@ -163,12 +160,12 @@ class TabRecords : Fragment() {
                                     }
                                 }
                             },
-                            object: RecordListAdapter.ItemDeleteListener{
+                            object : RecordListAdapter.ItemDeleteListener {
                                 override fun onItemDeleteClick(item: AudioRecord) {
                                     removeRecord(item)
                                 }
                             },
-                            object: RecordListAdapter.ItemLongClickListener{
+                            object : RecordListAdapter.ItemLongClickListener {
                                 override fun onLongClick(item: AudioRecord) {
                                     switchMode(true)
                                 }

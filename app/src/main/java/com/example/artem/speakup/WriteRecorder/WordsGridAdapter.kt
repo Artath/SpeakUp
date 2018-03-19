@@ -1,10 +1,11 @@
-package com.example.artem.speakup
+package com.example.artem.speakup.WriteRecorder
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.artem.speakup.R
 import com.example.artem.speakup.SpeechAnalysis.Word
 import kotlinx.android.synthetic.main.list_record_word.view.*
 

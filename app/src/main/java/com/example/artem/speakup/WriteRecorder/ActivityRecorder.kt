@@ -1,4 +1,4 @@
-package com.example.artem.speakup
+package com.example.artem.speakup.WriteRecorder
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,8 @@ import android.view.View
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
-import com.example.artem.speakup.R.id.show_content_txt
+import com.example.artem.speakup.MainPack.MainActivity
+import com.example.artem.speakup.R
 import com.example.artem.speakup.SpeechAnalysis.AnalysisPresenter
 import com.github.mikephil.charting.data.*
 
@@ -17,13 +18,11 @@ import ru.yandex.speechkit.Initializer
 import ru.yandex.speechkit.InitializerListener
 import ru.yandex.speechkit.SpeechKit
 import java.lang.Math.abs
-import com.vk.sdk.util.VKUtil
-import kotlinx.android.synthetic.main.activity_tongues_twisters.*
 import java.util.*
 
 
 class ActivityRecorder : MvpAppCompatActivity(),
-    RecorderPresenter.Interface,
+        RecorderPresenter.Interface,
     AnalysisPresenter.AnalysisView {
 
     private val API_KEY = "34e04a4d-07bc-4e70-8527-7b5e49f62cf9"

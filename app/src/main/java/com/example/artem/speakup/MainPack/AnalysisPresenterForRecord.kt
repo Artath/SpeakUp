@@ -1,4 +1,4 @@
-package com.example.artem.speakup
+package com.example.artem.speakup.MainPack
 
 import android.annotation.SuppressLint
 import android.os.CountDownTimer
@@ -10,6 +10,7 @@ import ru.yandex.speechkit.Recognition
 import ru.yandex.speechkit.Recognizer
 import ru.yandex.speechkit.RecognizerListener
 
+//GARBEGE
 @InjectViewState
 class AnalysisPresenterForRecord : MvpPresenter<AnalysisPresenterForRecord.AnalysisView>()   {
 

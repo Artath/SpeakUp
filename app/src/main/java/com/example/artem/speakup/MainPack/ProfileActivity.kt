@@ -1,4 +1,4 @@
-package com.example.artem.speakup
+package com.example.artem.speakup.MainPack
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.example.artem.speakup.Auth.AuthActivity
+import com.example.artem.speakup.R
 import com.firebase.ui.auth.AuthUI
 
 class ProfileActivity : AppCompatActivity() {

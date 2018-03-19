@@ -30,14 +30,14 @@
             android:name="com.vk.sdk.VKServiceActivity"
             android:label="ServiceActivity"
             android:theme="@style/VK.Transparent" />
-        <activity android:name=".ActivityRecorder">
+        <activity android:name=".WriteRecorder.ActivityRecorder">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".MainPack.MainActivity" />
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainPack.MainActivity" />
         <activity
-            android:name=".ProfileActivity"
+            android:name=".MainPack.ProfileActivity"
             android:noHistory="true" />
         <activity
             android:name=".Auth.AuthActivity"
@@ -47,7 +47,7 @@
         <activity android:name=".TonguesTwisters.TonguesTwistersActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".MainPack.MainActivity"/>
         </activity>
         <activity
             android:name=".TimeSpeechAssistant.CreateNewActivity"
@@ -57,10 +57,10 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".TimeSpeechAssistant.SpeechActivity" />
         <activity android:name=".SpeechAnalysis.ChooseWordsActivity" />
-        <activity android:name=".ActivityRecordDetails">
+        <activity android:name=".WriteRecorder.ActivityRecordDetails">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".MainPack.MainActivity" />
         </activity>
     </application>
 
