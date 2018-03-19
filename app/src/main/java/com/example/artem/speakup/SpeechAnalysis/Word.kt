@@ -1,6 +1,6 @@
 package com.example.artem.speakup.SpeechAnalysis
 
-class Word(var word: String, var numbRepeate: Int, var frequencyRepeat: Double) {
+class Word(var word: String, var numbRepeate: Int, var frequencyRepeat: Float) {
 
     companion object {
 
@@ -16,7 +16,7 @@ class Word(var word: String, var numbRepeate: Int, var frequencyRepeat: Double) 
             if (maxWords == 0){
                 maxWords = 1
             }
-            return Word(word, numbWordParasite, numbWordParasite.toDouble()/maxWords)
+            return Word(word, numbWordParasite, numbWordParasite.toFloat()/maxWords)
         }
 
         //to lowercase, delete chars if they in charFilter

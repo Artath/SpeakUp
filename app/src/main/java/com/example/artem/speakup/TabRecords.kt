@@ -89,83 +89,83 @@ class TabRecords : Fragment() {
     fun updateRecordsList() {
         var data = ArrayList<AudioRecord>()
         listener = object : ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        for (snapshot in dataSnapshot.children) {
-                            val name = snapshot.key
-                            var dt: Long = if( snapshot.child("date").exists() )
-                                snapshot.child("date").value as Long else 0
-                            var path: String = if( snapshot.child("path").exists() )
-                                snapshot.child("path").value as String else ""
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (snapshot in dataSnapshot.children) {
+                    val name = snapshot.key
+                    var dt: Long = if( snapshot.child("date").exists() )
+                        snapshot.child("date").value as Long else 0
+                    var path: String = if( snapshot.child("path").exists() )
+                        snapshot.child("path").value as String else ""
 
-                            if( dt == null )
-                                dt = 0
+                    if( dt == null )
+                        dt = 0
 
-                            if( path == null )
-                                path = ""
+                    if( path == null )
+                        path = ""
 
-                            val item = AudioRecord(name as String, dt as Long, path as String)
-                            data.add(item)
-                        }
-                        if( data!!.size == 0 ) {
-                            records_note.visibility = View.VISIBLE
-                            records_refresh.visibility = View.VISIBLE
-                            Toast.makeText(context, resources.getString(R.string.no_records), Toast.LENGTH_LONG).show()
-                        } else {
-                            records_note.visibility = View.GONE
-                            records_refresh.visibility = View.GONE
-                        }
-                        var mediaPlayer = MediaPlayer()
-                        if( rAdapter == null ) {
-                            rAdapter = RecordListAdapter(data,
-                                    object: RecordListAdapter.ItemClickListener{
-                                        override fun onListItemClick(item: AudioRecord) {
-                                            val intent = Intent(context, ActivityRecordDetails::class.java)
-                                            intent.putExtra("record_name", item.name)
-                                            startActivity(intent)
-                                        }
-                                    },
-                                    object: RecordListAdapter.ItemPlayListener{
-                                        override fun onItemPlayClick(item: AudioRecord) {
+                    val item = AudioRecord(name as String, dt as Long, path as String)
+                    data.add(item)
+                }
+                if( data!!.size == 0 ) {
+                    records_note.visibility = View.VISIBLE
+                    records_refresh.visibility = View.VISIBLE
+                    Toast.makeText(context, resources.getString(R.string.no_records), Toast.LENGTH_LONG).show()
+                } else {
+                    records_note.visibility = View.GONE
+                    records_refresh.visibility = View.GONE
+                }
+                var mediaPlayer = MediaPlayer()
+                if( rAdapter == null ) {
+                    rAdapter = RecordListAdapter(data,
+                            object: RecordListAdapter.ItemClickListener{
+                                override fun onListItemClick(item: AudioRecord) {
+                                    val intent = Intent(context, ActivityRecordDetails::class.java)
+                                    intent.putExtra("record_name", item.name)
+                                    startActivity(intent)
+                                }
+                            },
+                            object: RecordListAdapter.ItemPlayListener{
+                                override fun onItemPlayClick(item: AudioRecord) {
 
-                                            if (File(item.path).exists()){
-                                                if (mediaPlayer != null) {
-                                                    var path = item.path
-                                                    if (mediaPlayer.isPlaying) {
-                                                        mediaPlayer.stop()
-                                                        mediaPlayer = MediaPlayer()
-                                                        Toast.makeText(context, "Record stop", Toast.LENGTH_SHORT).show()
-                                                    } else {
-                                                        mediaPlayer.setDataSource(path)
-                                                        mediaPlayer.prepare()
-                                                        mediaPlayer.start()
-                                                        Toast.makeText(context, "Record play", Toast.LENGTH_SHORT).show()
-                                                    }
-                                                }
+                                    if (File(item.path).exists()){
+                                        if (mediaPlayer != null) {
+                                            var path = item.path
+                                            if (mediaPlayer.isPlaying) {
+                                                mediaPlayer.stop()
+                                                mediaPlayer = MediaPlayer()
+                                                Toast.makeText(context, "Record stop", Toast.LENGTH_SHORT).show()
+                                            } else {
+                                                mediaPlayer.setDataSource(path)
+                                                mediaPlayer.prepare()
+                                                mediaPlayer.start()
+                                                Toast.makeText(context, "Record play", Toast.LENGTH_SHORT).show()
                                             }
                                         }
-                                    },
-                                    object: RecordListAdapter.ItemDeleteListener{
-                                        override fun onItemDeleteClick(item: AudioRecord) {
-                                            removeRecord(item)
-                                        }
-                                    },
-                                    object: RecordListAdapter.ItemLongClickListener{
-                                        override fun onLongClick(item: AudioRecord) {
-                                            switchMode(true)
-                                        }
-                                    })
-                            rList.adapter = rAdapter
-                        } else {
-                            rAdapter?.data = data
-                            rAdapter?.notifyDataSetChanged()
-                        }
-                        swipeRefresh.isRefreshing = false
-                    }
-
-                    override fun onCancelled(databaseError: DatabaseError) {
-                        Toast.makeText(activity, "Loading error", Toast.LENGTH_SHORT).show()
-                    }
+                                    }
+                                }
+                            },
+                            object: RecordListAdapter.ItemDeleteListener{
+                                override fun onItemDeleteClick(item: AudioRecord) {
+                                    removeRecord(item)
+                                }
+                            },
+                            object: RecordListAdapter.ItemLongClickListener{
+                                override fun onLongClick(item: AudioRecord) {
+                                    switchMode(true)
+                                }
+                            })
+                    rList.adapter = rAdapter
+                } else {
+                    rAdapter?.data = data
+                    rAdapter?.notifyDataSetChanged()
                 }
+                swipeRefresh.isRefreshing = false
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Toast.makeText(activity, "Loading error", Toast.LENGTH_SHORT).show()
+            }
+        }
         ref.addListenerForSingleValueEvent(listener)
     }
 

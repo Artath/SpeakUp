@@ -3,6 +3,8 @@ package com.example.artem.speakup.TonguesTwisters
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.arellomobile.mvp.MvpView
+import com.arellomobile.mvp.viewstate.strategy.SkipStrategy
+import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -68,13 +70,15 @@ class TGPresenter : MvpPresenter<TGPresenter.TGPView>(){
 
     private fun getRandomTG(): ArrayList<String> {
         val arrTg = arrayListOf<String>()
-        val randomTG = HashSet<Int>()
-        val rand = Random()
-        var numb = 0
-        while (randomTG.size < MAX_TG) {
-            numb = rand.nextInt(arrayTG.size)
-            if (randomTG.add(numb)) {
-                arrTg.add(arrayTG[numb].text)
+        if (arrayTG.size != 0) {
+            val randomTG = HashSet<Int>()
+            val rand = Random()
+            var numb = 0
+            while (randomTG.size < MAX_TG) {
+                numb = rand.nextInt(arrayTG.size)
+                if (randomTG.add(numb)) {
+                    arrTg.add(arrayTG[numb].text)
+                }
             }
         }
         return  arrTg
@@ -87,7 +91,9 @@ class TGPresenter : MvpPresenter<TGPresenter.TGPView>(){
     }
     interface TGPView: MvpView {
         fun showTonguesTwisters(adapter: TGAdapter)
+        @StateStrategyType(SkipStrategy::class)
         fun showMessage(mess: String)
+        @StateStrategyType(SkipStrategy::class)
         fun takeTG(arrTG: ArrayList<String>)
     }
 }

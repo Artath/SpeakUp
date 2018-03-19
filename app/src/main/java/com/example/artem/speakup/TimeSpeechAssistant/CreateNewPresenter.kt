@@ -3,6 +3,8 @@ package com.example.artem.speakup.TimeSpeechAssistant
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.arellomobile.mvp.MvpView
+import com.arellomobile.mvp.viewstate.strategy.SkipStrategy
+import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import com.example.artem.speakup.DataWork.ExtraSourceWorker
 import com.example.artem.speakup.TimeSpeechAssistant.Data.DataHelper
 import com.example.artem.speakup.TimeSpeechAssistant.Data.Part
@@ -57,6 +59,7 @@ class CreateNewPresenter : MvpPresenter<CreateNewPresenter.CreateNewView>() {
 
     interface CreateNewView : MvpView {
         fun showPartList(adapter: PartAdapter)
+        @StateStrategyType(SkipStrategy::class)
         fun onTimeEnter()
     }
 }

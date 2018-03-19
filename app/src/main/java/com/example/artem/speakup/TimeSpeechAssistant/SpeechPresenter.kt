@@ -56,6 +56,7 @@ class SpeechPresenter : MvpPresenter<SpeechPresenter.SpeechView>() {
 
             if (indexChoose > indexTiming) {
                 if (partTimer != null) {
+                    partTimer?.cancel()
                     timeNextPart()
                 }
             }

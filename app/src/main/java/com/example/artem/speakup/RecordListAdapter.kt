@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import kotlinx.android.synthetic.main.list_record_item.view.*
 import java.io.File
 
@@ -34,7 +33,7 @@ class RecordListAdapter(var data: ArrayList<AudioRecord>?,
     interface ItemLongClickListener {
         fun onLongClick(item: AudioRecord)
     }
-
+    //???
     companion object {
         var adapterClickListener: ItemClickListener? = null
         var adapterPlayListener: ItemPlayListener? = null
@@ -45,6 +44,7 @@ class RecordListAdapter(var data: ArrayList<AudioRecord>?,
     override fun getItemCount() = data!!.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        //???
         adapterClickListener = itemListener
         adapterPlayListener = playListener
         adapterDeleteListener = deleteListener
