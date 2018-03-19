@@ -34,6 +34,8 @@ class ActivityRecorder : MvpAppCompatActivity(),
     @InjectPresenter
     lateinit var analysisPresenter: AnalysisPresenter
 
+    private var startts: Long = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recorder)
@@ -61,14 +63,27 @@ class ActivityRecorder : MvpAppCompatActivity(),
 
     fun recordHandler() {
         when( presenter.record_status ) {
-            "ready" -> startRecording()
-            "rec" ->  stopRecording()
+            "ready" -> {
+                startts = Date().time
+                startRecording()
+            }
+
+            "rec" -> {
+                if( ( Date().time - startts ) < 5 * 1000 ) {
+
+                     vMessage("Too short speech, wtf?!")
+                } else {
+                    stopRecording()
+                }
+            }
+
         }
     }
 
     fun startRecording() {
-        presenter.recorderStart()
         analysisPresenter.startRecognizer()
+        presenter.recorderStart()
+
     }
 
     fun stopRecording() {

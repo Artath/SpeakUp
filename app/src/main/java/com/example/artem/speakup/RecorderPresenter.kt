@@ -56,11 +56,11 @@ class RecorderPresenter: MvpPresenter<RecorderPresenter.Interface>() {
     }
 
     fun recorderStop(text: String) {
-        if( ( Date().time - startts ) < 5 * 1000 ) {
+        /*if( ( Date().time - startts ) < 5 * 1000 ) {
             // Set more userfriendly block
             viewState.vMessage("Too short speech, wtf?!")
             return
-        }
+        }*/
 
         if( aRecorder != null ) {
             record_status = "ready"

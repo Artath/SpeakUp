@@ -1,7 +1,6 @@
 package com.example.artem.speakup.SpeechAnalysis
 
 import android.annotation.SuppressLint
-import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.arellomobile.mvp.MvpView
@@ -9,7 +8,6 @@ import ru.yandex.speechkit.Error
 import ru.yandex.speechkit.Recognition
 import ru.yandex.speechkit.Recognizer
 import ru.yandex.speechkit.RecognizerListener
-import java.util.*
 
 @InjectViewState
 class AnalysisPresenter : MvpPresenter<AnalysisPresenter.AnalysisView>()   {
@@ -40,9 +38,11 @@ class AnalysisPresenter : MvpPresenter<AnalysisPresenter.AnalysisView>()   {
             override fun onPowerUpdated(p0: Recognizer?, p1: Float) {}
 
             override fun onPartialResults(p0: Recognizer?, p1: Recognition?, p2: Boolean) {
-                if (p2) if (p1 != null) {
+                if (p1 != null) {
                     viewState.showPartialRes(p1.bestResultText)
-                    cleanText.append(p1.bestResultText + " ")
+                    if (p2) {
+                        cleanText.append(p1.bestResultText + " ")
+                    }
                 }
             }
 
