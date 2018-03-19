@@ -9,6 +9,7 @@ import ru.yandex.speechkit.Error
 import ru.yandex.speechkit.Recognition
 import ru.yandex.speechkit.Recognizer
 import ru.yandex.speechkit.RecognizerListener
+import java.util.*
 
 @InjectViewState
 class AnalysisPresenter : MvpPresenter<AnalysisPresenter.AnalysisView>()   {
@@ -24,8 +25,8 @@ class AnalysisPresenter : MvpPresenter<AnalysisPresenter.AnalysisView>()   {
         if (recognizer != null) {
             recognizer!!.cancel()
             recognizer = null
-            viewState.showResults(cleanText.toString())
         }
+        viewState.showResults(cleanText.toString())
     }
 
     @SuppressLint("MissingPermission")

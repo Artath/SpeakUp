@@ -65,7 +65,7 @@ class TabRecords : Fragment() {
         // Refresh Records list
         records_refresh.setOnClickListener({ _ -> updateRecordsList() })
 
-        swipeRefresh.setOnRefreshListener(
+        /*swipeRefresh.setOnRefreshListener(
                 object : SwipeRefreshLayout.OnRefreshListener {
                     override fun onRefresh() {
                         Log.i(LOG_TAG, "onRefresh called from SwipeRefreshLayout")
@@ -76,6 +76,25 @@ class TabRecords : Fragment() {
                     }
                 }
         )
+
+        updateRecordsList()*/
+
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+       /* swipeRefresh.setOnRefreshListener(
+                object : SwipeRefreshLayout.OnRefreshListener {
+                    override fun onRefresh() {
+                        Log.i(LOG_TAG, "onRefresh called from SwipeRefreshLayout")
+
+                        // This method performs the actual data-refresh operation.
+                        // The method calls setRefreshing(false) when it's finished.
+                        updateRecordsList()
+                    }
+                }
+        )*/
 
         updateRecordsList()
 
@@ -106,14 +125,14 @@ class TabRecords : Fragment() {
                     val item = AudioRecord(name as String, dt as Long, path as String)
                     data.add(item)
                 }
-                if( data!!.size == 0 ) {
+               /* if( data!!.size == 0 ) {
                     records_note.visibility = View.VISIBLE
                     records_refresh.visibility = View.VISIBLE
                     Toast.makeText(context, resources.getString(R.string.no_records), Toast.LENGTH_LONG).show()
                 } else {
                     records_note.visibility = View.GONE
                     records_refresh.visibility = View.GONE
-                }
+                }*/
                 var mediaPlayer = MediaPlayer()
                 if( rAdapter == null ) {
                     rAdapter = RecordListAdapter(data,
@@ -159,7 +178,7 @@ class TabRecords : Fragment() {
                     rAdapter?.data = data
                     rAdapter?.notifyDataSetChanged()
                 }
-                swipeRefresh.isRefreshing = false
+                //swipeRefresh.isRefreshing = false
             }
 
             override fun onCancelled(databaseError: DatabaseError) {

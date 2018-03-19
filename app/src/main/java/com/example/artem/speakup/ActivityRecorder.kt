@@ -19,6 +19,7 @@ import ru.yandex.speechkit.SpeechKit
 import java.lang.Math.abs
 import com.vk.sdk.util.VKUtil
 import kotlinx.android.synthetic.main.activity_tongues_twisters.*
+import java.util.*
 
 
 class ActivityRecorder : MvpAppCompatActivity(),
@@ -61,7 +62,7 @@ class ActivityRecorder : MvpAppCompatActivity(),
     fun recordHandler() {
         when( presenter.record_status ) {
             "ready" -> startRecording()
-            "rec" -> stopRecording()
+            "rec" ->  stopRecording()
         }
     }
 
